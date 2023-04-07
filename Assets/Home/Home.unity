@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 1216868002302870353, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a39601c5f3abd4b6ca0fca25220c3592, type: 3}
+      objectReference: {fileID: 21300000, guid: 8a340f0b7c34f4fc3b7ccd60c3bb8a51, type: 3}
     - target: {fileID: 1514398016999620059, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: textData.Array.data[0].text
       value: Activities
@@ -295,7 +295,7 @@ PrefabInstance:
     - target: {fileID: 1216868002302870353, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c8cefa85ab9294df68de0601e283c4e5, type: 3}
+      objectReference: {fileID: 21300000, guid: 75cb3dee35401410fbe3b6da04ee8812, type: 3}
     - target: {fileID: 1514398016999620059, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: textData.Array.data[0].text
       value: Sandbox
@@ -642,7 +642,7 @@ PrefabInstance:
     - target: {fileID: 1216868002302870353, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a708bc7047ce44ca2a8b24afbe8d85db, type: 3}
+      objectReference: {fileID: 21300000, guid: 4a59c607ffdb9428498421d846866fcb, type: 3}
     - target: {fileID: 1514398016999620059, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: textData.Array.data[0].text
       value: Theory
@@ -1354,7 +1354,7 @@ PrefabInstance:
     - target: {fileID: 1216868002302870353, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5e56b1ee2aea244adaca0e51bddc515d, type: 3}
+      objectReference: {fileID: 21300000, guid: 731a52a46817d482bb86bfa1f363ab06, type: 3}
     - target: {fileID: 1514398016999620059, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: tmp
       value: 
