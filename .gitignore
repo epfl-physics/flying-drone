@@ -15,8 +15,11 @@
 
 # Testing
 /[Aa]ssets/[Tt]est/
+/[Aa]ssets/[Tt]est.meta
 /[Aa]ssets/[Tt]esting/
+/[Aa]ssets/[Tt]esting.meta
 /[Aa]ssets/[Ss]cratch/
+/[Aa]ssets/[Ss]cratch.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
