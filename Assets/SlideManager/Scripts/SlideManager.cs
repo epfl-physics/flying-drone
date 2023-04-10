@@ -4,10 +4,6 @@ namespace Slides
 {
     public class SlideManager : MonoBehaviour
     {
-        [Header("Header")]
-        [SerializeField] private Transform header;
-        [SerializeField] private bool showHeader = true;
-
         [Header("Slides")]
         [SerializeField] private Transform slideContainer;
         [SerializeField] private int currentSlideIndex = 0;
@@ -25,9 +21,6 @@ namespace Slides
 
         private void Awake()
         {
-            // Set header visibility
-            if (header) header.gameObject.SetActive(showHeader);
-
             // Do not proceed if no slide container has been assigned in the inspector
             if (!slideContainer)
             {
