@@ -10,6 +10,11 @@ public class LabeledSlider : MonoBehaviour
     [SerializeField] private bool snapToDecimal;
     [SerializeField] private bool controlValuePosition = true;
 
+    [Header("Color")]
+    public Color color;
+    [SerializeField] private Image fill;
+    [SerializeField] private Image handle;
+
     private Slider slider;
 
     private void Awake()
@@ -43,5 +48,13 @@ public class LabeledSlider : MonoBehaviour
             format += "0";
         }
         if (valueTMP) valueTMP.text = value.ToString(format);
+    }
+
+    public void SetColor(Color color)
+    {
+        if (fill) fill.color = color;
+        if (handle) handle.color = color;
+        if (valueTMP) valueTMP.color = color;
+        this.color = color;
     }
 }

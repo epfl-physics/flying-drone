@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6533567525350877352
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1216868002302870353, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8a340f0b7c34f4fc3b7ccd60c3bb8a51, type: 3}
+    - target: {fileID: 1514398016999620059, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: textData.Array.data[0].text
+      value: Activities
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514398016999620059, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: textData.Array.data[1].text
+      value: "Activit\xE9s"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259289883307363697, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_text
+      value: guided discovery
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924513296629304193, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924513296629304193, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924513296629304193, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924513296629304193, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924513296629304193, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924513296629304193, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924513296629304198, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_Name
+      value: ActivitiesButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924513298147510052, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: m_text
+      value: Activities
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311875937064516696, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: textData.Array.data[0].text
+      value: guided discovery
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311875937064516696, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
+      propertyPath: textData.Array.data[1].text
+      value: "d\xE9couverte guid\xE9e"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
