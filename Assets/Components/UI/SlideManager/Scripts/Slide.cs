@@ -10,25 +10,21 @@ namespace Slides
         private CameraController cameraController;
         private SimulationSlideController simSlideController;
 
-        private void Awake()
-        {
-            TryGetComponent(out canvasGroup);
-            TryGetComponent(out cameraController);
-            TryGetComponent(out simSlideController);
-        }
-
+        // SlideManager calls Deactivate() on all slides in its Awake() method
         public void Deactivate()
         {
             // Hide and disable all UI elements using the CanvasGroup
-            if (canvasGroup)
+            if (TryGetComponent(out canvasGroup))
             {
                 canvasGroup.alpha = 0;
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
             }
 
+            TryGetComponent(out cameraController);
+
             // Deactivate the associated simulations
-            if (simSlideController)
+            if (TryGetComponent(out simSlideController))
             {
                 simSlideController.DeactivateSimulation();
             }
@@ -59,12 +55,15 @@ namespace Slides
         //     }
         // }
 
-        public void FadeIn(float fadeTime, float startDelay = 0, bool useCameraState = false)
+        public void FadeIn(float fadeTime, bool useCameraState = false)
         {
             if (canvasGroup)
             {
                 StopAllCoroutines();
-                StartCoroutine(Fade(1, fadeTime, startDelay));
+                StartCoroutine(Fade(1, fadeTime));
+
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
             }
 
             if (simSlideController)
@@ -78,12 +77,15 @@ namespace Slides
             }
         }
 
-        public void FadeOut(float fadeTime, float startDelay = 0)
+        public void FadeOut(float fadeTime)
         {
             if (canvasGroup)
             {
                 StopAllCoroutines();
-                StartCoroutine(Fade(0, fadeTime, startDelay));
+                StartCoroutine(Fade(0, fadeTime));
+
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
             }
 
             if (simSlideController)
@@ -98,10 +100,8 @@ namespace Slides
             }
         }
 
-        private IEnumerator Fade(float targetAlpha, float fadeTime, float startDelay = 0)
+        private IEnumerator Fade(float targetAlpha, float fadeTime)
         {
-            yield return new WaitForSeconds(startDelay);
-
             float time = 0;
             float startAlpha = canvasGroup.alpha;
 

@@ -32,4 +32,9 @@ public class CursorHoverUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         RestoreDefault();
     }
+
+    public void SetCustomCursor(CustomCursor customCursor)
+    {
+        this.customCursor = customCursor;
+    }
 }

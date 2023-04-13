@@ -147,6 +147,7 @@ MonoBehaviour:
   radius: 3
   period: 3
   droneHeightOffset: 1
+  platformRotationFrequency: 0
   platformPositionVector: {fileID: 0}
   dronePositionVector: {fileID: 0}
   relativePositionVector: {fileID: 0}
@@ -218,6 +219,14 @@ PrefabInstance:
     - target: {fileID: 1844902273852153176, guid: e92dfb15e7cce4698aabd13da4048e49, type: 3}
       propertyPath: m_Name
       value: Drone
+      objectReference: {fileID: 0}
+    - target: {fileID: 4757134130112564890, guid: e92dfb15e7cce4698aabd13da4048e49, type: 3}
+      propertyPath: m_Size.x
+      value: 3.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4757134130112564890, guid: e92dfb15e7cce4698aabd13da4048e49, type: 3}
+      propertyPath: m_Size.y
+      value: 1.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e92dfb15e7cce4698aabd13da4048e49, type: 3}

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Slides
@@ -13,21 +12,31 @@ namespace Slides
         [Header("Bubbles")]
         [SerializeField] private Sprite filledDisk = default;
         [SerializeField] private Sprite openCircle = default;
+        [SerializeField] private CustomCursor customCursor;
         [SerializeField] private Color pastColor = Color.black;
         [SerializeField] private Color currentColor = Color.red;
         [SerializeField] private Color futureColor = Color.white;
         [SerializeField] private bool bubblesAreClickable = false;
 
         [Header("Progress Bar")]
-        [SerializeField] private RectTransform progressBarBackground = default;
-        [SerializeField] private RectTransform progressBarFill = default;
+        [SerializeField] private ProgressBar progressBar;
         [HideInInspector] public bool useProgressBar;
-        private int numSlides;
 
         private RectTransform bubbles;
+        private int numSlides;
         private int currentSlideIndex;
 
         public static event System.Action<int> OnChangeSlide;
+
+        private void OnEnable()
+        {
+            NavBubble.OnClick += HandleBubbleClicked;
+        }
+
+        private void OnDisable()
+        {
+            NavBubble.OnClick -= HandleBubbleClicked;
+        }
 
         public void SetNumSlides(int numSlides)
         {
@@ -46,7 +55,9 @@ namespace Slides
             for (int i = 0; i < numSlides; i++)
             {
                 RectTransform bubbleTransform = new GameObject("Bubble" + i, typeof(Image)).GetComponent<RectTransform>();
-                bubbleTransform.gameObject.AddComponent<Bubble>();
+                bubbleTransform.gameObject.AddComponent<NavBubble>();
+                var cursorHover = bubbleTransform.gameObject.AddComponent<CursorHoverUI>();
+                cursorHover.SetCustomCursor(customCursor);
                 Image bubbleImage = bubbleTransform.GetComponent<Image>();
                 bubbleTransform.SetParent(bubbles);
                 bubbleTransform.anchoredPosition = Vector2.zero;
@@ -88,37 +99,6 @@ namespace Slides
             }
         }
 
-        public void FillProgressBar(int slideIndex)
-        {
-            if (progressBarBackground && progressBarFill)
-            {
-                StopAllCoroutines();
-                StartCoroutine(AnimateFill((slideIndex + 1f) / numSlides));
-            }
-        }
-
-        private IEnumerator AnimateFill(float targetFraction, float lerpTime = 0.5f)
-        {
-            float currentFraction = progressBarFill.sizeDelta.x / progressBarBackground.rect.size.x;
-
-            float time = 0;
-            Vector2 sizeDelta = progressBarFill.sizeDelta;
-
-            while (time < lerpTime)
-            {
-                time += Time.deltaTime;
-                float t = time / lerpTime;
-                t = t * t * (3f - 2f * t);
-                float fraction = Mathf.Lerp(currentFraction, targetFraction, t);
-                sizeDelta.x = fraction * progressBarBackground.rect.size.x;
-                progressBarFill.sizeDelta = sizeDelta;
-                yield return null;
-            }
-
-            sizeDelta.x = targetFraction * progressBarBackground.rect.size.x;
-            progressBarFill.sizeDelta = sizeDelta;
-        }
-
         private void SetButtonVisibility()
         {
             if (backButton == null || forwardButton == null)
@@ -148,7 +128,7 @@ namespace Slides
         {
             if (useProgressBar)
             {
-                FillProgressBar(slideIndex);
+                if (progressBar) progressBar.FillProgressBar(slideIndex, numSlides);
             }
             else
             {
@@ -177,7 +157,7 @@ namespace Slides
             bubblesAreClickable = clickable;
         }
 
-        public void HandleBubbleClick(int slideIndex)
+        public void HandleBubbleClicked(int slideIndex)
         {
             if (!bubblesAreClickable) { return; }
 
@@ -192,6 +172,10 @@ namespace Slides
         {
             currentSlideIndex = slideIndex;
         }
-    }
 
+        public void HideProgressBar()
+        {
+            if (progressBar) progressBar.gameObject.SetActive(false);
+        }
+    }
 }
