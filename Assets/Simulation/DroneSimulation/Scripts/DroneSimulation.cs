@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DroneSimulation : Simulation
 {
     public DroneSimulationState simState;
     public bool ignoreStateOnStart;
-    public DroneSimulationState.Display display;
 
     [Header("Platform")]
     public MovingPlatform platform;
@@ -33,9 +30,7 @@ public class DroneSimulation : Simulation
     [Tooltip("Rad per second"), Range(-0.2f, 0.2f)] public float droneOrbitalFrequency = 0;
 
     [Header("Vectors")]
-    public Vector platformPositionVector;
-    public Vector dronePositionVector;
-    public Vector relativePositionVector;
+    public VectorManager vectors;
 
     private float droneTime = 0;
     private float minDroneHeight;
@@ -54,13 +49,6 @@ public class DroneSimulation : Simulation
 
         minPlatformHeight = platformRestHeight - platformAmplitude;
         maxPlatformHeight = platformRestHeight + platformAmplitude;
-
-        // if (platform) platform.SetPosition(platformRestHeight);
-        // if (drone)
-        // {
-        //     drone.localPosition = droneRestHeight * Vector3.up + droneCircularRadius * Vector3.right;
-        //     if (!droneIsIndependent) drone.localPosition += platformRestHeight * Vector3.up;
-        // }
     }
 
     private void Start()
@@ -83,7 +71,10 @@ public class DroneSimulation : Simulation
         droneAngle += 2 * Mathf.PI * droneOrbitalFrequency * Time.deltaTime;
         platformAngle += 2 * Mathf.PI * platformRotationFrequency * Time.deltaTime;
 
-        Vector3 relativePosition = platformOffset;
+        // Vector3 relativePosition = platformOffset;
+        Vector3 platformPosition = platformOffset + platformRestHeight * Vector3.up;
+        Vector3 dronePosition = droneRestHeight * Vector3.up;
+        // if (!droneIsIndependent) dronePosition += platformPosition;
 
         if (platform)
         {
@@ -91,23 +82,24 @@ public class DroneSimulation : Simulation
             if (platformMotion != PlatformMotion.None)
             {
                 float platformHeight = ComputePlatformHeight(platformTime);
-                // platform.SetHeight(platformHeight);
-                platform.SetPosition(platformOffset + platformHeight * Vector3.up);
+                platformPosition = platformOffset + platformHeight * Vector3.up;
+                platform.SetSurfacePosition(platformPosition);
             }
 
             // Set platform rotation angle
             platform.SetSurfaceRotation(-platformAngle * Mathf.Rad2Deg);
-
-            if (!droneIsIndependent)
-            {
-                // platform.height refers to the y value of its child Surface transform
-                relativePosition = platform.transform.localPosition + platform.height * Vector3.up;
-            }
         }
+
+        // if (!droneIsIndependent)
+        //     {
+        //         // platform.height refers to the y value of its child Surface transform
+        //         relativePosition = platform.GetSurfacePosition();
+        //         Debug.Log("Drone relative position " + relativePosition);
+        //     }
 
         if (drone)
         {
-            Vector3 dronePosition = relativePosition + droneRestHeight * Vector3.up;
+            // Vector3 dronePosition = relativePosition + droneRestHeight * Vector3.up;
 
             if (droneVerticalMotion != DroneVerticalMotion.None)
             {
@@ -120,21 +112,12 @@ public class DroneSimulation : Simulation
                 dronePosition.z = droneCircularRadius * Mathf.Sin(droneAngle);
             }
 
+            if (!droneIsIndependent) dronePosition += platformPosition;
+
             drone.localPosition = dronePosition;
-
-            if (dronePositionVector)
-            {
-                dronePositionVector.components = dronePosition;
-                dronePositionVector.Redraw();
-            }
-
-            if (relativePositionVector)
-            {
-                relativePositionVector.transform.position = relativePosition;
-                relativePositionVector.components = dronePosition - relativePosition;
-                relativePositionVector.Redraw();
-            }
         }
+
+        if (vectors) vectors.Redraw(platformPosition, dronePosition);
 
         if (simState)
         {
@@ -205,7 +188,7 @@ public class DroneSimulation : Simulation
 
     public void SetPlatformAtRestPosition()
     {
-        if (platform) platform.SetPosition(platformOffset + platformRestHeight * Vector3.up);
+        if (platform) platform.SetSurfacePosition(platformOffset + platformRestHeight * Vector3.up);
 
         SetDroneAtRestPosition();
     }
@@ -214,7 +197,7 @@ public class DroneSimulation : Simulation
     {
         if (drone)
         {
-            Debug.Log("Here");
+            Debug.Log("DroneSimulation > SetDroneAtRestPosition");
             Vector3 relativePosition = Vector3.zero;
             if (!droneIsIndependent)
             {
@@ -225,14 +208,17 @@ public class DroneSimulation : Simulation
         }
     }
 
-    public void SetDisplay()
+    public void SetDroneMovement(bool isCircular)
     {
-        if (simState) simState.SetDisplay(display);
-    }
-
-    public void SetDisplay(bool isPhysical)
-    {
-        display = isPhysical ? DroneSimulationState.Display.Physical : DroneSimulationState.Display.Mathematical;
-        SetDisplay();
+        if (isCircular)
+        {
+            droneHorizontalMotion = DroneHorizontalMotion.Circular;
+            droneOrbitalFrequency = 0.3f;
+        }
+        else
+        {
+            droneHorizontalMotion = DroneHorizontalMotion.None;
+            droneOrbitalFrequency = 0f;
+        }
     }
 }

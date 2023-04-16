@@ -15,11 +15,11 @@ public class MovingPlatform : MonoBehaviour
 
         Vector3 surfacePosition = surface.localPosition;
         surfacePosition.y = height;
-        SetPosition(surfacePosition);
+        SetSurfacePosition(surfacePosition);
         this.height = height;
     }
 
-    public void SetPosition(Vector3 position)
+    public void SetSurfacePosition(Vector3 position)
     {
         // Set the surface at the input position
         if (surface) surface.localPosition = position;
@@ -54,5 +54,14 @@ public class MovingPlatform : MonoBehaviour
         if (surface) surface.Rotate(axis, angle);
 
         if (basis) basis.Rotate(axis, angle);
+    }
+
+    public Vector3 GetSurfacePosition()
+    {
+        Vector3 position = Vector3.zero;
+
+        if (surface) position = surface.localPosition;
+
+        return position;
     }
 }

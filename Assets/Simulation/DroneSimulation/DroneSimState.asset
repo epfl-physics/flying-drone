@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d010399f337f4fda9141fa998940ec2, type: 3}
   m_Name: DroneSimState
   m_EditorClassIdentifier: 
-  time: 0
+  droneTime: 0.26430094
+  platformTime: 0.26430094
+  droneIsIndependent: 0
+  displayMode: 0

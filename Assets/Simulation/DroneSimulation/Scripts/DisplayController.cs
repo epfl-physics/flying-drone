@@ -11,15 +11,15 @@ public class DisplayController : MonoBehaviour
 
     public void OnEnable()
     {
-        DroneSimulationState.OnChangeDisplay += HandleDisplayChanged;
+        DroneSimulationState.OnChangeDisplayMode += HandleDisplayModeChanged;
     }
 
     public void OnDisable()
     {
-        DroneSimulationState.OnChangeDisplay -= HandleDisplayChanged;
+        DroneSimulationState.OnChangeDisplayMode -= HandleDisplayModeChanged;
     }
 
-    public void HandleDisplayChanged(DroneSimulationState.Display display)
+    public void HandleDisplayModeChanged(DroneSimulationState.DisplayMode displayMode)
     {
         // Debug.Log(transform.name + " heard display is " + display);
 
@@ -27,7 +27,7 @@ public class DisplayController : MonoBehaviour
 
         if (meshRenderer)
         {
-            if (display == DroneSimulationState.Display.Physical)
+            if (displayMode == DroneSimulationState.DisplayMode.Physical)
             {
                 if (opaque) meshRenderer.sharedMaterial = opaque;
             }
@@ -42,10 +42,10 @@ public class DisplayController : MonoBehaviour
                     meshRenderer.enabled = true;
                     break;
                 case VisibleOn.Physical:
-                    meshRenderer.enabled = display == DroneSimulationState.Display.Physical;
+                    meshRenderer.enabled = displayMode == DroneSimulationState.DisplayMode.Physical;
                     break;
                 case VisibleOn.Mathematical:
-                    meshRenderer.enabled = display == DroneSimulationState.Display.Mathematical;
+                    meshRenderer.enabled = displayMode == DroneSimulationState.DisplayMode.Mathematical;
                     break;
                 default:
                     break;
@@ -63,10 +63,10 @@ public class DisplayController : MonoBehaviour
                         spriteRenderer.enabled = true;
                         break;
                     case VisibleOn.Physical:
-                        spriteRenderer.enabled = display == DroneSimulationState.Display.Physical;
+                        spriteRenderer.enabled = displayMode == DroneSimulationState.DisplayMode.Physical;
                         break;
                     case VisibleOn.Mathematical:
-                        spriteRenderer.enabled = display == DroneSimulationState.Display.Mathematical;
+                        spriteRenderer.enabled = displayMode == DroneSimulationState.DisplayMode.Mathematical;
                         break;
                     default:
                         break;
@@ -82,10 +82,10 @@ public class DisplayController : MonoBehaviour
                             child.gameObject.SetActive(true);
                             break;
                         case VisibleOn.Physical:
-                            child.gameObject.SetActive(display == DroneSimulationState.Display.Physical);
+                            child.gameObject.SetActive(displayMode == DroneSimulationState.DisplayMode.Physical);
                             break;
                         case VisibleOn.Mathematical:
-                            child.gameObject.SetActive(display == DroneSimulationState.Display.Mathematical);
+                            child.gameObject.SetActive(displayMode == DroneSimulationState.DisplayMode.Mathematical);
                             break;
                         default:
                             break;

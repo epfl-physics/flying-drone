@@ -120,7 +120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991857051432935274}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.37940946, y: -0.120590515, z: 0.049950223, w: 0.9159756}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -333,7 +333,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simState: {fileID: 0}
   ignoreStateOnStart: 0
-  display: 0
   platform: {fileID: 6161832878244167986}
   platformOffset: {x: 4, y: 0, z: 0}
   platformMotion: 2
@@ -348,12 +347,10 @@ MonoBehaviour:
   droneRestHeight: 2
   droneVerticalAmplitude: 1
   droneHorizontalAmplitude: 2
-  droneCircularRadius: 3
+  droneCircularRadius: 1
   dronePeriod: 4
   droneOrbitalFrequency: 0
-  platformPositionVector: {fileID: 0}
-  dronePositionVector: {fileID: 0}
-  relativePositionVector: {fileID: 0}
+  vectors: {fileID: 0}
 --- !u!1 &3618494075395999529
 GameObject:
   m_ObjectHideFlags: 0

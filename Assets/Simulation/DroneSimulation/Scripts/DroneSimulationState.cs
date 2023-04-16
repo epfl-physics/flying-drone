@@ -6,14 +6,23 @@ public class DroneSimulationState : ScriptableObject
     public float droneTime;
     public float platformTime;
 
-    public enum Display { Physical, Mathematical }
-    public Display display = Display.Physical;
+    public bool droneIsIndependent;
 
-    public static event System.Action<Display> OnChangeDisplay;
+    public enum DisplayMode { Physical, Mathematical }
+    public DisplayMode displayMode = DisplayMode.Physical;
 
-    public void SetDisplay(Display display)
+    public static event System.Action<DisplayMode> OnChangeDisplayMode;
+
+    public void SetDisplayMode(bool isPhysical)
     {
-        this.display = display;
-        OnChangeDisplay?.Invoke(display);
+        SetDisplayMode(isPhysical ? DisplayMode.Physical : DisplayMode.Mathematical);
+        Debug.Log("DroneSimulationState > SetDisplayMode(bool)");
+    }
+
+    public void SetDisplayMode(DisplayMode displayMode)
+    {
+        this.displayMode = displayMode;
+        OnChangeDisplayMode?.Invoke(displayMode);
+        Debug.Log("DroneSimulationState > SetDisplayMode(DisplayMode)");
     }
 }
