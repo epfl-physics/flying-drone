@@ -10,21 +10,21 @@ public class VectorManager : MonoBehaviour
     {
         if (platformPositionVector)
         {
-            platformPositionVector.transform.position = Vector3.zero;
+            platformPositionVector.transform.position = transform.parent.localPosition;
             platformPositionVector.components = platformPosition;
             platformPositionVector.Redraw();
         }
 
         if (dronePositionVector)
         {
-            dronePositionVector.transform.position = Vector3.zero;
+            dronePositionVector.transform.position = transform.parent.localPosition;
             dronePositionVector.components = dronePosition;
             dronePositionVector.Redraw();
         }
 
         if (relativePositionVector)
         {
-            relativePositionVector.transform.position = platformPosition;
+            relativePositionVector.transform.position = transform.parent.localPosition + platformPosition;
             relativePositionVector.components = dronePosition - platformPosition;
             relativePositionVector.Redraw();
         }

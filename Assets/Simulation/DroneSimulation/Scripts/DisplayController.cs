@@ -3,8 +3,17 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class DisplayController : MonoBehaviour
 {
+
+    // TODO
+    //
+    // GET RID OF THIS SCRIPT 
+
+
     [SerializeField] private Material opaque;
     [SerializeField] private Material transparent;
+
+    public enum CurrentMaterial { Opaque, Transparent }
+    public CurrentMaterial currentMaterial;
 
     private enum VisibleOn { Both, Physical, Mathematical }
     [SerializeField] VisibleOn visibleOn;
