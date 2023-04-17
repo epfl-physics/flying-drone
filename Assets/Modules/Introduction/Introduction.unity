@@ -696,7 +696,7 @@ PrefabInstance:
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1462407471}
+      objectReference: {fileID: 1955569959}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
@@ -3343,7 +3343,7 @@ MonoBehaviour:
   platformRotationFrequency: 0.25
   tree: {fileID: 264136912}
   treeIsVisible: 0
-  ground: {fileID: 1462407467}
+  ground: {fileID: 1955569958}
   groundIsVisible: 1
   checkboxes:
   - {fileID: 1974010183}
@@ -3574,7 +3574,7 @@ PrefabInstance:
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1462407471}
+      objectReference: {fileID: 1955569959}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -3962,7 +3962,7 @@ MonoBehaviour:
   platformRotationFrequency: 0
   tree: {fileID: 264136912}
   treeIsVisible: 0
-  ground: {fileID: 1462407467}
+  ground: {fileID: 1955569958}
   groundIsVisible: 1
   checkboxes:
   - {fileID: 388824853}
@@ -4303,7 +4303,7 @@ MonoBehaviour:
   platformRotationFrequency: 0
   tree: {fileID: 264136912}
   treeIsVisible: 1
-  ground: {fileID: 1462407467}
+  ground: {fileID: 1955569958}
   groundIsVisible: 1
   checkboxes:
   - {fileID: 388824853}
@@ -4382,7 +4382,7 @@ PrefabInstance:
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1462407471}
+      objectReference: {fileID: 1955569959}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
@@ -5139,26 +5139,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1462407467 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3618494075395999529, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
-  m_PrefabInstance: {fileID: 1955569956}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1462407471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462407467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca9468d9290c4e2c8bef9ad8fea1c39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 2100000, guid: 144765bfa738546388ab8b8c65ecac58, type: 2}
-  - {fileID: 2100000, guid: 55734a1c3b2f440b58d4d2a9684127b6, type: 2}
 --- !u!1001 &1466048996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5950,7 +5930,7 @@ MonoBehaviour:
   platformRotationFrequency: 0.25
   tree: {fileID: 264136912}
   treeIsVisible: 1
-  ground: {fileID: 1462407467}
+  ground: {fileID: 1955569958}
   groundIsVisible: 1
   checkboxes:
   - {fileID: 2101499754}
@@ -6343,7 +6323,7 @@ Transform:
   - {fileID: 1466048997}
   - {fileID: 1714851556}
   m_Father: {fileID: 1955569957}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1901981907
 MonoBehaviour:
@@ -6388,6 +6368,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 863345683951010405, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 863345683951010405, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalScale.x
       value: 40
       objectReference: {fileID: 0}
@@ -6418,6 +6402,10 @@ PrefabInstance:
     - target: {fileID: 1028045249449981408, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464492106998983109, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1464492106999148209, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_IsActive
@@ -6451,6 +6439,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 144765bfa738546388ab8b8c65ecac58, type: 2}
+    - target: {fileID: 2553495405717711811, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2668608375692434237, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7044161
@@ -6569,7 +6561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3618494075395999529, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3677359182030249485, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_IsActive
@@ -6612,6 +6604,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4054165581583041719, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054165581583041719, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3
       objectReference: {fileID: 0}
@@ -6619,6 +6615,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1a12bdc1098004bb1b088828b1393c27, type: 2}
+    - target: {fileID: 4435590472811513308, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645313516587591862, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_Color.b
+      value: 0.87058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645313516587591862, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.87058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645313516587591862, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.87058824
+      objectReference: {fileID: 0}
     - target: {fileID: 4705556817788437443, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -6707,6 +6719,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6714804195147696735, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6905260692918923559, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9965655
@@ -6788,6 +6804,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8046889006762758509, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8046889006762758509, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -6835,6 +6855,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8598998990859951391, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8646387794052795877, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -6863,6 +6887,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.082808204
       objectReference: {fileID: 0}
+    - target: {fileID: 9216231846006151855, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
 --- !u!4 &1955569957 stripped
@@ -6870,6 +6898,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3067780818712770147, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
   m_PrefabInstance: {fileID: 1955569956}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1955569958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056103581170999267, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+  m_PrefabInstance: {fileID: 1955569956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1955569959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955569958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca9468d9290c4e2c8bef9ad8fea1c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 800533b8f09f5485ba5138c6dc2b5eb8, type: 2}
+  - {fileID: 2100000, guid: 7bffc51b16d98428192231489ccb329b, type: 2}
 --- !u!224 &1974010181 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7858766765902229638, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
@@ -7318,7 +7366,7 @@ MonoBehaviour:
   platformRotationFrequency: 0
   tree: {fileID: 264136912}
   treeIsVisible: 0
-  ground: {fileID: 1462407467}
+  ground: {fileID: 1955569958}
   groundIsVisible: 1
   checkboxes:
   - {fileID: 388824853}
