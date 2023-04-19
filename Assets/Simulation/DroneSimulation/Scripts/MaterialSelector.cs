@@ -3,6 +3,12 @@ using UnityEngine;
 public class MaterialSelector : MonoBehaviour
 {
     public Material[] materials;
+    public int currentIndex;
+
+    public void OnValidate()
+    {
+        currentIndex = Mathf.Clamp(currentIndex, 0, materials.Length - 1);
+    }
 
     public void SetMaterial(int index)
     {

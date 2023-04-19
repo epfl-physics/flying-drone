@@ -1249,6 +1249,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 34588baa8c1c74c17a381be905fda887, type: 2}
   - {fileID: 2100000, guid: 1f24fca3dccd346f68f3d35bb8526189, type: 2}
+  currentIndex: 0
 --- !u!43 &270285895
 Mesh:
   m_ObjectHideFlags: 0
@@ -6113,6 +6114,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: fd2b01685b823415f8f3ea28700382b4, type: 2}
   - {fileID: 2100000, guid: dbe618d40577c4bdc947c4ffc7b3240a, type: 2}
+  currentIndex: 0
 --- !u!1 &1825610893
 GameObject:
   m_ObjectHideFlags: 0
@@ -6922,6 +6924,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 800533b8f09f5485ba5138c6dc2b5eb8, type: 2}
   - {fileID: 2100000, guid: 7bffc51b16d98428192231489ccb329b, type: 2}
+  currentIndex: 0
 --- !u!108 &1955569960 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 4435590472811513308, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
@@ -7118,6 +7121,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 1a12bdc1098004bb1b088828b1393c27, type: 2}
   - {fileID: 2100000, guid: 438f1f0833bfd4ac288f18f62ddb7e69, type: 2}
+  currentIndex: 0
 --- !u!114 &2101499754 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}

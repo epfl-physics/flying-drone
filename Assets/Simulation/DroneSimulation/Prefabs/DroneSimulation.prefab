@@ -147,7 +147,7 @@ MonoBehaviour:
   ignoreStateOnStart: 0
   platform: {fileID: 6161832878244167986}
   platformOffset: {x: 4, y: 0, z: 0}
-  platformMotion: 2
+  platformMotion: 0
   platformRestHeight: 1
   platformAmplitude: 1
   platformPeriod: 4

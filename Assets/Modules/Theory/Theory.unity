@@ -932,6 +932,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BannerWIP
       objectReference: {fileID: 0}
+    - target: {fileID: 4502035588558081700, guid: d60f66d5b9a694ad3b6beafc11dcd67a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60f66d5b9a694ad3b6beafc11dcd67a, type: 3}
 --- !u!224 &443389550 stripped
