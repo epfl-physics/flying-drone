@@ -7,11 +7,17 @@ public class MaterialSelector : MonoBehaviour
 
     public void OnValidate()
     {
-        currentIndex = Mathf.Clamp(currentIndex, 0, materials.Length - 1);
+        if (materials != null)
+        {
+            int maxInt = Mathf.Max(0, materials.Length - 1);
+            currentIndex = Mathf.Clamp(currentIndex, 0, maxInt);
+        }
     }
 
     public void SetMaterial(int index)
     {
+        if (materials == null) return;
+
         if (index < 0 || index >= materials.Length) return;
 
         if (TryGetComponent(out MeshRenderer renderer))

@@ -8,9 +8,8 @@ public class DroneSimulationEditor : Editor
 
     private Vector3 platformOffset;
     private float platformRestHeight;
-    // private bool droneIsIndependent;
+    private bool droneIsIndependent;
     private float droneRestHeight;
-    // private DroneSimulationState.DisplayMode displayMode;
 
     private void OnEnable()
     {
@@ -33,22 +32,16 @@ public class DroneSimulationEditor : Editor
             platformRestHeight = sim.platformRestHeight;
         }
 
-        // if (droneIsIndependent != sim.droneIsIndependent)
-        // {
-        //     sim.SetDroneAtRestPosition();
-        //     droneIsIndependent = sim.droneIsIndependent;
-        // }
+        if (droneIsIndependent != sim.droneIsIndependent)
+        {
+            sim.SetDroneAtRestPosition();
+            droneIsIndependent = sim.droneIsIndependent;
+        }
 
         if (droneRestHeight != sim.droneRestHeight)
         {
             sim.SetDroneAtRestPosition();
             droneRestHeight = sim.droneRestHeight;
         }
-
-        // if (display != sim.display)
-        // {
-        //     sim.SetDisplay();
-        //     display = sim.display;
-        // }
     }
 }

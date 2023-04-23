@@ -13,7 +13,7 @@ public class DroneSimulation : Simulation
     public float platformRestHeight = 2;
     public float platformAmplitude = 1;
     [Tooltip("Time to execute one full cycle"), Min(0)] public float platformPeriod = 2;
-    [Tooltip("Rad per second"), Range(-0.5f, 0.5f)] public float platformRotationFrequency = 0;
+    [Tooltip("Rotations per second"), Range(-0.5f, 0.5f)] public float platformRotationFrequency = 0;
 
     [Header("Drone")]
     public Transform drone;
@@ -27,13 +27,13 @@ public class DroneSimulation : Simulation
     public float droneHorizontalAmplitude = 2;
     public float droneCircularRadius = 3;
     [Tooltip("Time to execute one full cycle"), Min(0)] public float dronePeriod = 2;
-    [Tooltip("Rad per second"), Range(-0.5f, 0.5f)] public float droneOrbitalFrequency = 0;
+    [Tooltip("Rotations per second"), Range(-0.5f, 0.5f)] public float droneOrbitalFrequency = 0;
 
     [Header("Point Mass")]
     public Transform pointMass;
 
-    [Header("Vectors")]
-    public VectorManager vectors;
+    // [Header("Vectors")]
+    // public VectorManager vectors;
 
     private float droneTime = 0;
     private float minDroneHeight;
@@ -44,6 +44,8 @@ public class DroneSimulation : Simulation
     private float minPlatformHeight;
     private float maxPlatformHeight;
     private float platformAngle = 0;
+
+    public Vector3 Omega => 2 * Mathf.PI * platformRotationFrequency * Vector3.up;
 
     private void Awake()
     {
@@ -86,7 +88,7 @@ public class DroneSimulation : Simulation
             platform.SetSurfacePosition(platformPosition);
 
             // Set platform rotation angle
-            platformAngle += 2 * Mathf.PI * platformRotationFrequency * Time.deltaTime;
+            platformAngle += Mathf.Sign(Omega.y) * Omega.magnitude * Time.deltaTime;
             platform.SetSurfaceRotation(-platformAngle * Mathf.Rad2Deg);
         }
 
@@ -105,8 +107,8 @@ public class DroneSimulation : Simulation
             dronePosition.z = droneCircularRadius * Mathf.Sin(droneAngle);
         }
 
-        // Set the drone's position relative to the platform if it's not independent
-        if (!droneIsIndependent) dronePosition += platformPosition;
+        // Set the drone's position relative to the platform or the ground
+        dronePosition += droneIsIndependent ? platformOffset : platformPosition;
 
         // Place the drone
         if (drone) drone.localPosition = dronePosition;
@@ -114,12 +116,21 @@ public class DroneSimulation : Simulation
         // Place the point mass
         if (pointMass) pointMass.localPosition = dronePosition;
 
-        if (vectors) vectors.Redraw(platformPosition, dronePosition);
-
+        // Update the sim state
         if (simState)
         {
             simState.droneTime = droneTime;
             simState.platformTime = platformTime;
+
+            simState.droneVelocityAbsolute = (dronePosition - simState.dronePositionAbsolute) / Time.deltaTime;
+            simState.platformVelocity = (platformPosition - simState.platformPosition) / Time.deltaTime;
+
+            simState.omega = Omega;
+            simState.origin = transform.localPosition;
+            simState.dronePositionAbsolute = dronePosition;
+            simState.platformPosition = platformPosition;
+
+            simState.RedrawVectors();
         }
     }
 
@@ -192,14 +203,10 @@ public class DroneSimulation : Simulation
 
     public void SetDroneAtRestPosition()
     {
-        Debug.Log("DroneSimulation > SetDroneAtRestPosition");
+        // Debug.Log("DroneSimulation > SetDroneAtRestPosition");
 
-        Vector3 relativePosition = Vector3.zero;
-        if (!droneIsIndependent)
-        {
-            relativePosition = platformOffset + platformRestHeight * Vector3.up;
-        }
-        Vector3 dronePosition = relativePosition + droneRestHeight * Vector3.up;
+        Vector3 dronePosition = droneRestHeight * Vector3.up;
+        dronePosition += droneIsIndependent ? platformOffset : platform.GetSurfacePosition();
 
         if (drone) drone.localPosition = dronePosition;
         if (pointMass) pointMass.localPosition = dronePosition;

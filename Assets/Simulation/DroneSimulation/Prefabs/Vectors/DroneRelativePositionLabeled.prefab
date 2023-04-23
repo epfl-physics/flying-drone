@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 8774445623285671079}
   - component: {fileID: 8905177490657632795}
   m_Layer: 0
-  m_Name: DroneRelativePosition
+  m_Name: DroneRelativePositionLabeled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

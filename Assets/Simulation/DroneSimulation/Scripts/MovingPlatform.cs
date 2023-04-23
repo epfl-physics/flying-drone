@@ -9,6 +9,9 @@ public class MovingPlatform : MonoBehaviour
 
     [Min(0)] public float height = 1;
 
+    public enum MotionType { None, Linear, Sinusoidal }
+    public MotionType motionType;
+
     public void SetHeight(float height)
     {
         if (!surface) return;

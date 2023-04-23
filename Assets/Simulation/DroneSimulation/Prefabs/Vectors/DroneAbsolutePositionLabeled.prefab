@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 3792365946209978825}
   - component: {fileID: 1337054482595161673}
   m_Layer: 0
-  m_Name: DroneAbsolutePosition
+  m_Name: DroneAbsolutePositionLabeled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

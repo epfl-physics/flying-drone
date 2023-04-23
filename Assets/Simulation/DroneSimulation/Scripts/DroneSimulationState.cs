@@ -6,23 +6,25 @@ public class DroneSimulationState : ScriptableObject
     public float droneTime;
     public float platformTime;
 
-    public bool droneIsIndependent;
+    [Header("Rotation")]
+    public Vector3 omega;
 
-    public enum DisplayMode { Physical, Mathematical }
-    public DisplayMode displayMode = DisplayMode.Physical;
+    [Header("Position")]
+    public Vector3 origin;
+    public Vector3 dronePositionAbsolute;
+    public Vector3 dronePositionRelative;
+    public Vector3 platformPosition;
 
-    public static event System.Action<DisplayMode> OnChangeDisplayMode;
+    [Header("Velocity")]
+    public Vector3 droneVelocityAbsolute;
+    public Vector3 droneVelocityRelative;
+    public Vector3 platformVelocity;
+    public Vector3 tangentialVelocity;
 
-    public void SetDisplayMode(bool isPhysical)
+    public static event System.Action OnRedrawVectors;
+
+    public void RedrawVectors()
     {
-        SetDisplayMode(isPhysical ? DisplayMode.Physical : DisplayMode.Mathematical);
-        Debug.Log("DroneSimulationState > SetDisplayMode(bool)");
-    }
-
-    public void SetDisplayMode(DisplayMode displayMode)
-    {
-        this.displayMode = displayMode;
-        OnChangeDisplayMode?.Invoke(displayMode);
-        Debug.Log("DroneSimulationState > SetDisplayMode(DisplayMode)");
+        OnRedrawVectors?.Invoke();
     }
 }
