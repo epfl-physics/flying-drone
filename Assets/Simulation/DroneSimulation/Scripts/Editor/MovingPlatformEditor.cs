@@ -17,7 +17,7 @@ public class MovingPlatformEditor : Editor
 
         if (GUI.changed)
         {
-            platform.SetHeight(platform.height);
+            platform.SetRestHeight(platform.restHeight);
         }
     }
 }

@@ -22,8 +22,8 @@ public class DroneSlideController : Slides.SimulationSlideController
     {
         DroneSimulation sim = (DroneSimulation)simulation;
 
-        sim.droneOrbitalFrequency = droneOrbitalFrequency;
-        sim.platformRotationFrequency = platformRotationFrequency;
+        // sim.droneOrbitalFrequency = droneOrbitalFrequency;
+        // sim.platformRotationFrequency = platformRotationFrequency;
 
         if (platform) platform.SetActive(platformIsVisible);
 

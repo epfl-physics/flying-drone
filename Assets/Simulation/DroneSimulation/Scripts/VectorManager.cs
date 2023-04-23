@@ -51,7 +51,7 @@ public class VectorManager : MonoBehaviour
         Vector3 vRelative = vAbsolute - vPlatform - vTangential;
 
         // Rotation
-        RedrawVector(omega, origin + rPlatform, -simState.omega, showRotation);
+        RedrawVector(omega, origin + rPlatform, simState.omega, showRotation);
 
         // Positions
         RedrawVector(dronePositionAbsolute, origin, rAbsolute, showPositions);
@@ -60,7 +60,7 @@ public class VectorManager : MonoBehaviour
 
         // Velocities
         RedrawVector(droneVelocityAbsolute, origin + rAbsolute, vAbsolute, showVelocities);
-        RedrawVector(platformVelocity, origin + rPlatform, vPlatform, showVelocities);
+        RedrawVector(platformVelocity, origin + rPlatform + 1.5f * Vector3.right, vPlatform, showVelocities);
 
         if (velocityAdditionOrder == VelocityAdditionOrder.First)
         {
