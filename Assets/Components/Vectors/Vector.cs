@@ -5,10 +5,13 @@ public class Vector : MonoBehaviour
     public LineRenderer body;
     public ConeMesh head;
     public Material defaultMaterial;
+    private Material currentMaterial;
+    private int renderQueue = 3000;
 
     public Vector3 components;
     public Color color = Color.black;
     [Min(0)] public float lineWidth = 0.2f;
+    public int sortOrder = 0;
 
     private float currentHeadRadius;
     private float currentHeadHeight;
@@ -16,10 +19,17 @@ public class Vector : MonoBehaviour
 
     public virtual void OnEnable()
     {
-        Redraw();
-
-        // Make sure colors and materials are synchronized
+        // Make sure materials are synchronized
+        UpdateCurrentMaterial();
         SetColor();
+        SetSortOrder();
+
+        Redraw();
+    }
+
+    public void OnDestroy()
+    {
+        currentMaterial = null;
     }
 
     public virtual void Redraw()
@@ -64,16 +74,36 @@ public class Vector : MonoBehaviour
         if (head) head.Redraw();
     }
 
+    private void UpdateCurrentMaterial()
+    {
+        // Create a copy of the default material if available
+        if (!currentMaterial && defaultMaterial)
+        {
+            currentMaterial = new Material(defaultMaterial);
+            currentMaterial.name = "Copy of " + defaultMaterial;
+            renderQueue = defaultMaterial.renderQueue;
+        }
+
+        if (!currentMaterial) return;
+
+        // Assign the copied material to the body and head components
+        if (body) body.GetComponent<LineRenderer>().sharedMaterial = currentMaterial;
+        if (head) head.SetMaterial(currentMaterial);
+    }
+
     public void SetColor()
     {
-        if (defaultMaterial)
-        {
-            Material material = new Material(defaultMaterial);
-            material.color = color;
-            material.name = "Copy of " + defaultMaterial;
+        // Make sure the current material is available
+        UpdateCurrentMaterial();
 
-            if (body) body.GetComponent<LineRenderer>().sharedMaterial = material;
-            if (head) head.SetMaterial(material);
-        }
+        if (currentMaterial) currentMaterial.color = color;
+    }
+
+    public void SetSortOrder()
+    {
+        // Make sure the current material is available
+        UpdateCurrentMaterial();
+
+        if (currentMaterial) currentMaterial.renderQueue = renderQueue + sortOrder;
     }
 }

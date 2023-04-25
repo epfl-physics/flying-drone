@@ -3,6 +3,7 @@ using UnityEngine;
 public class VectorManager : MonoBehaviour
 {
     public DroneSimulationState simState;
+    public bool hideVectorsOnStart;
 
     [Header("Rotation")]
     public Vector omega;
@@ -13,16 +14,23 @@ public class VectorManager : MonoBehaviour
     public Vector dronePositionRelative;
     public Vector platformPosition;
     public bool showPositions;
+    // Used by DroneSlideController to turn on and off specific vectors
+    [HideInInspector] public bool showDronePositionAbsolute = true;
+    [HideInInspector] public bool showDronePositionRelative = true;
+    [HideInInspector] public bool showPlatformPosition = true;
 
     [Header("Velocity")]
     public Vector droneVelocityAbsolute;
     public Vector droneVelocityRelative;
     public Vector platformVelocity;
-    public Vector phantomPlatformVelocity;
+    public Vector platformVelocityAdditive;
     public Vector tangentialVelocity;
     public bool showVelocities;
     public enum VelocityAdditionOrder { First, Second }
     public VelocityAdditionOrder velocityAdditionOrder = default;
+
+    [Header("Acceleration")]
+    public bool showAccelerations;
 
     private void OnEnable()
     {
@@ -32,6 +40,11 @@ public class VectorManager : MonoBehaviour
     private void OnDisable()
     {
         DroneSimulationState.OnRedrawVectors -= Redraw;
+    }
+
+    private void Start()
+    {
+        if (hideVectorsOnStart) SetVectorVisibility(0);
     }
 
     public void Redraw()
@@ -51,12 +64,13 @@ public class VectorManager : MonoBehaviour
         Vector3 vRelative = vAbsolute - vPlatform - vTangential;
 
         // Rotation
-        RedrawVector(omega, origin + rPlatform, simState.omega, showRotation);
+        Vector3 omegaPosition = origin + rPlatform - rPlatform.y * Vector3.up - 0.5f * Vector3.right;
+        RedrawVector(omega, omegaPosition, simState.omega, showRotation);
 
         // Positions
-        RedrawVector(dronePositionAbsolute, origin, rAbsolute, showPositions);
-        RedrawVector(dronePositionRelative, origin + rPlatform, rRelative, showPositions);
-        RedrawVector(this.platformPosition, origin, rPlatform, showPositions);
+        RedrawVector(dronePositionAbsolute, origin, rAbsolute, showPositions && showDronePositionAbsolute);
+        RedrawVector(dronePositionRelative, origin + rPlatform, rRelative, showPositions && showDronePositionRelative);
+        RedrawVector(this.platformPosition, origin, rPlatform, showPositions && showPlatformPosition);
 
         // Velocities
         RedrawVector(droneVelocityAbsolute, origin + rAbsolute, vAbsolute, showVelocities);
@@ -65,14 +79,14 @@ public class VectorManager : MonoBehaviour
         if (velocityAdditionOrder == VelocityAdditionOrder.First)
         {
             RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
-            RedrawVector(phantomPlatformVelocity, origin + rAbsolute + vRelative, vPlatform, showVelocities);
+            RedrawVector(platformVelocityAdditive, origin + rAbsolute + vRelative, vPlatform, showVelocities);
             RedrawVector(tangentialVelocity, origin + rAbsolute + vRelative + vPlatform, vTangential, showVelocities);
         }
         else if (velocityAdditionOrder == VelocityAdditionOrder.Second)
         {
             RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
             RedrawVector(tangentialVelocity, origin + rAbsolute + vRelative, vTangential, showVelocities);
-            RedrawVector(phantomPlatformVelocity, origin + rAbsolute + vRelative + vTangential, vPlatform, showVelocities);
+            RedrawVector(platformVelocityAdditive, origin + rAbsolute + vRelative + vTangential, vPlatform, showVelocities);
         }
     }
 
@@ -86,5 +100,34 @@ public class VectorManager : MonoBehaviour
 
             vector.gameObject.SetActive(show);
         }
+    }
+
+    public void SetVectorVisibility(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                showPositions = true;
+                showVelocities = false;
+                showAccelerations = false;
+                break;
+            case 2:
+                showPositions = false;
+                showVelocities = true;
+                showAccelerations = false;
+                break;
+            case 3:
+                showPositions = false;
+                showVelocities = false;
+                showAccelerations = true;
+                break;
+            default:
+                showPositions = false;
+                showVelocities = false;
+                showAccelerations = false;
+                break;
+        }
+
+        Redraw();
     }
 }

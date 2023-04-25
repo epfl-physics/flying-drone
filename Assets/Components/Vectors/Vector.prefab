@@ -288,3 +288,4 @@ MonoBehaviour:
   components: {x: 2, y: 1, z: 0}
   color: {r: 0.35686275, g: 0.67058825, b: 0.94509804, a: 1}
   lineWidth: 0.2
+  sortOrder: 0

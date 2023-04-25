@@ -321,9 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa577bb779a2413b824a171838974d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraState: {fileID: 11400000, guid: 4142d516b6c8d45ab98b9075babf832f, type: 2}
-  targetPosition: {x: 0, y: 2.5, z: -20}
-  targetRotation: {x: 0, y: 0, z: 0}
+  cameraState: {fileID: 11400000, guid: 39f4c0426ca434011b7b724859aeb057, type: 2}
+  targetPosition: {x: 2, y: 5.7, z: -10}
+  targetRotation: {x: 15, y: 0, z: 0}
   moveTime: 1
   canZoom: 0
   minZoom: 1
@@ -332,7 +332,7 @@ MonoBehaviour:
   zoomTarget: {fileID: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
-  cameraTransform: {fileID: 1071083210}
+  cameraTransform: {fileID: 0}
 --- !u!1001 &1152805287
 PrefabInstance:
   m_ObjectHideFlags: 0

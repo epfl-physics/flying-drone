@@ -9,6 +9,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Transform piston;
     [SerializeField] private Transform basisTriad;
     [SerializeField] private Transform originLabel;
+    private Vector3 originLabelPosition;
 
     [Header("Parameters")]
     [Min(0)] public float restHeight = 1;
@@ -32,6 +33,9 @@ public class MovingPlatform : MonoBehaviour
     private void Awake()
     {
         ComputeHeightBounds();
+        SetSurfaceAlpha(1);
+
+        if (originLabel) originLabelPosition = originLabel.position - GetSurfacePosition();
     }
 
     private void Update()
@@ -117,7 +121,7 @@ public class MovingPlatform : MonoBehaviour
 
         if (basisTriad) basisTriad.localPosition = position;
 
-        if (originLabel) originLabel.localPosition = position + new Vector3(-0.4f, 0.35f, 0);
+        if (originLabel) originLabel.position = position + originLabelPosition;
 
         // Scale the piston to connect the surface to the ground
         if (piston)
@@ -149,7 +153,7 @@ public class MovingPlatform : MonoBehaviour
 
     public Vector3 GetSurfacePosition()
     {
-        Vector3 position = Vector3.zero;
+        Vector3 position = ComputeHeight(0) * Vector3.up;
 
         if (surface) position = surface.localPosition;
 
@@ -188,6 +192,24 @@ public class MovingPlatform : MonoBehaviour
 
         return speed * Vector3.up;
     }
+
+    public void SetSurfaceAlpha(float value)
+    {
+        if (surface)
+        {
+            surface.GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", value);
+        }
+    }
+
+    public void SetSurfaceTransparency(bool isTransparent)
+    {
+        if (surface)
+        {
+            float alpha = isTransparent ? 0.05f : 1;
+            surface.GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", alpha);
+        }
+    }
+
 }
 
 [System.Serializable]

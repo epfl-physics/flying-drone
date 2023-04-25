@@ -4,6 +4,7 @@ public class DroneSimulation : Simulation
 {
     public DroneSimulationState simState;
     public bool ignoreStateOnStart;
+    public bool startStationary;
 
     [Header("Platform")]
     public MovingPlatform platform;
@@ -29,8 +30,18 @@ public class DroneSimulation : Simulation
             platform.Position = platformData.position;
         }
 
-        ApplyPlatformData();
-        ApplyDroneData();
+        if (startStationary)
+        {
+            SetDroneVerticalData(0);
+            SetDroneHorizontalData(0);
+            SetPlatformVerticalData(0);
+            SetPlatformRotationData(0);
+        }
+        else
+        {
+            ApplyDroneData();
+            ApplyPlatformData();
+        }
     }
 
     private void Start()
@@ -85,7 +96,7 @@ public class DroneSimulation : Simulation
         }
     }
 
-    public void ApplyDroneData()
+    public void ApplyDroneData(bool resetPosition = false)
     {
         if (drone)
         {
@@ -99,7 +110,7 @@ public class DroneSimulation : Simulation
             drone.horizontalMotionType = droneData.horizontalMotionType;
         }
 
-        SetDroneAtRestPosition();
+        if (resetPosition) SetDroneAtRestPosition();
     }
 
     public void UpdateSimState()
@@ -109,8 +120,6 @@ public class DroneSimulation : Simulation
         simState.droneTime = drone.Time;
         simState.platformTime = platform.Time;
 
-        // simState.droneVelocityAbsolute = (drone.transform.localPosition - simState.dronePositionAbsolute) / Time.deltaTime;
-        // simState.platformVelocity = (platform.GetSurfacePosition() - simState.platformPosition) / Time.deltaTime;
         simState.droneVelocityAbsolute = drone.GetVelocity();
         simState.platformVelocity = platform.GetVelocity();
 
@@ -132,19 +141,116 @@ public class DroneSimulation : Simulation
         if (pointMass) pointMass.localPosition = dronePosition;
     }
 
-    public void SetDroneMovement(bool isCircular)
+    // public void SetDroneMovement(bool isCircular)
+    // {
+    //     if (isCircular)
+    //     {
+    //         droneData.horizontalMotionType = Drone.HorizontalMotionType.Circular;
+    //         droneData.orbitalFrequency = 0.3f;
+    //     }
+    //     else
+    //     {
+    //         droneData.horizontalMotionType = Drone.HorizontalMotionType.None;
+    //         droneData.orbitalFrequency = 0f;
+    //     }
+
+    //     ApplyDroneData();
+    // }
+
+    public void SetDroneVerticalData(int index)
     {
-        if (isCircular)
+        if (droneData == null) return;
+
+        droneData.restHeight = 4;
+        droneData.verticalAmplitude = 0.8f;
+        droneData.translationPeriod = 3;
+        if (index == 1 || index == 4)
+        {
+            droneData.verticalMotionType = Drone.VerticalMotionType.Linear;
+        }
+        else if (index == 2 || index == 5)
+        {
+            droneData.verticalMotionType = Drone.VerticalMotionType.Sinusoidal;
+        }
+        else
+        {
+            droneData.verticalMotionType = Drone.VerticalMotionType.None;
+        }
+
+        ApplyDroneData();
+    }
+
+    public void SetDroneHorizontalData(int index)
+    {
+        if (droneData == null) return;
+
+        droneData.horizontalAmplitude = 2;
+        droneData.circularRadius = 1.2f;
+        if (index > 0)
         {
             droneData.horizontalMotionType = Drone.HorizontalMotionType.Circular;
-            droneData.orbitalFrequency = 0.3f;
         }
         else
         {
             droneData.horizontalMotionType = Drone.HorizontalMotionType.None;
-            droneData.orbitalFrequency = 0f;
+        }
+        if (index == 1)
+        {
+            droneData.orbitalFrequency = 0.15f;
+        }
+        else if (index == 2)
+        {
+            droneData.orbitalFrequency = -0.15f;
+        }
+        else
+        {
+            droneData.orbitalFrequency = 0;
         }
 
         ApplyDroneData();
+    }
+
+    public void SetPlatformVerticalData(int index)
+    {
+        if (platformData == null) return;
+
+        platformData.position = 4 * Vector3.right;
+        platformData.restHeight = 1.5f;
+        platformData.amplitude = 0.8f;
+        platformData.translationPeriod = 3;
+        if (index == 1)
+        {
+            platformData.motionType = MovingPlatform.MotionType.Linear;
+        }
+        else if (index == 2)
+        {
+            platformData.motionType = MovingPlatform.MotionType.Sinusoidal;
+        }
+        else
+        {
+            platformData.motionType = MovingPlatform.MotionType.None;
+        }
+
+        ApplyPlatformData();
+    }
+
+    public void SetPlatformRotationData(int index)
+    {
+        if (platformData == null) return;
+
+        if (index == 1)
+        {
+            platformData.rotationFrequency = 0.15f;
+        }
+        else if (index == 2)
+        {
+            platformData.rotationFrequency = -0.15f;
+        }
+        else
+        {
+            platformData.rotationFrequency = 0;
+        }
+
+        ApplyPlatformData();
     }
 }
