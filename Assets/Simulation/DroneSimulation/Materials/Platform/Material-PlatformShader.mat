@@ -38,7 +38,7 @@ Material:
     m_Floats:
     - Vector1_6491ec52457c4f6da5da23b321be97c7: 0
     - Vector1_85602ab155dd47848afe0e4185e4a0d8: 0.5
-    - _Alpha: 0.05
+    - _Alpha: 1
     - _Metallic: 0
     - _Smoothness: 0
     m_Colors:

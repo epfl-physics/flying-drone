@@ -3,7 +3,7 @@ using UnityEngine;
 public class DroneSimulation : Simulation
 {
     public DroneSimulationState simState;
-    public bool ignoreStateOnStart;
+    // public bool ignoreStateOnStart;
     public bool startStationary;
 
     [Header("Platform")]
@@ -46,31 +46,35 @@ public class DroneSimulation : Simulation
 
     private void Start()
     {
-        if (simState)
-        {
-            if (!ignoreStateOnStart)
-            {
-                if (drone) drone.Time = simState.droneTime;
-                if (platform) platform.Time = simState.platformTime;
-            }
+        if (drone) drone.Time = 0;
+        if (platform) platform.Time = 0;
 
-            simState.droneVelocityAbsolute = Vector3.zero;
-            simState.droneVelocityRelative = Vector3.zero;
-            simState.platformVelocity = Vector3.zero;
-            simState.tangentialVelocity = Vector3.zero;
-        }
+        // if (simState)
+        // {
+        //     simState.droneVelocityAbsolute = Vector3.zero;
+        //     simState.droneVelocityRelative = Vector3.zero;
+        //     simState.platformVelocity = Vector3.zero;
+        //     simState.tangentialVelocity = Vector3.zero;
+        // }
     }
 
     private void Update()
     {
         Vector3 platformSurfacePosition = Vector3.zero;
-        if (platform)
+
+        // Determine whether the platform needs to update
+        bool platformIsMoving = platformData.motionType != MovingPlatform.MotionType.None;
+        platformIsMoving |= platformData.rotationFrequency != 0;
+        if (platform && platformIsMoving)
         {
             platform.TakeAStep(Time.deltaTime);
             platformSurfacePosition = platform.GetSurfacePosition();
         }
 
-        if (drone)
+        // Determine whether the drone needs to update
+        bool droneIsMoving = droneData.verticalMotionType != Drone.VerticalMotionType.None;
+        droneIsMoving |= droneData.horizontalMotionType != Drone.HorizontalMotionType.None;
+        if (drone && droneIsMoving)
         {
             Vector3 relativePosition = platformData.position;
             if (!droneData.isIndependent) relativePosition += platformSurfacePosition;
@@ -83,7 +87,7 @@ public class DroneSimulation : Simulation
         UpdateSimState();
     }
 
-    public void ApplyPlatformData()
+    public void ApplyPlatformData(bool synchronizeWithDrone = false)
     {
         if (platform)
         {
@@ -93,10 +97,15 @@ public class DroneSimulation : Simulation
             platform.translationPeriod = platformData.translationPeriod;
             platform.rotationFrequency = platformData.rotationFrequency;
             platform.motionType = platformData.motionType;
+
+            if (drone && synchronizeWithDrone)
+            {
+                platform.Time = drone.Time;
+            }
         }
     }
 
-    public void ApplyDroneData(bool resetPosition = false)
+    public void ApplyDroneData(bool synchronizeWithPlatform = false)
     {
         if (drone)
         {
@@ -110,7 +119,11 @@ public class DroneSimulation : Simulation
             drone.horizontalMotionType = droneData.horizontalMotionType;
         }
 
-        if (resetPosition) SetDroneAtRestPosition();
+        // if (resetPosition) SetDroneAtRestPosition();
+        if (platform && synchronizeWithPlatform)
+        {
+            drone.Time = platform.Time;
+        }
     }
 
     public void UpdateSimState()
@@ -141,22 +154,6 @@ public class DroneSimulation : Simulation
         if (pointMass) pointMass.localPosition = dronePosition;
     }
 
-    // public void SetDroneMovement(bool isCircular)
-    // {
-    //     if (isCircular)
-    //     {
-    //         droneData.horizontalMotionType = Drone.HorizontalMotionType.Circular;
-    //         droneData.orbitalFrequency = 0.3f;
-    //     }
-    //     else
-    //     {
-    //         droneData.horizontalMotionType = Drone.HorizontalMotionType.None;
-    //         droneData.orbitalFrequency = 0f;
-    //     }
-
-    //     ApplyDroneData();
-    // }
-
     public void SetDroneVerticalData(int index)
     {
         if (droneData == null) return;
@@ -177,7 +174,7 @@ public class DroneSimulation : Simulation
             droneData.verticalMotionType = Drone.VerticalMotionType.None;
         }
 
-        ApplyDroneData();
+        ApplyDroneData(true);
     }
 
     public void SetDroneHorizontalData(int index)
@@ -207,7 +204,7 @@ public class DroneSimulation : Simulation
             droneData.orbitalFrequency = 0;
         }
 
-        ApplyDroneData();
+        ApplyDroneData(true);
     }
 
     public void SetPlatformVerticalData(int index)
@@ -231,7 +228,7 @@ public class DroneSimulation : Simulation
             platformData.motionType = MovingPlatform.MotionType.None;
         }
 
-        ApplyPlatformData();
+        ApplyPlatformData(true);
     }
 
     public void SetPlatformRotationData(int index)
@@ -251,6 +248,6 @@ public class DroneSimulation : Simulation
             platformData.rotationFrequency = 0;
         }
 
-        ApplyPlatformData();
+        ApplyPlatformData(true);
     }
 }

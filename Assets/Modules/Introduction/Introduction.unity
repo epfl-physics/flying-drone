@@ -176,14 +176,14 @@ MonoBehaviour:
   tmp: {fileID: 25032381}
   textData:
   - language: 0
-    text: We will be interested in the way that positions, as well as velocities
+    text: In this app we will examine the way that positions, as well as velocities
       and accelerations, are related between inertial (like the tree) and non-inertial
       (like the platform) frames of reference.
     visibleUI: {fileID: 0}
   - language: 1
-    text: "Nous nous int\xE9resserons \xE0 la fa\xE7on dont les positions, ainsi
-      que les vitesses et les acc\xE9l\xE9rations, sont li\xE9es entre les r\xE9f\xE9rentiels
-      inertiels (comme l'arbre) et non inertiels (comme la plateforme)."
+    text: "Dans cette application, nous examinerons la mani\xE8re dont les positions,
+      ainsi que les vitesses et les acc\xE9l\xE9rations, sont li\xE9es entre les
+      r\xE9f\xE9rentiels inertiels (comme l'arbre) et non inertiels (comme la plateforme)."
     visibleUI: {fileID: 0}
 --- !u!114 &25032381
 MonoBehaviour:
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: We will be interested in the way that positions, as well as velocities
+  m_text: In this app we will examine the way that positions, as well as velocities
     and accelerations, are related between inertial (like the tree) and non-inertial
     (like the platform) frames of reference.
   m_isRightToLeft: 0
@@ -584,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: m_IsOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: m_Interactable
@@ -1591,7 +1591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: m_IsOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: m_Interactable
@@ -2302,8 +2302,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465849216}
-  m_LocalRotation: {x: 0.1305262, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 7, z: -13}
+  m_LocalRotation: {x: 0.15643448, y: 0, z: 0, w: 0.98768836}
+  m_LocalPosition: {x: 2, y: 6.6, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6972,7 +6972,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746724863}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -7303,7 +7303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640608c777ece4ae2b65c5b40e7d18d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simState: {fileID: 11400000, guid: 4471f3da58ab347e699cd2fe21f4f54a, type: 2}
+  simState: {fileID: 11400000, guid: 751fa249bec9c4cfaad0cb130e4c60fc, type: 2}
   hideVectorsOnStart: 0
   omega: {fileID: 0}
   showRotation: 0
@@ -7449,7 +7449,7 @@ PrefabInstance:
     - target: {fileID: 1363157891644225616, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 438f1f0833bfd4ac288f18f62ddb7e69, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a12bdc1098004bb1b088828b1393c27, type: 2}
     - target: {fileID: 1464492106998983109, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7568,7 +7568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2711849974202272965, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2967383974295039980, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7593,7 +7593,7 @@ PrefabInstance:
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: simState
       value: 
-      objectReference: {fileID: 11400000, guid: 4471f3da58ab347e699cd2fe21f4f54a, type: 2}
+      objectReference: {fileID: 11400000, guid: 751fa249bec9c4cfaad0cb130e4c60fc, type: 2}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneRestHeight
       value: 2
@@ -7683,6 +7683,10 @@ PrefabInstance:
       value: DroneSimulation
       objectReference: {fileID: 0}
     - target: {fileID: 3119210787294123657, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164018640989275434, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -7928,11 +7932,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7608605803144981745, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9965655
+      value: 0.98768836
       objectReference: {fileID: 0}
     - target: {fileID: 7608605803144981745, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.082808204
+      value: 0.1564345
       objectReference: {fileID: 0}
     - target: {fileID: 7608605803144981745, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.y
@@ -8020,15 +8024,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8544886394906363820, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 8544886394906363820, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9914449
+      value: 0.98768836
       objectReference: {fileID: 0}
     - target: {fileID: 8544886394906363820, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1305262
+      value: 0.1564345
       objectReference: {fileID: 0}
     - target: {fileID: 8544886394906363820, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.y
@@ -8070,6 +8074,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1990105268}
+    - target: {fileID: 8989986124751517625, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: originLabelOffset.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989986124751517625, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: originLabelOffset.y
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 8991188187149096460, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -8551,7 +8563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: m_IsOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: m_Interactable

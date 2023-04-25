@@ -9,7 +9,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Transform piston;
     [SerializeField] private Transform basisTriad;
     [SerializeField] private Transform originLabel;
-    private Vector3 originLabelPosition;
+    [SerializeField] private Vector3 originLabelOffset;
 
     [Header("Parameters")]
     [Min(0)] public float restHeight = 1;
@@ -34,8 +34,6 @@ public class MovingPlatform : MonoBehaviour
     {
         ComputeHeightBounds();
         SetSurfaceAlpha(1);
-
-        if (originLabel) originLabelPosition = originLabel.position - GetSurfacePosition();
     }
 
     private void Update()
@@ -121,7 +119,7 @@ public class MovingPlatform : MonoBehaviour
 
         if (basisTriad) basisTriad.localPosition = position;
 
-        if (originLabel) originLabel.position = position + originLabelPosition;
+        if (originLabel) originLabel.position = (surface ? surface.position : Vector3.zero) + originLabelOffset;
 
         // Scale the piston to connect the surface to the ground
         if (piston)
