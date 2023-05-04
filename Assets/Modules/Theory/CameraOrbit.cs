@@ -53,6 +53,7 @@ public class CameraOrbit : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             isDragging = true;
+            Cursor.visible = false;
         }
 
         if (isDragging)
@@ -74,6 +75,7 @@ public class CameraOrbit : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
+            Cursor.visible = true;
         }
     }
 

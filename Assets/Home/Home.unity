@@ -523,9 +523,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraState: {fileID: 11400000, guid: 39f4c0426ca434011b7b724859aeb057, type: 2}
-  targetPosition: {x: 2, y: 5.3, z: -5.5}
+  targetPosition: {x: 2, y: 4.75, z: -3.2}
   targetRotation: {x: 15, y: 0, z: 0}
-  moveTime: 1
+  moveTime: 1.5
   canZoom: 0
   minZoom: 1
   maxZoom: 10
@@ -749,7 +749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.verticalAmplitude
-      value: 0.2
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.verticalMotionType

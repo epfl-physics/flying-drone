@@ -21,6 +21,14 @@ public class DroneSimulationState : ScriptableObject
     public Vector3 platformVelocity;
     public Vector3 tangentialVelocity;
 
+    [Header("Acceleration")]
+    public Vector3 droneAccelerationAbsolute;
+    public Vector3 droneAccelerationRelative;
+    public Vector3 platformAcceleration;
+    public Vector3 centrifugalAcceleration;
+    public Vector3 coriolisAcceleration;
+    public Vector3 eulerAcceleration;
+
     public static event System.Action OnRedrawVectors;
 
     public void RedrawVectors()

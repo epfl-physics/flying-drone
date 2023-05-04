@@ -134,7 +134,10 @@ public class DroneSimulation : Simulation
         simState.platformTime = platform.Time;
 
         simState.droneVelocityAbsolute = drone.GetVelocity();
+        simState.droneAccelerationAbsolute = drone.GetAcceleration();
+
         simState.platformVelocity = platform.GetVelocity();
+        simState.platformAcceleration = platform.GetAcceleration();
 
         simState.omega = platform.Omega;
         simState.origin = transform.localPosition;

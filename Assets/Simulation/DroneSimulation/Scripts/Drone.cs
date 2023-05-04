@@ -160,6 +160,38 @@ public class Drone : MonoBehaviour
 
         return velocity;
     }
+
+    public Vector3 GetAcceleration()
+    {
+        Vector3 acceleration = Vector3.zero;
+
+        float t = 2 * time / translationPeriod;
+
+        if (verticalMotionType == VerticalMotionType.Linear)
+        {
+            acceleration.y = 0;
+        }
+        else if (verticalMotionType == VerticalMotionType.Sinusoidal)
+        {
+            if (t < 1)
+            {
+                acceleration.y = Mathf.PI * Mathf.PI * Mathf.Cos(Mathf.PI * t) / translationPeriod / translationPeriod;
+            }
+            else
+            {
+                acceleration.y = -Mathf.PI * Mathf.PI * Mathf.Cos(Mathf.PI * (t - 1)) / translationPeriod / translationPeriod;
+            }
+        }
+
+        if (horizontalMotionType == HorizontalMotionType.Circular)
+        {
+            float a = 2 * Mathf.PI * orbitalFrequency;
+            acceleration.x = -a * a * circularRadius * Mathf.Cos(angle);
+            acceleration.z = -a * a * circularRadius * Mathf.Sin(angle);
+        }
+
+        return acceleration;
+    }
 }
 
 [System.Serializable]

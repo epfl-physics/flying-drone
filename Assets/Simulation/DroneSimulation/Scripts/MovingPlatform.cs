@@ -191,6 +191,28 @@ public class MovingPlatform : MonoBehaviour
         return speed * Vector3.up;
     }
 
+    public Vector3 GetAcceleration()
+    {
+        Vector3 acceleration = Vector3.zero;
+
+        float t = 2 * time / translationPeriod;
+        float a = 0;
+
+        if (motionType == MotionType.Sinusoidal)
+        {
+            if (t < 1)
+            {
+                a = Mathf.PI * Mathf.PI * Mathf.Cos(Mathf.PI * t) / translationPeriod / translationPeriod;
+            }
+            else
+            {
+                a = -Mathf.PI * Mathf.PI * Mathf.Cos(Mathf.PI * (t - 1)) / translationPeriod / translationPeriod;
+            }
+        }
+
+        return a * Vector3.up;
+    }
+
     public void SetSurfaceAlpha(float value)
     {
         if (surface)
