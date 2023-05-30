@@ -32,6 +32,13 @@ public class DroneSimulationState : ScriptableObject
 
     public static event System.Action OnRedrawVectors;
 
+    [HideInInspector] public bool droneIsOnAxis = true;
+    [HideInInspector] public bool droneIsAtRestInR = true;
+    [HideInInspector] public bool droneIsAtRestInRPrime = false;
+    [HideInInspector] public bool rotationIsZero = true;
+    [HideInInspector] public bool rotationIsConstant = false;
+    [HideInInspector] public bool rotationIsVariable = false;
+
     public void RedrawVectors()
     {
         OnRedrawVectors?.Invoke();
