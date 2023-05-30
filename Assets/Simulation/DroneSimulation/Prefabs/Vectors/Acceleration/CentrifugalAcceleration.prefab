@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7916903046096456173, guid: 7d32de44ddd0846c5840d6048bb8201b, type: 3}
       propertyPath: m_Name
-      value: CentrifugalAcceleration 1
+      value: CentrifugalAcceleration
       objectReference: {fileID: 0}
     - target: {fileID: 7916903046096456175, guid: 7d32de44ddd0846c5840d6048bb8201b, type: 3}
       propertyPath: m_RootOrder

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class DroneSlideController : Slides.SimulationSlideController
 {
     [Header("Simulation")]
-    public float droneOrbitalFrequency = 0;
+    public float droneCircularFrequency = 0;
     public float droneVerticalAmplitude = 0.5f;
     public float droneVerticalPeriod = 3f;
     public GameObject platform;
@@ -33,9 +33,9 @@ public class DroneSlideController : Slides.SimulationSlideController
     {
         DroneSimulation sim = (DroneSimulation)simulation;
 
-        sim.droneData.orbitalFrequency = droneOrbitalFrequency;
+        sim.droneData.circularFrequency = droneCircularFrequency;
         sim.droneData.verticalAmplitude = droneVerticalAmplitude;
-        sim.droneData.translationPeriod = droneVerticalPeriod;
+        sim.droneData.verticalPeriod = droneVerticalPeriod;
         sim.ApplyDroneData();
 
         sim.platformData.amplitude = platformVerticalAmplitude;

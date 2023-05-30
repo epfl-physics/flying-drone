@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: dd35653107bdf4f6faecff0a7dba489a
   - enabled: 1
     path: Assets/Modules/Theory/Theory.unity
-    guid: b208479497b53462ba018b44d0d96676
+    guid: 40052359f4c554f27ae1f3d7dcc89c24
   - enabled: 1
     path: Assets/Modules/Activities/Activities.unity
     guid: fe45f13095dd241b6bdb96c00e33ce8a

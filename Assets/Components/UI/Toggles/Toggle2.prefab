@@ -320,7 +320,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8838591168304344292}
   - component: {fileID: 8838591168304344290}
-  - component: {fileID: 8838591168304344293}
   - component: {fileID: 2261706883270124280}
   m_Layer: 0
   m_Name: Option 2
@@ -409,19 +408,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
---- !u!114 &8838591168304344293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8838591168304344295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a42205f085adf4349ae4f68d9d960d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customCursor: {fileID: 11400000, guid: 684d79e95eecf4b9197ede40cef826b0, type: 2}
 --- !u!222 &2261706883270124280
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -442,6 +428,7 @@ GameObject:
   - component: {fileID: 8838591168734078434}
   - component: {fileID: 8838591168734078437}
   - component: {fileID: 8838591168734078436}
+  - component: {fileID: 7454230810865958401}
   m_Layer: 0
   m_Name: Toggle2
   m_TagString: Untagged
@@ -522,6 +509,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &7454230810865958401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8838591168734078438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42205f085adf4349ae4f68d9d960d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customCursor: {fileID: 11400000, guid: 684d79e95eecf4b9197ede40cef826b0, type: 2}
 --- !u!1 &8838591168771992343
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +532,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8838591168771992340}
   - component: {fileID: 8838591168771992338}
-  - component: {fileID: 8838591168771992341}
   - component: {fileID: 3615340189092873500}
   m_Layer: 0
   m_Name: Option 1
@@ -621,19 +620,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
---- !u!114 &8838591168771992341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8838591168771992343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a42205f085adf4349ae4f68d9d960d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customCursor: {fileID: 11400000, guid: 684d79e95eecf4b9197ede40cef826b0, type: 2}
 --- !u!222 &3615340189092873500
 CanvasRenderer:
   m_ObjectHideFlags: 0

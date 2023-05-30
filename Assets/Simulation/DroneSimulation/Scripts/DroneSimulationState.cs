@@ -8,6 +8,7 @@ public class DroneSimulationState : ScriptableObject
 
     [Header("Rotation")]
     public Vector3 omega;
+    public Vector3 omegaDot;
 
     [Header("Position")]
     public Vector3 origin;
