@@ -21,6 +21,10 @@ public class TheoryController : MonoBehaviour
     public ToggleGroup platformDirectionTG;
     public ToggleGroup platformRotationTG;
 
+    [Header("Trails")]
+    public TrailRenderer droneTrail;
+    public TrailRenderer pointMassTrail;
+
     public static event System.Action OnChangeSimulationParameters;
 
     public void Start()
@@ -72,15 +76,15 @@ public class TheoryController : MonoBehaviour
         rotationIsConstant = false;
         rotationIsVariable = false;
 
-        if (typeIndex == 2)
+        if (typeIndex == 0)
         {
             rotationIsZero = true;
         }
-        else if (typeIndex == 3)
+        else if (typeIndex == 1)
         {
             rotationIsConstant = true;
         }
-        else if (typeIndex == 4)
+        else if (typeIndex == 2)
         {
             rotationIsVariable = true;
         }
@@ -104,11 +108,11 @@ public class TheoryController : MonoBehaviour
         droneIsAtRestInR = false;
         droneIsAtRestInRPrime = false;
 
-        if (motionIndex == 3)
+        if (motionIndex == 0)
         {
             droneIsAtRestInR = true;
         }
-        else if (motionIndex == 4)
+        else if (motionIndex == 1)
         {
             droneIsAtRestInRPrime = true;
         }
@@ -256,6 +260,9 @@ public class TheoryController : MonoBehaviour
             simState.rotationIsConstant = rotationIsConstant;
             simState.rotationIsVariable = rotationIsVariable;
         }
+
+        if (droneTrail) droneTrail.Clear();
+        if (pointMassTrail) pointMassTrail.Clear();
 
         OnChangeSimulationParameters?.Invoke();
     }
