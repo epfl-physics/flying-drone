@@ -15,6 +15,9 @@ public class DroneSimulation : Simulation
     [Header("Point Mass")]
     public Transform pointMass;
 
+    [Header("Projected Point")]
+    public Transform droneProjection;
+
     private void Awake()
     {
         if (drone)
@@ -62,6 +65,8 @@ public class DroneSimulation : Simulation
             SynchronizePointMass();
         }
 
+        SynchronizeDroneProjection();
+
         UpdateSimState();
     }
 
@@ -101,6 +106,7 @@ public class DroneSimulation : Simulation
         }
 
         SynchronizePointMass();
+        SynchronizeDroneProjection();
 
         if (platform && synchronizeWithPlatform)
         {
@@ -168,6 +174,7 @@ public class DroneSimulation : Simulation
         {
             drone.ReturnToRestPosition();
             SynchronizePointMass();
+            SynchronizeDroneProjection();
         }
     }
 
@@ -177,6 +184,16 @@ public class DroneSimulation : Simulation
         if (drone && pointMass)
         {
             pointMass.localPosition = drone.transform.localPosition;
+        }
+    }
+
+    private void SynchronizeDroneProjection()
+    {
+        if (drone && platform && droneProjection)
+        {
+            Vector3 position = drone.transform.localPosition;
+            position.y = platform.GetSurfacePosition().y;
+            droneProjection.localPosition = position;
         }
     }
 }
