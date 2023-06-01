@@ -20,6 +20,7 @@ public class TheoryEquationTerm : MonoBehaviour
         EulerAcceleration
     }
     public EquationTerm term;
+    public GameObject[] displayWhenZero;
 
     private void OnEnable()
     {
@@ -58,33 +59,59 @@ public class TheoryEquationTerm : MonoBehaviour
                     isZero = true;
                 }
                 break;
-            // case EquationTerm.AbsoluteAcceleration:
-            //     isZero = simState.droneAccelerationAbsolute.magnitude < threshold;
-            //     break;
-            // case EquationTerm.RelativeAcceleration:
-            //     isZero = simState.droneAccelerationRelative.magnitude < threshold;
-            //     break;
-            // case EquationTerm.PlatformAcceleration:
-            //     isZero = simState.platformAcceleration.magnitude < threshold;
-            //     break;
-            // case EquationTerm.CentrifugalAcceleration:
-            //     isZero = simState.centrifugalAcceleration.magnitude < threshold;
-            //     break;
-            // case EquationTerm.CoriolisAcceleration:
-            //     isZero = simState.coriolisAcceleration.magnitude < threshold;
-            //     break;
-            // case EquationTerm.EulerAcceleration:
-            //     isZero = simState.eulerAcceleration.magnitude < threshold;
-            //     break;
+            case EquationTerm.AbsoluteAcceleration:
+                isZero = simState.droneIsAtRestInR;
+                break;
+            case EquationTerm.RelativeAcceleration:
+                isZero = simState.droneIsAtRestInRPrime;
+                break;
+            case EquationTerm.PlatformAcceleration:
+                isZero = false;
+                break;
+            case EquationTerm.CentrifugalAcceleration:
+                if (simState.droneIsOnAxis)
+                {
+                    isZero = true;
+                }
+                else if (simState.rotationIsZero)
+                {
+                    isZero = true;
+                }
+                break;
+            case EquationTerm.CoriolisAcceleration:
+                if (simState.droneIsOnAxis)
+                {
+                    isZero = true;
+                }
+                else if (simState.rotationIsZero || simState.droneIsAtRestInRPrime)
+                {
+                    isZero = true;
+                }
+                break;
+            case EquationTerm.EulerAcceleration:
+                if (simState.droneIsOnAxis)
+                {
+                    isZero = true;
+                }
+                else if (simState.rotationIsZero || simState.rotationIsConstant)
+                {
+                    isZero = true;
+                }
+                break;
             default:
                 break;
         }
 
-        if (TryGetComponent(out Image image))
+        // if (TryGetComponent(out Image image))
+        // {
+        //     Color color = image.color;
+        //     color.a = isZero ? 0.2f : 1f;
+        //     image.color = color;
+        // }
+
+        foreach (var gameObject in displayWhenZero)
         {
-            Color color = image.color;
-            color.a = isZero ? 0.2f : 1f;
-            image.color = color;
+            gameObject.SetActive(isZero);
         }
     }
 }

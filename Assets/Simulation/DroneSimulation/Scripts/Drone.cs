@@ -172,7 +172,7 @@ public class Drone : MonoBehaviour
         }
 
         float omega = ComputeOmega(time);
-        float omegaDot = 2 * Mathf.PI * ComputeOmegaDot(time);
+        float omegaDot = ComputeOmegaDot(time);
         float r = data.circularRadius;
         acceleration.x = -r * (omega * omega * Mathf.Cos(angle) + omegaDot * Mathf.Sin(angle));
         acceleration.z = -r * (omega * omega * Mathf.Sin(angle) - omegaDot * Mathf.Cos(angle));
@@ -186,7 +186,7 @@ public class Drone : MonoBehaviour
 
         if (data.circularMotionType == CircularMotionType.Sinusoidal)
         {
-            frequency = data.circularFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.verticalPeriod));
+            frequency = 0.5f * data.circularFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.verticalPeriod));
         }
 
         return 2 * Mathf.PI * frequency;
@@ -199,7 +199,7 @@ public class Drone : MonoBehaviour
         if (data.circularMotionType == CircularMotionType.Sinusoidal)
         {
             float factor = 2 * Mathf.PI * data.circularFrequency / data.verticalPeriod;
-            frequencyDot = factor * Mathf.Sin(2 * Mathf.PI * time / data.verticalPeriod);
+            frequencyDot = 0.5f * factor * Mathf.Sin(2 * Mathf.PI * time / data.verticalPeriod);
         }
 
         return 2 * Mathf.PI * frequencyDot;

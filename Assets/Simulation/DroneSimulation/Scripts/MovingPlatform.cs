@@ -95,32 +95,32 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 ComputeOmega()
     {
-        Vector3 omega = Vector3.zero;
+        float frequency = 0;
 
         if (data.rotationType == RotationType.Constant)
         {
-            omega = 2 * Mathf.PI * data.rotationFrequency * Vector3.up;
+            frequency = data.rotationFrequency;
         }
         else if (data.rotationType == RotationType.Sinusoidal)
         {
-            float frequency = data.rotationFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.translationPeriod));
-            omega = 2 * Mathf.PI * frequency * Vector3.up;
+            frequency = 0.5f * data.rotationFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.translationPeriod));
         }
 
-        return omega;
+        return 2 * Mathf.PI * frequency * Vector3.up;
     }
 
     private Vector3 ComputeOmegaDot()
     {
-        Vector3 omegaDot = Vector3.zero;
+        // Vector3 omegaDot = Vector3.zero;
+        float frequencyDot = 0;
 
         if (data.rotationType == RotationType.Sinusoidal)
         {
-            float factor = 4 * Mathf.PI * Mathf.PI * data.rotationFrequency / data.translationPeriod;
-            omegaDot = factor * Mathf.Sin(2 * Mathf.PI * time / data.translationPeriod) * Vector3.up;
+            float factor = 2 * Mathf.PI * data.rotationFrequency / data.translationPeriod;
+            frequencyDot = 0.5f * factor * Mathf.Sin(2 * Mathf.PI * time / data.translationPeriod);
         }
 
-        return omegaDot;
+        return 2 * Mathf.PI * frequencyDot * Vector3.up;
     }
 
     private void ComputeHeightBounds()

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 public class TheoryControlDrawer : MonoBehaviour
@@ -9,6 +10,7 @@ public class TheoryControlDrawer : MonoBehaviour
     [SerializeField] private float xHidden = -200;
     [SerializeField] private float xShowing = -40;
     [SerializeField] private bool startHidden = false;
+    [SerializeField] private Image icon;
 
     private float yPosition;
 
@@ -49,6 +51,7 @@ public class TheoryControlDrawer : MonoBehaviour
         // Vector2 targetPosition = new Vector2(xPosition, -rectTransform.rect.height);
         Vector2 targetPosition = new Vector2(xHidden, yPosition);
         StartCoroutine(LerpPosition(rectTransform, targetPosition, lerpTime, 2));
+        if (icon) StartCoroutine(LerpIconAlpha(1, lerpTime));
     }
 
     public void Show(float lerpTime)
@@ -56,6 +59,7 @@ public class TheoryControlDrawer : MonoBehaviour
         StopAllCoroutines();
         Vector2 targetPosition = new Vector2(xShowing, yPosition);
         StartCoroutine(LerpPosition(rectTransform, targetPosition, lerpTime, 2));
+        if (icon) StartCoroutine(LerpIconAlpha(0, 0.6f * lerpTime));
     }
 
     private IEnumerator LerpPosition(RectTransform rectTransform,
@@ -80,5 +84,24 @@ public class TheoryControlDrawer : MonoBehaviour
     private float EaseOut(float t, float a)
     {
         return 1 - Mathf.Pow(1 - t, a);
+    }
+
+    private IEnumerator LerpIconAlpha(float targetAlpha, float lerpTime, float easeFactor = 0)
+    {
+        Color startColor = icon.color;
+        Color targetColor = startColor;
+        targetColor.a = targetAlpha;
+
+        float time = 0;
+        while (time < lerpTime)
+        {
+            time += Time.unscaledDeltaTime;
+            // float t = time / lerpTime;
+            float t = EaseOut(time / lerpTime, 1 + easeFactor);
+            icon.color = Color.Lerp(startColor, targetColor, t);
+            yield return null;
+        }
+
+        icon.color = targetColor;
     }
 }
