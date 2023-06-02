@@ -7,11 +7,13 @@ public class DroneSlideController : Slides.SimulationSlideController
     public float droneCircularFrequency = 0;
     public float droneVerticalAmplitude = 0.5f;
     public float droneVerticalPeriod = 3f;
+    public Drone.CircularMotionType droneCircularMotionType;
     public GameObject platform;
     public bool platformIsVisible;
     public float platformVerticalAmplitude = 0.5f;
     public float platformVerticalPeriod = 3f;
     public float platformRotationFrequency = 0f;
+    public MovingPlatform.RotationType platformRotationType;
 
     [Header("Environment")]
     public GameObject tree;
@@ -33,15 +35,17 @@ public class DroneSlideController : Slides.SimulationSlideController
     {
         DroneSimulation sim = (DroneSimulation)simulation;
 
-        sim.droneData.circularFrequency = droneCircularFrequency;
-        sim.droneData.verticalAmplitude = droneVerticalAmplitude;
-        sim.droneData.verticalPeriod = droneVerticalPeriod;
-        sim.ApplyDroneData();
-
         sim.platformData.amplitude = platformVerticalAmplitude;
         sim.platformData.translationPeriod = platformVerticalPeriod;
         sim.platformData.rotationFrequency = platformRotationFrequency;
+        sim.platformData.rotationType = platformRotationType;
         sim.ApplyPlatformData();
+
+        sim.droneData.circularFrequency = droneCircularFrequency;
+        sim.droneData.verticalAmplitude = droneVerticalAmplitude;
+        sim.droneData.verticalPeriod = droneVerticalPeriod;
+        sim.droneData.circularMotionType = droneCircularMotionType;
+        sim.ApplyDroneData(false, false);
 
         // Object visibility
         if (platform) platform.SetActive(platformIsVisible);

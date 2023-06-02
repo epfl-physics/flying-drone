@@ -724,6 +724,10 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: droneData.origin.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneIsIndependent
       value: 0
       objectReference: {fileID: 0}
@@ -821,7 +825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4054165581583041719, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4054165581583041719, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -857,7 +861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714804195147696735, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6714804195147696735, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalPosition.y

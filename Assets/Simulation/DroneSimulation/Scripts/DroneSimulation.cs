@@ -89,7 +89,7 @@ public class DroneSimulation : Simulation
         }
     }
 
-    public void ApplyDroneData(bool synchronizeWithPlatform = false)
+    public void ApplyDroneData(bool synchronizeWithPlatform = false, bool returnToRestPosition = true)
     {
         if (drone)
         {
@@ -102,7 +102,7 @@ public class DroneSimulation : Simulation
             drone.data.circularRadius = droneData.circularRadius;
             drone.data.circularFrequency = droneData.circularFrequency;
             drone.data.circularMotionType = droneData.circularMotionType;
-            drone.ReturnToRestPosition();
+            if (returnToRestPosition) drone.ReturnToRestPosition();
         }
 
         SynchronizePointMass();
