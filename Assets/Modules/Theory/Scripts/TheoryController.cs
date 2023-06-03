@@ -1,0 +1,269 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class TheoryController : MonoBehaviour
+{
+    public DroneSimulation sim;
+    public DroneSimulationState simState;
+    public float droneAxisOffset = 1;
+    private bool droneIsOnAxis = true;
+    private bool droneIsAtRestInR = true;
+    private bool droneIsAtRestInRPrime = false;
+    private float defaultRotationRate = 0.1f;
+    private float rotationDirection = 1f;
+    private bool rotationIsZero = true;
+    private bool rotationIsConstant = false;
+    private bool rotationIsVariable = false;
+
+    [Header("Toggle Groups")]
+    public ToggleGroup dronePositionTG;
+    public ToggleGroup droneMotionTG;
+    public ToggleGroup platformDirectionTG;
+    public ToggleGroup platformRotationTG;
+
+    [Header("Trails")]
+    public TrailRenderer droneTrail;
+    public TrailRenderer pointMassTrail;
+
+    public static event System.Action OnChangeSimulationParameters;
+
+    public void Start()
+    {
+        int directionIndex = GetToggleGroupActiveIndex(platformDirectionTG);
+        SetPlatformRotationDirection(directionIndex, false);
+
+        int rotationTypeIndex = GetToggleGroupActiveIndex(platformRotationTG);
+        SetPlatformRotationType(rotationTypeIndex, false);
+
+        int axisIndex = GetToggleGroupActiveIndex(dronePositionTG);
+        SetDroneAxisOffset(axisIndex, false);
+
+        int droneMotionIndex = GetToggleGroupActiveIndex(droneMotionTG);
+        SetDroneMotionType(droneMotionIndex, false);
+
+        SetSimulationData();
+    }
+
+    private int GetToggleGroupActiveIndex(ToggleGroup toggleGroup)
+    {
+        int index = -1;
+
+        if (toggleGroup)
+        {
+            foreach (var toggle in toggleGroup.ActiveToggles())
+            {
+                index = toggle.transform.GetSiblingIndex();
+            }
+        }
+
+        return index;
+    }
+
+    private void SetPlatformRotationDirection(int directionIndex, bool setSimData)
+    {
+        if (directionIndex < 0) return;
+
+        rotationDirection = directionIndex == 1 ? 1 : -1;
+
+        if (setSimData) SetSimulationData();
+    }
+
+    private void SetPlatformRotationType(int typeIndex, bool setSimData)
+    {
+        if (typeIndex < 0) return;
+
+        rotationIsZero = false;
+        rotationIsConstant = false;
+        rotationIsVariable = false;
+
+        if (typeIndex == 0)
+        {
+            rotationIsZero = true;
+        }
+        else if (typeIndex == 1)
+        {
+            rotationIsConstant = true;
+        }
+        else if (typeIndex == 2)
+        {
+            rotationIsVariable = true;
+        }
+
+        if (setSimData) SetSimulationData();
+    }
+
+    private void SetDroneAxisOffset(int axisIndex, bool setSimData)
+    {
+        if (axisIndex < 0) return;
+
+        droneIsOnAxis = axisIndex == 1;
+
+        if (setSimData) SetSimulationData();
+    }
+
+    private void SetDroneMotionType(int motionIndex, bool setSimData)
+    {
+        if (motionIndex < 0) return;
+
+        droneIsAtRestInR = false;
+        droneIsAtRestInRPrime = false;
+
+        if (motionIndex == 0)
+        {
+            droneIsAtRestInR = true;
+        }
+        else if (motionIndex == 1)
+        {
+            droneIsAtRestInRPrime = true;
+        }
+
+        if (setSimData) SetSimulationData();
+    }
+
+    public void OnPlatformDirectionOptionChanged(bool triggerNewDirection)
+    {
+        if (!triggerNewDirection) return;
+
+        int activeIndex = GetToggleGroupActiveIndex(platformDirectionTG);
+        SetPlatformRotationDirection(activeIndex, true);
+    }
+
+    public void OnPlatformRotationOptionChanged(bool triggerNewRotationType)
+    {
+        if (!triggerNewRotationType) return;
+
+        int activeIndex = GetToggleGroupActiveIndex(platformRotationTG);
+        SetPlatformRotationType(activeIndex, true);
+    }
+
+    public void OnDroneAxisOffsetChanged(bool triggerNewOffset)
+    {
+        if (!triggerNewOffset) return;
+
+        int activeIndex = GetToggleGroupActiveIndex(dronePositionTG);
+        SetDroneAxisOffset(activeIndex, true);
+    }
+
+    public void OnDroneMotionOptionChanged(bool triggerNewMotion)
+    {
+        if (!triggerNewMotion) return;
+
+        int activeIndex = GetToggleGroupActiveIndex(droneMotionTG);
+        SetDroneMotionType(activeIndex, true);
+    }
+
+    private void SetSimulationData()
+    {
+        if (!sim) return;
+
+        // Debug.Log("TheoryController > SetSimulationData");
+
+        // First deal with the platform
+        sim.platformData.rotationFrequency = rotationDirection * defaultRotationRate;
+        if (rotationIsZero)
+        {
+            sim.platformData.rotationType = MovingPlatform.RotationType.None;
+        }
+        else if (rotationIsConstant)
+        {
+            sim.platformData.rotationType = MovingPlatform.RotationType.Constant;
+        }
+        else if (rotationIsVariable)
+        {
+            sim.platformData.rotationType = MovingPlatform.RotationType.Sinusoidal;
+        }
+
+        sim.ApplyPlatformData(false);
+
+        sim.droneData.origin = 4 * Vector3.right;
+        sim.droneData.verticalPeriod = sim.platformData.translationPeriod;
+        sim.droneData.verticalAmplitude = sim.platformData.amplitude;
+        sim.droneData.circularFrequency = sim.platformData.rotationFrequency;
+        if (droneIsAtRestInR)
+        {
+            sim.droneData.circularRadius = 0;
+            sim.droneData.verticalMotionType = Drone.VerticalMotionType.None;
+            sim.droneData.circularMotionType = Drone.CircularMotionType.None;
+            if (droneIsOnAxis)
+            {
+                sim.droneData.restPosition = 4 * Vector3.up;
+            }
+            else
+            {
+                sim.droneData.restPosition = 4 * Vector3.up + droneAxisOffset * Vector3.right;
+            }
+        }
+        else if (droneIsAtRestInRPrime)
+        {
+            sim.droneData.verticalMotionType = Drone.VerticalMotionType.Sinusoidal;
+            if (droneIsOnAxis)
+            {
+                sim.droneData.restPosition = 4 * Vector3.up;
+                sim.droneData.circularRadius = 0;
+                sim.droneData.circularFrequency = 0;
+                sim.droneData.circularMotionType = Drone.CircularMotionType.None;
+            }
+            else
+            {
+                if (rotationIsZero)
+                {
+                    sim.droneData.restPosition = 4 * Vector3.up + droneAxisOffset * Vector3.right;
+                    sim.droneData.circularRadius = droneAxisOffset;
+                    sim.droneData.circularFrequency = 0;
+                    sim.droneData.circularMotionType = Drone.CircularMotionType.None;
+                }
+                else if (rotationIsConstant)
+                {
+                    sim.droneData.restPosition = 4 * Vector3.up;
+                    sim.droneData.circularRadius = droneAxisOffset;
+                    sim.droneData.circularFrequency = sim.platformData.rotationFrequency;
+                    sim.droneData.circularMotionType = Drone.CircularMotionType.Constant;
+                }
+                else if (rotationIsVariable)
+                {
+                    sim.droneData.restPosition = 4 * Vector3.up;
+                    sim.droneData.circularRadius = droneAxisOffset;
+                    sim.droneData.circularFrequency = sim.platformData.rotationFrequency;
+                    sim.droneData.circularMotionType = Drone.CircularMotionType.Sinusoidal;
+                }
+            }
+        }
+        else
+        {
+            // Not at rest in R or R' !!
+            if (droneIsOnAxis)
+            {
+                sim.droneData.restPosition = 4 * Vector3.up;
+                sim.droneData.circularRadius = 0;
+                sim.droneData.circularMotionType = Drone.CircularMotionType.Constant;
+                sim.droneData.verticalMotionType = Drone.VerticalMotionType.Linear;
+            }
+            else
+            {
+                sim.droneData.restPosition = 4 * Vector3.up;
+                sim.droneData.circularRadius = droneAxisOffset;
+                sim.droneData.circularFrequency = -sim.platformData.rotationFrequency;
+                sim.droneData.circularMotionType = Drone.CircularMotionType.Constant;
+                sim.droneData.verticalMotionType = Drone.VerticalMotionType.None;
+            }
+        }
+
+        sim.ApplyDroneData(true);
+
+        // Assign hidden variables
+        if (simState)
+        {
+            simState.droneIsOnAxis = droneIsOnAxis;
+            simState.droneIsAtRestInR = droneIsAtRestInR;
+            simState.droneIsAtRestInRPrime = droneIsAtRestInRPrime;
+            simState.rotationIsZero = rotationIsZero;
+            simState.rotationIsConstant = rotationIsConstant;
+            simState.rotationIsVariable = rotationIsVariable;
+        }
+
+        if (droneTrail) droneTrail.Clear();
+        if (pointMassTrail) pointMassTrail.Clear();
+
+        OnChangeSimulationParameters?.Invoke();
+    }
+}

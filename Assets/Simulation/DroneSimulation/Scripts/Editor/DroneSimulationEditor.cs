@@ -6,12 +6,6 @@ public class DroneSimulationEditor : Editor
 {
     private DroneSimulation sim;
 
-    private Vector3 platformOffset;
-    private float platformRestHeight;
-    // private bool droneIsIndependent;
-    private float droneRestHeight;
-    // private DroneSimulationState.DisplayMode displayMode;
-
     private void OnEnable()
     {
         sim = (DroneSimulation)target;
@@ -21,34 +15,10 @@ public class DroneSimulationEditor : Editor
     {
         DrawDefaultInspector();
 
-        if (platformOffset != sim.platformOffset)
+        if (GUI.changed)
         {
-            sim.SetPositionOffset(sim.platformOffset);
-            platformOffset = sim.platformOffset;
+            sim.ApplyPlatformData();
+            sim.ApplyDroneData();
         }
-
-        if (platformRestHeight != sim.platformRestHeight)
-        {
-            sim.SetPlatformAtRestPosition();
-            platformRestHeight = sim.platformRestHeight;
-        }
-
-        // if (droneIsIndependent != sim.droneIsIndependent)
-        // {
-        //     sim.SetDroneAtRestPosition();
-        //     droneIsIndependent = sim.droneIsIndependent;
-        // }
-
-        if (droneRestHeight != sim.droneRestHeight)
-        {
-            sim.SetDroneAtRestPosition();
-            droneRestHeight = sim.droneRestHeight;
-        }
-
-        // if (display != sim.display)
-        // {
-        //     sim.SetDisplay();
-        //     display = sim.display;
-        // }
     }
 }

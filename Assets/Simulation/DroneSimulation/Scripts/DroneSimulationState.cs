@@ -6,23 +6,41 @@ public class DroneSimulationState : ScriptableObject
     public float droneTime;
     public float platformTime;
 
-    public bool droneIsIndependent;
+    [Header("Rotation")]
+    public Vector3 omega;
+    public Vector3 omegaDot;
 
-    public enum DisplayMode { Physical, Mathematical }
-    public DisplayMode displayMode = DisplayMode.Physical;
+    [Header("Position")]
+    public Vector3 origin;
+    public Vector3 dronePositionAbsolute;
+    public Vector3 dronePositionRelative;
+    public Vector3 platformPosition;
 
-    public static event System.Action<DisplayMode> OnChangeDisplayMode;
+    [Header("Velocity")]
+    public Vector3 droneVelocityAbsolute;
+    public Vector3 droneVelocityRelative;
+    public Vector3 platformVelocity;
+    public Vector3 tangentialVelocity;
 
-    public void SetDisplayMode(bool isPhysical)
+    [Header("Acceleration")]
+    public Vector3 droneAccelerationAbsolute;
+    public Vector3 droneAccelerationRelative;
+    public Vector3 platformAcceleration;
+    public Vector3 centrifugalAcceleration;
+    public Vector3 coriolisAcceleration;
+    public Vector3 eulerAcceleration;
+
+    public static event System.Action OnRedrawVectors;
+
+    [HideInInspector] public bool droneIsOnAxis = true;
+    [HideInInspector] public bool droneIsAtRestInR = true;
+    [HideInInspector] public bool droneIsAtRestInRPrime = false;
+    [HideInInspector] public bool rotationIsZero = true;
+    [HideInInspector] public bool rotationIsConstant = false;
+    [HideInInspector] public bool rotationIsVariable = false;
+
+    public void RedrawVectors()
     {
-        SetDisplayMode(isPhysical ? DisplayMode.Physical : DisplayMode.Mathematical);
-        Debug.Log("DroneSimulationState > SetDisplayMode(bool)");
-    }
-
-    public void SetDisplayMode(DisplayMode displayMode)
-    {
-        this.displayMode = displayMode;
-        OnChangeDisplayMode?.Invoke(displayMode);
-        Debug.Log("DroneSimulationState > SetDisplayMode(DisplayMode)");
+        OnRedrawVectors?.Invoke();
     }
 }

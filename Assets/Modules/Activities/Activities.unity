@@ -288,6 +288,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Activity 2 Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6630728238529657201, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657213, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -744,6 +748,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Activity 1 Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6630728238529657201, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657213, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -957,10 +965,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa577bb779a2413b824a171838974d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraState: {fileID: 11400000, guid: 4142d516b6c8d45ab98b9075babf832f, type: 2}
-  targetPosition: {x: 0.7, y: 0.8, z: -8}
-  targetRotation: {x: 6, y: 0, z: 0}
-  moveTime: 1.5
+  cameraState: {fileID: 11400000, guid: 39f4c0426ca434011b7b724859aeb057, type: 2}
+  targetPosition: {x: 2, y: 5.7, z: -10}
+  targetRotation: {x: 15, y: 0, z: 0}
+  moveTime: 1
   canZoom: 0
   minZoom: 1
   maxZoom: 10

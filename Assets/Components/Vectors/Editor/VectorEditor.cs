@@ -9,6 +9,7 @@ public class VectorEditor : Editor
     private Vector3 components;
     private Color color;
     private float lineWidth;
+    private int sortOrder;
 
     private void OnEnable()
     {
@@ -43,6 +44,12 @@ public class VectorEditor : Editor
         {
             vector.SetColor();
             color = vector.color;
+        }
+
+        if (sortOrder != vector.sortOrder)
+        {
+            vector.SetSortOrder();
+            sortOrder = vector.sortOrder;
         }
     }
 }
