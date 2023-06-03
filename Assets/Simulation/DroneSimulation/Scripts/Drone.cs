@@ -108,7 +108,7 @@ public class Drone : MonoBehaviour
 
     public void ReturnToRestPosition()
     {
-        Debug.Log("ReturnToRestPosition");
+        // Debug.Log("ReturnToRestPosition");
         transform.localPosition = data.origin + data.restPosition;
     }
 
