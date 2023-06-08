@@ -191,15 +191,6 @@ public class TheoryController : MonoBehaviour
         if (setSimData) SetSimulationData();
     }
 
-    // public void OnPlatformTranslationOptionChanged(bool triggerNewTranslationType)
-    // {
-    //     if (!triggerNewTranslationType) return;
-
-    //     // int activeIndex = GetToggleGroupActiveIndex(platformTranslationTG);
-    //     int activeIndex = GetDropdownActiveIndex(platformTranslationDropdown);
-    //     SetPlatformTranslationType(activeIndex, true);
-    // }
-
     public void OnPlatformTranslationOptionChanged(int value)
     {
         SetPlatformTranslationType(value, true);
@@ -212,14 +203,6 @@ public class TheoryController : MonoBehaviour
         int activeIndex = GetToggleGroupActiveIndex(platformDirectionTG);
         SetPlatformRotationDirection(activeIndex, true);
     }
-
-    // public void OnPlatformRotationOptionChanged(bool triggerNewRotationType)
-    // {
-    //     if (!triggerNewRotationType) return;
-
-    //     int activeIndex = GetToggleGroupActiveIndex(platformRotationTG);
-    //     SetPlatformRotationType(activeIndex, true);
-    // }
 
     public void OnPlatformRotationOptionChanged(int value)
     {

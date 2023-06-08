@@ -41,15 +41,6 @@ public class Drone : MonoBehaviour
             position.y = ComputeHeight(time);
         }
 
-        // if (data.circularMotionType == CircularMotionType.Constant)
-        // {
-        //     angle += 2 * Mathf.PI * data.circularFrequency * deltaTime;
-        // }
-        // else if (data.circularMotionType == CircularMotionType.Sinusoidal)
-        // {
-        //     float frequency = data.circularFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.verticalPeriod));
-        //     angle += 2 * Mathf.PI * frequency * deltaTime;
-        // }
         float omega = ComputeOmega(time);
         angle += omega * deltaTime;
         position.x = data.circularRadius * Mathf.Cos(angle);

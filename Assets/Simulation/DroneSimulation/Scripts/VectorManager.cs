@@ -93,15 +93,15 @@ public class VectorManager : MonoBehaviour
             bool showY3 = false;
             if (showPositions)
             {
-                showY3 = aPlatform.magnitude == 0 || Vector3.Cross(rRelative, Vector3.up).magnitude != 0;
+                showY3 = !simState.droneIsOnAxis;
             }
             else if (showVelocities)
             {
-                showY3 = false;
+                showY3 = simState.translationIsZero;
             }
             else if (showAccelerations)
             {
-                showY3 = false;
+                showY3 = !simState.translationIsVariable;
             }
 
             y3.gameObject.SetActive(showY3);
