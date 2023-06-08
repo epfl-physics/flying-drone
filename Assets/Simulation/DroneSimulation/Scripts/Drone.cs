@@ -124,22 +124,22 @@ public class Drone : MonoBehaviour
         {
             if (t < 0.5f)
             {
-                velocity.y = 2 * data.verticalAmplitude / data.verticalPeriod;
+                velocity.y = 4 * data.verticalAmplitude / data.verticalPeriod;
             }
             else
             {
-                velocity.y = -2 * data.verticalAmplitude / data.verticalPeriod;
+                velocity.y = -4 * data.verticalAmplitude / data.verticalPeriod;
             }
         }
         else if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
         {
             if (t < 0.5f)
             {
-                velocity.y = data.verticalAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * t) / data.verticalPeriod;
+                velocity.y = 2 * data.verticalAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * t) / data.verticalPeriod;
             }
             else
             {
-                velocity.y = -data.verticalAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * (t - 0.5f)) / data.verticalPeriod;
+                velocity.y = -2 * data.verticalAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * (t - 0.5f)) / data.verticalPeriod;
             }
         }
 
@@ -162,11 +162,11 @@ public class Drone : MonoBehaviour
         {
             if (t < 0.5f)
             {
-                acceleration.y = 2 * data.verticalAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * t) / data.verticalPeriod / data.verticalPeriod;
+                acceleration.y = 4 * data.verticalAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * t) / data.verticalPeriod / data.verticalPeriod;
             }
             else
             {
-                acceleration.y = -2 * data.verticalAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * (t - 0.5f)) / data.verticalPeriod / data.verticalPeriod;
+                acceleration.y = -4 * data.verticalAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * (t - 0.5f)) / data.verticalPeriod / data.verticalPeriod;
             }
         }
 

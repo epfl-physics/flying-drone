@@ -26,7 +26,7 @@ public class DroneSimulationState : ScriptableObject
     public Vector3 droneAccelerationAbsolute;
     public Vector3 droneAccelerationRelative;
     public Vector3 platformAcceleration;
-    public Vector3 centrifugalAcceleration;
+    public Vector3 centripetalAcceleration;
     public Vector3 coriolisAcceleration;
     public Vector3 eulerAcceleration;
 

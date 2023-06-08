@@ -11,7 +11,7 @@ public class TheoryController : MonoBehaviour
     private bool droneIsAtRestInR = true;
     private bool droneIsAtRestInRPrime = false;
     private float defaultTranslationAmplitude = 0.7f;
-    private float defaultTranslationPeriod = 3f;
+    private float defaultTranslationPeriod = 4f;
     private bool translationIsZero = false;
     private bool translationIsConstant = false;
     private bool translationIsVariable = true;

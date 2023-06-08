@@ -107,22 +107,22 @@ public class MovingPlatform : MonoBehaviour
         {
             if (t < 0.5f)
             {
-                speed = 2 * data.translationAmplitude / data.translationPeriod;
+                speed = 4 * data.translationAmplitude / data.translationPeriod;
             }
             else
             {
-                speed = -2 * data.translationAmplitude / data.translationPeriod;
+                speed = -4 * data.translationAmplitude / data.translationPeriod;
             }
         }
         else if (data.translationType == TranslationType.Sinusoidal)
         {
             if (t < 0.5f)
             {
-                speed = data.translationAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * t) / data.translationPeriod;
+                speed = 2 * data.translationAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * t) / data.translationPeriod;
             }
             else
             {
-                speed = -data.translationAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * (t - 0.5f)) / data.translationPeriod;
+                speed = -2 * data.translationAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * (t - 0.5f)) / data.translationPeriod;
             }
         }
 
@@ -142,11 +142,11 @@ public class MovingPlatform : MonoBehaviour
         {
             if (t < 0.5f)
             {
-                a = 2 * data.translationAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * t) / data.translationPeriod / data.translationPeriod;
+                a = 4 * data.translationAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * t) / data.translationPeriod / data.translationPeriod;
             }
             else
             {
-                a = -2 * data.translationAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * (t - 0.5f)) / data.translationPeriod / data.translationPeriod;
+                a = -4 * data.translationAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * (t - 0.5f)) / data.translationPeriod / data.translationPeriod;
             }
         }
 

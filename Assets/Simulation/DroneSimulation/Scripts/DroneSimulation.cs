@@ -140,10 +140,10 @@ public class DroneSimulation : Simulation
         Vector3 rRelative = rAbsolute - rPlatform;
         Vector3 vTangential = -Vector3.Cross(omega, rRelative);
         Vector3 vRelative = vAbsolute - vPlatform - vTangential;
-        Vector3 aCentrifugal = -Vector3.Cross(omega, vTangential);
+        Vector3 aCentripetal = -Vector3.Cross(omega, vTangential);
         Vector3 aCoriolis = -2 * Vector3.Cross(omega, vRelative);
         Vector3 aEuler = -Vector3.Cross(omegaDot, rRelative);
-        Vector3 aRelative = aAbsolute - aPlatform - aCentrifugal - aCoriolis - aEuler;
+        Vector3 aRelative = aAbsolute - aPlatform - aCentripetal - aCoriolis - aEuler;
 
         simState.omega = omega;
         simState.omegaDot = omegaDot;
@@ -161,7 +161,7 @@ public class DroneSimulation : Simulation
         simState.droneAccelerationAbsolute = aAbsolute;
         simState.droneAccelerationRelative = aRelative;
         simState.platformAcceleration = aPlatform;
-        simState.centrifugalAcceleration = aCentrifugal;
+        simState.centripetalAcceleration = aCentripetal;
         simState.coriolisAcceleration = aCoriolis;
         simState.eulerAcceleration = aEuler;
 
