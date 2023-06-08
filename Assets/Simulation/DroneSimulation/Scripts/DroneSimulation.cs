@@ -47,7 +47,7 @@ public class DroneSimulation : Simulation
 
         // Determine whether the platform needs to update
         bool platformIsMoving = false;
-        platformIsMoving |= platformData.motionType != MovingPlatform.MotionType.None;
+        platformIsMoving |= platformData.translationType != MovingPlatform.TranslationType.None;
         platformIsMoving |= platformData.rotationType != MovingPlatform.RotationType.None;
 
         if (platform && platformIsMoving)
@@ -76,10 +76,10 @@ public class DroneSimulation : Simulation
         {
             platform.Position = platformData.position;
             platform.SetRestHeight(platformData.restHeight);
-            platform.SetAmplitude(platformData.amplitude);
+            platform.SetAmplitude(platformData.translationAmplitude);
             platform.data.translationPeriod = platformData.translationPeriod;
             platform.data.rotationFrequency = platformData.rotationFrequency;
-            platform.data.motionType = platformData.motionType;
+            platform.data.translationType = platformData.translationType;
             platform.data.rotationType = platformData.rotationType;
 
             if (drone && synchronizeWithDrone)

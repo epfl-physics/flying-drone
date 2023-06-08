@@ -83,7 +83,6 @@ public class VectorManager : MonoBehaviour
         Vector3 aEuler = simState.eulerAcceleration;
 
         // Rotation
-        // Vector3 omegaPosition = origin + rPlatform - rPlatform.y * Vector3.up - 0.5f * Vector3.right;
         // Vector3 omegaPosition = origin + rPlatform;
         Vector3 omegaPosition = origin + 6.5f * Vector3.right + 1.5f * Vector3.up;
         RedrawVector(omega, omegaPosition, simState.omega, showRotation);
@@ -91,7 +90,7 @@ public class VectorManager : MonoBehaviour
 
         if (y3)
         {
-            bool basisVisible = showPositions || showVelocities || showAccelerations;
+            bool basisVisible = showPositions;
             y3.gameObject.SetActive(basisVisible && (aPlatform.magnitude == 0 || Vector3.Cross(rRelative, Vector3.up).magnitude != 0));
         }
 
@@ -102,36 +101,18 @@ public class VectorManager : MonoBehaviour
 
         // Velocities
         RedrawVector(droneVelocityAbsolute, origin + rAbsolute, vAbsolute, showVelocities);
-        // RedrawVector(platformVelocity, origin + rPlatform + 1.5f * Vector3.right, vPlatform, showVelocities);
         RedrawVector(platformVelocity, origin + rPlatform, vPlatform, showVelocities);
-
-        // if (velocityAdditionOrder == VelocityAdditionOrder.First)
-        // {
-        //     RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
-        //     RedrawVector(platformVelocityAdditive, origin + rAbsolute + vRelative, vPlatform, showVelocities);
-        //     RedrawVector(tangentialVelocity, origin + rAbsolute + vRelative + vPlatform, vTangential, showVelocities);
-        // }
-        // else if (velocityAdditionOrder == VelocityAdditionOrder.Second)
-        // {
-        //     RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
-        //     RedrawVector(tangentialVelocity, origin + rAbsolute + vRelative, vTangential, showVelocities);
-        //     RedrawVector(platformVelocityAdditive, origin + rAbsolute + vRelative + vTangential, vPlatform, showVelocities);
-        // }
         RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
-        RedrawVector(platformVelocityAdditive, origin + rAbsolute + vRelative, vPlatform, showVelocities);
+        bool showPlatformV2 = showVelocities && (vAbsolute != vPlatform);
+        RedrawVector(platformVelocityAdditive, origin + rAbsolute, vPlatform, showPlatformV2);
         RedrawVector(tangentialVelocity, origin + rAbsolute, vTangential, showVelocities);
 
         // Accelerations
         RedrawVector(droneAccelerationAbsolute, origin + rAbsolute, aAbsolute, showAccelerations);
-        // RedrawVector(platformAcceleration, origin + rPlatform + 1.5f * Vector3.right, aPlatform, showAccelerations);
         RedrawVector(platformAcceleration, origin + rPlatform, aPlatform, showAccelerations);
-
         RedrawVector(droneAccelerationRelative, origin + rAbsolute, aRelative, showAccelerations);
-        // RedrawVector(platformAccelerationAdditive, origin + rAbsolute + aRelative, aPlatform, showAccelerations);
-        // RedrawVector(centrifugalAcceleration, origin + rAbsolute + aRelative + aPlatform, aCentrifugal, showAccelerations);
-        // RedrawVector(coriolisAcceleration, origin + rAbsolute + aRelative + aPlatform + aCentrifugal, aCoriolis, showAccelerations);
-        // RedrawVector(eulerAcceleration, origin + rAbsolute + aRelative + aPlatform + aCentrifugal + aCoriolis, aEuler, showAccelerations);
-        RedrawVector(platformAccelerationAdditive, origin + rAbsolute + aRelative, aPlatform, showAccelerations);
+        bool showPlatformA2 = showAccelerations && (aAbsolute != aPlatform);
+        RedrawVector(platformAccelerationAdditive, origin + rAbsolute, aPlatform, showPlatformA2);
         RedrawVector(centrifugalAcceleration, origin + rAbsolute, aCentrifugal, showAccelerations);
         RedrawVector(coriolisAcceleration, origin + rAbsolute, aCoriolis, showAccelerations);
         RedrawVector(eulerAcceleration, origin + rAbsolute, aEuler, showAccelerations);

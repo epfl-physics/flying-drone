@@ -252,7 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simState: {fileID: 0}
-  startStationary: 0
   platform: {fileID: 8989986124751517625}
   platformData:
     position: {x: 4, y: 0, z: 0}
@@ -261,18 +260,19 @@ MonoBehaviour:
     translationPeriod: 3
     rotationFrequency: 0
     motionType: 0
+    rotationType: 0
   drone: {fileID: 5235535545676843800}
   droneData:
-    isIndependent: 1
-    restHeight: 4
+    origin: {x: 0, y: 0, z: 0}
+    restPosition: {x: 0, y: 4, z: 0}
     verticalAmplitude: 0.5
-    translationPeriod: 2
+    verticalPeriod: 2
     verticalMotionType: 0
-    horizontalAmplitude: 2
     circularRadius: 1
-    orbitalFrequency: 0
-    horizontalMotionType: 0
+    circularFrequency: 0
+    circularMotionType: 0
   pointMass: {fileID: 6714804195147696735}
+  droneProjection: {fileID: 0}
 --- !u!1001 &1464492106999328983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -749,6 +749,18 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.087155744
       objectReference: {fileID: 0}
+    - target: {fileID: 7449174743655540854, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449174743655540854, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449174743655540854, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5568628
+      objectReference: {fileID: 0}
     - target: {fileID: 7756680460203355257, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
       propertyPath: m_Name
       value: MovingPlatform
@@ -827,6 +839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 2828814600023039361, guid: 6438e1df3cabf40faa9c86ef1dfeb989, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3c4258e785ef4eaa8ec5189e11b4b7d, type: 2}
     - target: {fileID: 3495700382826190369, guid: 6438e1df3cabf40faa9c86ef1dfeb989, type: 3}
       propertyPath: m_RootOrder
       value: 1
