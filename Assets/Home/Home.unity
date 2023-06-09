@@ -748,6 +748,10 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: droneData.verticalPeriod
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.translationPeriod
       value: 4
       objectReference: {fileID: 0}
