@@ -24,9 +24,7 @@ public class TheoryController : MonoBehaviour
     [Header("Toggle Groups")]
     public ToggleGroup dronePositionTG;
     public ToggleGroup droneMotionTG;
-    public ToggleGroup platformTranslationTG;
     public ToggleGroup platformDirectionTG;
-    public ToggleGroup platformRotationTG;
 
     [Header("Dropdowns")]
     public TMP_Dropdown platformTranslationDropdown;
@@ -169,7 +167,7 @@ public class TheoryController : MonoBehaviour
 
         droneIsOnAxis = axisIndex == 1;
 
-        if (setSimData) SetSimulationData();
+        if (setSimData) SetSimulationData(true);
     }
 
     private void SetDroneMotionType(int motionIndex, bool setSimData)
@@ -225,7 +223,7 @@ public class TheoryController : MonoBehaviour
         SetDroneMotionType(activeIndex, true);
     }
 
-    private void SetSimulationData()
+    private void SetSimulationData(bool clearTrail = false)
     {
         if (!sim) return;
 
@@ -348,7 +346,7 @@ public class TheoryController : MonoBehaviour
             }
         }
 
-        sim.ApplyDroneData(true);
+        sim.ApplyDroneData(true, true);
 
         // Assign hidden variables
         if (simState)
@@ -364,8 +362,11 @@ public class TheoryController : MonoBehaviour
             simState.rotationIsVariable = rotationIsVariable;
         }
 
-        if (droneTrail) droneTrail.Clear();
-        if (pointMassTrail) pointMassTrail.Clear();
+        if (clearTrail)
+        {
+            if (droneTrail) droneTrail.Clear();
+            if (pointMassTrail) pointMassTrail.Clear();
+        }
 
         OnChangeSimulationParameters?.Invoke();
     }

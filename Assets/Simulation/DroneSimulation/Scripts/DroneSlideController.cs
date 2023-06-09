@@ -13,6 +13,7 @@ public class DroneSlideController : Slides.SimulationSlideController
     public float platformVerticalAmplitude = 0.5f;
     public float platformVerticalPeriod = 3f;
     public float platformRotationFrequency = 0f;
+    public MovingPlatform.TranslationType platformTranslationType;
     public MovingPlatform.RotationType platformRotationType;
 
     [Header("Environment")]
@@ -37,6 +38,7 @@ public class DroneSlideController : Slides.SimulationSlideController
 
         sim.platformData.translationAmplitude = platformVerticalAmplitude;
         sim.platformData.translationPeriod = platformVerticalPeriod;
+        sim.platformData.translationType = platformTranslationType;
         sim.platformData.rotationFrequency = platformRotationFrequency;
         sim.platformData.rotationType = platformRotationType;
         sim.ApplyPlatformData();
