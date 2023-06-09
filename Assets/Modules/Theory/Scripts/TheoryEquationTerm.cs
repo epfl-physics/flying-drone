@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TheoryEquationTerm : MonoBehaviour
 {
@@ -41,13 +40,41 @@ public class TheoryEquationTerm : MonoBehaviour
         switch (term)
         {
             case EquationTerm.AbsoluteVelocity:
-                isZero = simState.droneIsAtRestInR;
+                if (simState.droneIsAtRestInR)
+                {
+                    isZero = true;
+                }
+                else if (simState.droneIsAtRestInRPrime)
+                {
+                    if (simState.droneIsOnAxis)
+                    {
+                        isZero = simState.translationIsZero;
+                    }
+                    else
+                    {
+                        isZero = simState.translationIsZero && simState.rotationIsZero;
+                    }
+                }
                 break;
             case EquationTerm.RelativeVelocity:
-                isZero = simState.droneIsAtRestInRPrime;
+                if (simState.droneIsAtRestInRPrime)
+                {
+                    isZero = true;
+                }
+                else if (simState.droneIsAtRestInR)
+                {
+                    if (simState.droneIsOnAxis)
+                    {
+                        isZero = simState.translationIsZero;
+                    }
+                    else
+                    {
+                        isZero = simState.translationIsZero && simState.rotationIsZero;
+                    }
+                }
                 break;
             case EquationTerm.PlatformVelocity:
-                isZero = false;
+                isZero = simState.translationIsZero;
                 break;
             case EquationTerm.TangentialVelocity:
                 if (simState.droneIsOnAxis)
@@ -60,13 +87,42 @@ public class TheoryEquationTerm : MonoBehaviour
                 }
                 break;
             case EquationTerm.AbsoluteAcceleration:
-                isZero = simState.droneIsAtRestInR;
+                // isZero = simState.droneIsAtRestInR;
+                if (simState.droneIsAtRestInR)
+                {
+                    isZero = true;
+                }
+                else if (simState.droneIsAtRestInRPrime)
+                {
+                    if (simState.droneIsOnAxis)
+                    {
+                        isZero = !simState.translationIsVariable;
+                    }
+                    else
+                    {
+                        isZero = !simState.translationIsVariable && simState.rotationIsZero;
+                    }
+                }
                 break;
             case EquationTerm.RelativeAcceleration:
-                isZero = simState.droneIsAtRestInRPrime;
+                if (simState.droneIsAtRestInRPrime)
+                {
+                    isZero = true;
+                }
+                else if (simState.droneIsAtRestInR)
+                {
+                    if (simState.droneIsOnAxis)
+                    {
+                        isZero = !simState.translationIsVariable;
+                    }
+                    else
+                    {
+                        isZero = !simState.translationIsVariable && simState.rotationIsZero;
+                    }
+                }
                 break;
             case EquationTerm.PlatformAcceleration:
-                isZero = false;
+                isZero = !simState.translationIsVariable;
                 break;
             case EquationTerm.CentrifugalAcceleration:
                 if (simState.droneIsOnAxis)
@@ -101,13 +157,6 @@ public class TheoryEquationTerm : MonoBehaviour
             default:
                 break;
         }
-
-        // if (TryGetComponent(out Image image))
-        // {
-        //     Color color = image.color;
-        //     color.a = isZero ? 0.2f : 1f;
-        //     image.color = color;
-        // }
 
         foreach (var gameObject in displayWhenZero)
         {

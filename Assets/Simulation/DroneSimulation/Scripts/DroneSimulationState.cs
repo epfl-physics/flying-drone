@@ -26,7 +26,7 @@ public class DroneSimulationState : ScriptableObject
     public Vector3 droneAccelerationAbsolute;
     public Vector3 droneAccelerationRelative;
     public Vector3 platformAcceleration;
-    public Vector3 centrifugalAcceleration;
+    public Vector3 centripetalAcceleration;
     public Vector3 coriolisAcceleration;
     public Vector3 eulerAcceleration;
 
@@ -35,6 +35,9 @@ public class DroneSimulationState : ScriptableObject
     [HideInInspector] public bool droneIsOnAxis = true;
     [HideInInspector] public bool droneIsAtRestInR = true;
     [HideInInspector] public bool droneIsAtRestInRPrime = false;
+    [HideInInspector] public bool translationIsZero = true;
+    [HideInInspector] public bool translationIsConstant = false;
+    [HideInInspector] public bool translationIsVariable = false;
     [HideInInspector] public bool rotationIsZero = true;
     [HideInInspector] public bool rotationIsConstant = false;
     [HideInInspector] public bool rotationIsVariable = false;

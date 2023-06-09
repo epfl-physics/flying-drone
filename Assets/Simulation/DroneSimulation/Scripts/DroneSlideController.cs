@@ -35,7 +35,7 @@ public class DroneSlideController : Slides.SimulationSlideController
     {
         DroneSimulation sim = (DroneSimulation)simulation;
 
-        sim.platformData.amplitude = platformVerticalAmplitude;
+        sim.platformData.translationAmplitude = platformVerticalAmplitude;
         sim.platformData.translationPeriod = platformVerticalPeriod;
         sim.platformData.rotationFrequency = platformRotationFrequency;
         sim.platformData.rotationType = platformRotationType;

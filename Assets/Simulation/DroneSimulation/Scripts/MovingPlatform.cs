@@ -4,7 +4,7 @@ public class MovingPlatform : MonoBehaviour
 {
     public bool autoUpdate;
 
-    public enum MotionType { None, Linear, Sinusoidal }
+    public enum TranslationType { None, Linear, Sinusoidal }
     public enum RotationType { None, Constant, Sinusoidal }
     public PlatformData data;
 
@@ -48,12 +48,12 @@ public class MovingPlatform : MonoBehaviour
     public void TakeAStep(float deltaTime)
     {
         time += deltaTime;
-        if (time >= data.translationPeriod) time = 0;
+        if (time >= 2 * data.translationPeriod) time = 0;
 
         // Compute the platform's position
         Vector3 position = data.restHeight * Vector3.up;
 
-        if (data.motionType != MotionType.None)
+        if (data.translationType != TranslationType.None)
         {
             float height = ComputeHeight(time);
             position = height * Vector3.up;
@@ -70,27 +70,87 @@ public class MovingPlatform : MonoBehaviour
     private float ComputeHeight(float time)
     {
         float height = 0;
-        float t = 2 * time / data.translationPeriod;
+        float t = time / data.translationPeriod;
+        if (time >= data.translationPeriod) t -= 1;
 
-        if (t < 1)
+        if (t < 0.5f)
         {
-            if (data.motionType == MotionType.Sinusoidal)
+            if (data.translationType == TranslationType.Sinusoidal)
             {
-                t = 0.5f * (1 - Mathf.Cos(Mathf.PI * t));
+                t = 0.25f * (1 - Mathf.Cos(2 * Mathf.PI * t));
             }
-            height = Mathf.Lerp(minHeight, maxHeight, t);
+            height = Mathf.Lerp(minHeight, maxHeight, 2 * t);
         }
         else
         {
-            t = t - 1;
-            if (data.motionType == MotionType.Sinusoidal)
+            t = t - 0.5f;
+            if (data.translationType == TranslationType.Sinusoidal)
             {
-                t = 0.5f * (1 - Mathf.Cos(Mathf.PI * t));
+                t = 0.25f * (1 - Mathf.Cos(2 * Mathf.PI * t));
             }
-            height = Mathf.Lerp(maxHeight, minHeight, t);
+            height = Mathf.Lerp(maxHeight, minHeight, 2 * t);
         }
 
         return height;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        Vector3 velocity = Vector3.zero;
+
+        // float t = 2 * time / data.translationPeriod;
+        float t = time / data.translationPeriod;
+        if (time >= data.translationPeriod) t -= 1;
+        float speed = 0;
+
+        if (data.translationType == TranslationType.Linear)
+        {
+            if (t < 0.5f)
+            {
+                speed = 4 * data.translationAmplitude / data.translationPeriod;
+            }
+            else
+            {
+                speed = -4 * data.translationAmplitude / data.translationPeriod;
+            }
+        }
+        else if (data.translationType == TranslationType.Sinusoidal)
+        {
+            if (t < 0.5f)
+            {
+                speed = 2 * data.translationAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * t) / data.translationPeriod;
+            }
+            else
+            {
+                speed = -2 * data.translationAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * (t - 0.5f)) / data.translationPeriod;
+            }
+        }
+
+        return speed * Vector3.up;
+    }
+
+    public Vector3 GetAcceleration()
+    {
+        Vector3 acceleration = Vector3.zero;
+
+        // float t = 2 * time / data.translationPeriod;
+        float t = time / data.translationPeriod;
+        if (time >= data.translationPeriod) t -= 1;
+        float a = 0;
+
+        if (data.translationType == TranslationType.Sinusoidal)
+        {
+            if (t < 0.5f)
+            {
+                a = 4 * data.translationAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * t) / data.translationPeriod / data.translationPeriod;
+            }
+            else
+            {
+                a = -4 * data.translationAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * (t - 0.5f)) / data.translationPeriod / data.translationPeriod;
+            }
+        }
+
+        return a * Vector3.up;
     }
 
     private Vector3 ComputeOmega()
@@ -103,7 +163,10 @@ public class MovingPlatform : MonoBehaviour
         }
         else if (data.rotationType == RotationType.Sinusoidal)
         {
-            frequency = 0.5f * data.rotationFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.translationPeriod));
+            // Positive for one vertical period, negative for the next, and repeat
+            float angularSpeed = 0.5f * (2 * Mathf.PI / data.translationPeriod);
+            // frequency = 0.5f * data.rotationFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.translationPeriod));
+            frequency = data.rotationFrequency * Mathf.Sin(angularSpeed * time);
         }
 
         return 2 * Mathf.PI * frequency * Vector3.up;
@@ -111,13 +174,15 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 ComputeOmegaDot()
     {
-        // Vector3 omegaDot = Vector3.zero;
         float frequencyDot = 0;
 
         if (data.rotationType == RotationType.Sinusoidal)
         {
-            float factor = 2 * Mathf.PI * data.rotationFrequency / data.translationPeriod;
-            frequencyDot = 0.5f * factor * Mathf.Sin(2 * Mathf.PI * time / data.translationPeriod);
+            // float factor = 2 * Mathf.PI * data.rotationFrequency / data.translationPeriod;
+            // frequencyDot = 0.5f * factor * Mathf.Sin(2 * Mathf.PI * time / data.translationPeriod);
+            float angularSpeed = 0.5f * (2 * Mathf.PI / data.translationPeriod);
+            frequencyDot = angularSpeed * data.rotationFrequency * Mathf.Cos(angularSpeed * time);
+
         }
 
         return 2 * Mathf.PI * frequencyDot * Vector3.up;
@@ -125,13 +190,13 @@ public class MovingPlatform : MonoBehaviour
 
     private void ComputeHeightBounds()
     {
-        minHeight = data.restHeight - data.amplitude;
-        maxHeight = data.restHeight + data.amplitude;
+        minHeight = data.restHeight - data.translationAmplitude;
+        maxHeight = data.restHeight + data.translationAmplitude;
     }
 
     public void SetAmplitude(float value)
     {
-        data.amplitude = value;
+        data.translationAmplitude = value;
         ComputeHeightBounds();
     }
 
@@ -187,61 +252,6 @@ public class MovingPlatform : MonoBehaviour
         return position;
     }
 
-    public Vector3 GetVelocity()
-    {
-        Vector3 velocity = Vector3.zero;
-
-        float t = 2 * time / data.translationPeriod;
-        float speed = 0;
-
-        if (data.motionType == MotionType.Linear)
-        {
-            if (t < 1)
-            {
-                speed = 2 * data.amplitude / data.translationPeriod;
-            }
-            else
-            {
-                speed = -2 * data.amplitude / data.translationPeriod;
-            }
-        }
-        else if (data.motionType == MotionType.Sinusoidal)
-        {
-            if (t < 1)
-            {
-                speed = Mathf.PI * Mathf.Sin(Mathf.PI * t) / data.translationPeriod;
-            }
-            else
-            {
-                speed = -Mathf.PI * Mathf.Sin(Mathf.PI * (t - 1)) / data.translationPeriod;
-            }
-        }
-
-        return speed * Vector3.up;
-    }
-
-    public Vector3 GetAcceleration()
-    {
-        Vector3 acceleration = Vector3.zero;
-
-        float t = 2 * time / data.translationPeriod;
-        float a = 0;
-
-        if (data.motionType == MotionType.Sinusoidal)
-        {
-            if (t < 1)
-            {
-                a = Mathf.PI * Mathf.PI * Mathf.Cos(Mathf.PI * t) / data.translationPeriod / data.translationPeriod;
-            }
-            else
-            {
-                a = -Mathf.PI * Mathf.PI * Mathf.Cos(Mathf.PI * (t - 1)) / data.translationPeriod / data.translationPeriod;
-            }
-        }
-
-        return a * Vector3.up;
-    }
-
     public void SetSurfaceAlpha(float value)
     {
         if (surface)
@@ -266,9 +276,9 @@ public class PlatformData
 {
     [Tooltip("Of the base")] public Vector3 position;
     [Tooltip("Of the surface above the base"), Min(0)] public float restHeight = 1;
-    [Tooltip("Vertical displacement")] public float amplitude = 1;
+    [Tooltip("Vertical displacement")] public float translationAmplitude = 1;
     [Tooltip("Time to execute one full cycle"), Min(0)] public float translationPeriod = 2;
     [Tooltip("Rotations per second"), Range(-0.5f, 0.5f)] public float rotationFrequency = 0;
-    public MovingPlatform.MotionType motionType;
+    public MovingPlatform.TranslationType translationType;
     public MovingPlatform.RotationType rotationType;
 }

@@ -47,7 +47,7 @@ public class DroneSimulation : Simulation
 
         // Determine whether the platform needs to update
         bool platformIsMoving = false;
-        platformIsMoving |= platformData.motionType != MovingPlatform.MotionType.None;
+        platformIsMoving |= platformData.translationType != MovingPlatform.TranslationType.None;
         platformIsMoving |= platformData.rotationType != MovingPlatform.RotationType.None;
 
         if (platform && platformIsMoving)
@@ -76,10 +76,10 @@ public class DroneSimulation : Simulation
         {
             platform.Position = platformData.position;
             platform.SetRestHeight(platformData.restHeight);
-            platform.SetAmplitude(platformData.amplitude);
+            platform.SetAmplitude(platformData.translationAmplitude);
             platform.data.translationPeriod = platformData.translationPeriod;
             platform.data.rotationFrequency = platformData.rotationFrequency;
-            platform.data.motionType = platformData.motionType;
+            platform.data.translationType = platformData.translationType;
             platform.data.rotationType = platformData.rotationType;
 
             if (drone && synchronizeWithDrone)
@@ -140,10 +140,10 @@ public class DroneSimulation : Simulation
         Vector3 rRelative = rAbsolute - rPlatform;
         Vector3 vTangential = -Vector3.Cross(omega, rRelative);
         Vector3 vRelative = vAbsolute - vPlatform - vTangential;
-        Vector3 aCentrifugal = -Vector3.Cross(omega, vTangential);
+        Vector3 aCentripetal = -Vector3.Cross(omega, vTangential);
         Vector3 aCoriolis = -2 * Vector3.Cross(omega, vRelative);
         Vector3 aEuler = -Vector3.Cross(omegaDot, rRelative);
-        Vector3 aRelative = aAbsolute - aPlatform - aCentrifugal - aCoriolis - aEuler;
+        Vector3 aRelative = aAbsolute - aPlatform - aCentripetal - aCoriolis - aEuler;
 
         simState.omega = omega;
         simState.omegaDot = omegaDot;
@@ -161,7 +161,7 @@ public class DroneSimulation : Simulation
         simState.droneAccelerationAbsolute = aAbsolute;
         simState.droneAccelerationRelative = aRelative;
         simState.platformAcceleration = aPlatform;
-        simState.centrifugalAcceleration = aCentrifugal;
+        simState.centripetalAcceleration = aCentripetal;
         simState.coriolisAcceleration = aCoriolis;
         simState.eulerAcceleration = aEuler;
 

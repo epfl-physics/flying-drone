@@ -31,7 +31,7 @@ public class Drone : MonoBehaviour
     public void TakeAStep(float deltaTime)
     {
         time += deltaTime;
-        if (time >= data.verticalPeriod) time = 0;
+        if (time >= 2 * data.verticalPeriod) time = 0;
 
         // Compute the drone's local position
         Vector3 position = data.restPosition;
@@ -41,15 +41,6 @@ public class Drone : MonoBehaviour
             position.y = ComputeHeight(time);
         }
 
-        // if (data.circularMotionType == CircularMotionType.Constant)
-        // {
-        //     angle += 2 * Mathf.PI * data.circularFrequency * deltaTime;
-        // }
-        // else if (data.circularMotionType == CircularMotionType.Sinusoidal)
-        // {
-        //     float frequency = data.circularFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.verticalPeriod));
-        //     angle += 2 * Mathf.PI * frequency * deltaTime;
-        // }
         float omega = ComputeOmega(time);
         angle += omega * deltaTime;
         position.x = data.circularRadius * Mathf.Cos(angle);
@@ -65,24 +56,25 @@ public class Drone : MonoBehaviour
     private float ComputeHeight(float time)
     {
         float height = 0;
-        float t = 2 * time / data.verticalPeriod;
+        float t = time / data.verticalPeriod;
+        if (time >= data.verticalPeriod) t -= 1;
 
-        if (t < 1)
+        if (t < 0.5f)
         {
             if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
             {
-                t = 0.5f * (1 - Mathf.Cos(Mathf.PI * t));
+                t = 0.25f * (1 - Mathf.Cos(2 * Mathf.PI * t));
             }
-            height = Mathf.Lerp(minHeight, maxHeight, t);
+            height = Mathf.Lerp(minHeight, maxHeight, 2 * t);
         }
         else
         {
-            t = t - 1;
+            t = t - 0.5f;
             if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
             {
-                t = 0.5f * (1 - Mathf.Cos(Mathf.PI * t));
+                t = 0.25f * (1 - Mathf.Cos(2 * Mathf.PI * t));
             }
-            height = Mathf.Lerp(maxHeight, minHeight, t);
+            height = Mathf.Lerp(maxHeight, minHeight, 2 * t);
         }
 
         return height;
@@ -116,28 +108,29 @@ public class Drone : MonoBehaviour
     {
         Vector3 velocity = Vector3.zero;
 
-        float t = 2 * time / data.verticalPeriod;
+        float t = time / data.verticalPeriod;
+        if (time >= data.verticalPeriod) t -= 1;
 
         if (data.verticalMotionType == VerticalMotionType.Linear)
         {
-            if (t < 1)
+            if (t < 0.5f)
             {
-                velocity.y = 2 * data.verticalAmplitude / data.verticalPeriod;
+                velocity.y = 4 * data.verticalAmplitude / data.verticalPeriod;
             }
             else
             {
-                velocity.y = -2 * data.verticalAmplitude / data.verticalPeriod;
+                velocity.y = -4 * data.verticalAmplitude / data.verticalPeriod;
             }
         }
         else if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
         {
-            if (t < 1)
+            if (t < 0.5f)
             {
-                velocity.y = Mathf.PI * Mathf.Sin(Mathf.PI * t) / data.verticalPeriod;
+                velocity.y = 2 * data.verticalAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * t) / data.verticalPeriod;
             }
             else
             {
-                velocity.y = -Mathf.PI * Mathf.Sin(Mathf.PI * (t - 1)) / data.verticalPeriod;
+                velocity.y = -2 * data.verticalAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * (t - 0.5f)) / data.verticalPeriod;
             }
         }
 
@@ -153,21 +146,18 @@ public class Drone : MonoBehaviour
     {
         Vector3 acceleration = Vector3.zero;
 
-        float t = 2 * time / data.verticalPeriod;
+        float t = time / data.verticalPeriod;
+        if (time >= data.verticalPeriod) t -= 1;
 
-        if (data.verticalMotionType == VerticalMotionType.Linear)
+        if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
         {
-            acceleration.y = 0;
-        }
-        else if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
-        {
-            if (t < 1)
+            if (t < 0.5f)
             {
-                acceleration.y = Mathf.PI * Mathf.PI * Mathf.Cos(Mathf.PI * t) / data.verticalPeriod / data.verticalPeriod;
+                acceleration.y = 4 * data.verticalAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * t) / data.verticalPeriod / data.verticalPeriod;
             }
             else
             {
-                acceleration.y = -Mathf.PI * Mathf.PI * Mathf.Cos(Mathf.PI * (t - 1)) / data.verticalPeriod / data.verticalPeriod;
+                acceleration.y = -4 * data.verticalAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * (t - 0.5f)) / data.verticalPeriod / data.verticalPeriod;
             }
         }
 
@@ -186,7 +176,10 @@ public class Drone : MonoBehaviour
 
         if (data.circularMotionType == CircularMotionType.Sinusoidal)
         {
-            frequency = 0.5f * data.circularFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.verticalPeriod));
+            // Positive for one vertical period, negative for the next, and repeat
+            float angularSpeed = 0.5f * (2 * Mathf.PI / data.verticalPeriod);
+            // frequency = 0.5f * data.circularFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.verticalPeriod));
+            frequency = data.circularFrequency * Mathf.Sin(angularSpeed * time);
         }
 
         return 2 * Mathf.PI * frequency;
@@ -198,8 +191,10 @@ public class Drone : MonoBehaviour
 
         if (data.circularMotionType == CircularMotionType.Sinusoidal)
         {
-            float factor = 2 * Mathf.PI * data.circularFrequency / data.verticalPeriod;
-            frequencyDot = 0.5f * factor * Mathf.Sin(2 * Mathf.PI * time / data.verticalPeriod);
+            // float factor = 2 * Mathf.PI * data.circularFrequency / data.verticalPeriod;
+            // frequencyDot = 0.5f * factor * Mathf.Sin(2 * Mathf.PI * time / data.verticalPeriod);
+            float angularSpeed = 0.5f * (2 * Mathf.PI / data.verticalPeriod);
+            frequencyDot = angularSpeed * data.circularFrequency * Mathf.Cos(angularSpeed * time);
         }
 
         return 2 * Mathf.PI * frequencyDot;

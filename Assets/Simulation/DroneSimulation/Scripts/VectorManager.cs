@@ -38,7 +38,7 @@ public class VectorManager : MonoBehaviour
     public Vector droneAccelerationRelative;
     public Vector platformAcceleration;
     public Vector platformAccelerationAdditive;
-    public Vector centrifugalAcceleration;
+    public Vector centripetalAcceleration;
     public Vector coriolisAcceleration;
     public Vector eulerAcceleration;
     public bool showAccelerations;
@@ -78,12 +78,11 @@ public class VectorManager : MonoBehaviour
         Vector3 aAbsolute = simState.droneAccelerationAbsolute;
         Vector3 aRelative = simState.droneAccelerationRelative;
         Vector3 aPlatform = simState.platformAcceleration;
-        Vector3 aCentrifugal = simState.centrifugalAcceleration;
+        Vector3 aCentripetal = simState.centripetalAcceleration;
         Vector3 aCoriolis = simState.coriolisAcceleration;
         Vector3 aEuler = simState.eulerAcceleration;
 
         // Rotation
-        // Vector3 omegaPosition = origin + rPlatform - rPlatform.y * Vector3.up - 0.5f * Vector3.right;
         // Vector3 omegaPosition = origin + rPlatform;
         Vector3 omegaPosition = origin + 6.5f * Vector3.right + 1.5f * Vector3.up;
         RedrawVector(omega, omegaPosition, simState.omega, showRotation);
@@ -91,8 +90,21 @@ public class VectorManager : MonoBehaviour
 
         if (y3)
         {
-            bool basisVisible = showPositions || showVelocities || showAccelerations;
-            y3.gameObject.SetActive(basisVisible && (aPlatform.magnitude == 0 || Vector3.Cross(rRelative, Vector3.up).magnitude != 0));
+            bool showY3 = false;
+            if (showPositions)
+            {
+                showY3 = !simState.droneIsOnAxis;
+            }
+            else if (showVelocities)
+            {
+                showY3 = simState.translationIsZero;
+            }
+            else if (showAccelerations)
+            {
+                showY3 = !simState.translationIsVariable;
+            }
+
+            y3.gameObject.SetActive(showY3);
         }
 
         // Positions
@@ -102,37 +114,21 @@ public class VectorManager : MonoBehaviour
 
         // Velocities
         RedrawVector(droneVelocityAbsolute, origin + rAbsolute, vAbsolute, showVelocities);
-        // RedrawVector(platformVelocity, origin + rPlatform + 1.5f * Vector3.right, vPlatform, showVelocities);
         RedrawVector(platformVelocity, origin + rPlatform, vPlatform, showVelocities);
-
-        // if (velocityAdditionOrder == VelocityAdditionOrder.First)
-        // {
-        //     RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
-        //     RedrawVector(platformVelocityAdditive, origin + rAbsolute + vRelative, vPlatform, showVelocities);
-        //     RedrawVector(tangentialVelocity, origin + rAbsolute + vRelative + vPlatform, vTangential, showVelocities);
-        // }
-        // else if (velocityAdditionOrder == VelocityAdditionOrder.Second)
-        // {
-        //     RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
-        //     RedrawVector(tangentialVelocity, origin + rAbsolute + vRelative, vTangential, showVelocities);
-        //     RedrawVector(platformVelocityAdditive, origin + rAbsolute + vRelative + vTangential, vPlatform, showVelocities);
-        // }
         RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
-        RedrawVector(platformVelocityAdditive, origin + rAbsolute + vRelative, vPlatform, showVelocities);
-        RedrawVector(tangentialVelocity, origin + rAbsolute, vTangential, showVelocities);
+        bool showPlatformV2 = showVelocities && (vAbsolute != vPlatform);
+        RedrawVector(platformVelocityAdditive, origin + rAbsolute, vPlatform, showPlatformV2);
+        bool showTangentialV = showVelocities && (vAbsolute != vTangential);
+        RedrawVector(tangentialVelocity, origin + rAbsolute, vTangential, showTangentialV);
 
         // Accelerations
         RedrawVector(droneAccelerationAbsolute, origin + rAbsolute, aAbsolute, showAccelerations);
-        // RedrawVector(platformAcceleration, origin + rPlatform + 1.5f * Vector3.right, aPlatform, showAccelerations);
         RedrawVector(platformAcceleration, origin + rPlatform, aPlatform, showAccelerations);
-
         RedrawVector(droneAccelerationRelative, origin + rAbsolute, aRelative, showAccelerations);
-        // RedrawVector(platformAccelerationAdditive, origin + rAbsolute + aRelative, aPlatform, showAccelerations);
-        // RedrawVector(centrifugalAcceleration, origin + rAbsolute + aRelative + aPlatform, aCentrifugal, showAccelerations);
-        // RedrawVector(coriolisAcceleration, origin + rAbsolute + aRelative + aPlatform + aCentrifugal, aCoriolis, showAccelerations);
-        // RedrawVector(eulerAcceleration, origin + rAbsolute + aRelative + aPlatform + aCentrifugal + aCoriolis, aEuler, showAccelerations);
-        RedrawVector(platformAccelerationAdditive, origin + rAbsolute + aRelative, aPlatform, showAccelerations);
-        RedrawVector(centrifugalAcceleration, origin + rAbsolute, aCentrifugal, showAccelerations);
+        bool showPlatformA2 = showAccelerations && (aAbsolute != aPlatform);
+        RedrawVector(platformAccelerationAdditive, origin + rAbsolute, aPlatform, showPlatformA2);
+        bool showCentripetalA = showAccelerations && (aAbsolute != aCentripetal);
+        RedrawVector(centripetalAcceleration, origin + rAbsolute, aCentripetal, showCentripetalA);
         RedrawVector(coriolisAcceleration, origin + rAbsolute, aCoriolis, showAccelerations);
         RedrawVector(eulerAcceleration, origin + rAbsolute, aEuler, showAccelerations);
     }
