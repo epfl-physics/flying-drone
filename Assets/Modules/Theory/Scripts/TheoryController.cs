@@ -24,9 +24,7 @@ public class TheoryController : MonoBehaviour
     [Header("Toggle Groups")]
     public ToggleGroup dronePositionTG;
     public ToggleGroup droneMotionTG;
-    public ToggleGroup platformTranslationTG;
     public ToggleGroup platformDirectionTG;
-    public ToggleGroup platformRotationTG;
 
     [Header("Dropdowns")]
     public TMP_Dropdown platformTranslationDropdown;

@@ -11,6 +11,7 @@ public class TheoryControlDrawer : MonoBehaviour
     [SerializeField] private float xShowing = -40;
     [SerializeField] private bool startHidden = false;
     [SerializeField] private Image icon;
+    [SerializeField] private CanvasGroup coverPanel;
 
     private float yPosition;
 
@@ -52,6 +53,7 @@ public class TheoryControlDrawer : MonoBehaviour
         Vector2 targetPosition = new Vector2(xHidden, yPosition);
         StartCoroutine(LerpPosition(rectTransform, targetPosition, lerpTime, 2));
         if (icon) StartCoroutine(LerpIconAlpha(1, lerpTime));
+        if (coverPanel) StartCoroutine(LerpCoverPanelAlpha(coverPanel, 1, 0.8f * lerpTime));
     }
 
     public void Show(float lerpTime)
@@ -60,6 +62,7 @@ public class TheoryControlDrawer : MonoBehaviour
         Vector2 targetPosition = new Vector2(xShowing, yPosition);
         StartCoroutine(LerpPosition(rectTransform, targetPosition, lerpTime, 2));
         if (icon) StartCoroutine(LerpIconAlpha(0, 0.6f * lerpTime));
+        if (coverPanel) StartCoroutine(LerpCoverPanelAlpha(coverPanel, 0, 0.6f * lerpTime));
     }
 
     private IEnumerator LerpPosition(RectTransform rectTransform,
@@ -103,5 +106,22 @@ public class TheoryControlDrawer : MonoBehaviour
         }
 
         icon.color = targetColor;
+    }
+
+    private IEnumerator LerpCoverPanelAlpha(CanvasGroup cg, float targetAlpha, float lerpTime, float easeFactor = 0)
+    {
+        float startAlpha = cg.alpha;
+        cg.blocksRaycasts = targetAlpha == 1;
+
+        float time = 0;
+        while (time < lerpTime)
+        {
+            time += Time.unscaledDeltaTime;
+            float t = EaseOut(time / lerpTime, 1 + easeFactor);
+            cg.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+            yield return null;
+        }
+
+        cg.alpha = targetAlpha;
     }
 }

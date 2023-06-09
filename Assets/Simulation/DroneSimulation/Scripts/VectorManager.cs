@@ -118,8 +118,9 @@ public class VectorManager : MonoBehaviour
         RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
         bool showPlatformV2 = showVelocities && (vAbsolute != vPlatform);
         RedrawVector(platformVelocityAdditive, origin + rAbsolute, vPlatform, showPlatformV2);
-        bool showTangentialV = showVelocities && (vAbsolute != vTangential);
-        RedrawVector(tangentialVelocity, origin + rAbsolute, vTangential, showTangentialV);
+        // bool showTangentialV = showVelocities && (vAbsolute != vTangential);
+        Vector3 tangentialVOffset = vAbsolute == vTangential ? 0.2f * Vector3.down : Vector3.zero;
+        RedrawVector(tangentialVelocity, origin + rAbsolute + tangentialVOffset, vTangential, showVelocities);
 
         // Accelerations
         RedrawVector(droneAccelerationAbsolute, origin + rAbsolute, aAbsolute, showAccelerations);
@@ -128,7 +129,8 @@ public class VectorManager : MonoBehaviour
         bool showPlatformA2 = showAccelerations && (aAbsolute != aPlatform);
         RedrawVector(platformAccelerationAdditive, origin + rAbsolute, aPlatform, showPlatformA2);
         bool showCentripetalA = showAccelerations && (aAbsolute != aCentripetal);
-        RedrawVector(centripetalAcceleration, origin + rAbsolute, aCentripetal, showCentripetalA);
+        Vector3 centripetalOffset = aRelative == aCentripetal ? 0.2f * Vector3.down : Vector3.zero;
+        RedrawVector(centripetalAcceleration, origin + rAbsolute + centripetalOffset, aCentripetal, showCentripetalA);
         RedrawVector(coriolisAcceleration, origin + rAbsolute, aCoriolis, showAccelerations);
         RedrawVector(eulerAcceleration, origin + rAbsolute, aEuler, showAccelerations);
     }
