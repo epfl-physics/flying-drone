@@ -168,15 +168,15 @@ public class DroneSimulation : Simulation
         simState.RedrawVectors();
     }
 
-    public void SetDroneAtRestPosition()
-    {
-        if (drone)
-        {
-            drone.ReturnToRestPosition();
-            SynchronizePointMass();
-            SynchronizeDroneProjection();
-        }
-    }
+    // public void SetDroneAtRestPosition()
+    // {
+    //     if (drone)
+    //     {
+    //         drone.ReturnToRestPosition();
+    //         SynchronizePointMass();
+    //         SynchronizeDroneProjection();
+    //     }
+    // }
 
     private void SynchronizePointMass()
     {

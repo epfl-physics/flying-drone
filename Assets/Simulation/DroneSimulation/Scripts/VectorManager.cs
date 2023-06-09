@@ -128,9 +128,9 @@ public class VectorManager : MonoBehaviour
         RedrawVector(droneAccelerationRelative, origin + rAbsolute, aRelative, showAccelerations);
         bool showPlatformA2 = showAccelerations && (aAbsolute != aPlatform);
         RedrawVector(platformAccelerationAdditive, origin + rAbsolute, aPlatform, showPlatformA2);
-        bool showCentripetalA = showAccelerations && (aAbsolute != aCentripetal);
-        Vector3 centripetalOffset = aRelative == aCentripetal ? 0.2f * Vector3.down : Vector3.zero;
-        RedrawVector(centripetalAcceleration, origin + rAbsolute + centripetalOffset, aCentripetal, showCentripetalA);
+        // bool showCentripetalA = showAccelerations && (aAbsolute != aCentripetal);
+        Vector3 centripetalOffset = aRelative == aCentripetal || aAbsolute == aCentripetal ? 0.2f * Vector3.down : Vector3.zero;
+        RedrawVector(centripetalAcceleration, origin + rAbsolute + centripetalOffset, aCentripetal, showAccelerations);
         RedrawVector(coriolisAcceleration, origin + rAbsolute, aCoriolis, showAccelerations);
         RedrawVector(eulerAcceleration, origin + rAbsolute, aEuler, showAccelerations);
     }
