@@ -256,10 +256,10 @@ MonoBehaviour:
   platformData:
     position: {x: 4, y: 0, z: 0}
     restHeight: 1.5
-    amplitude: 0.5
+    translationAmplitude: 1
     translationPeriod: 3
     rotationFrequency: 0
-    motionType: 0
+    translationType: 0
     rotationType: 0
   drone: {fileID: 5235535545676843800}
   droneData:
@@ -765,6 +765,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 7779163333602243850, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779163333602243850, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779163333602243850, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7954220070012864691, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.9961947
@@ -802,10 +814,15 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8680062714246348090, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680062714246348090, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
       propertyPath: m_LocalScale.z
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 205303637205257301, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
 --- !u!4 &6779090485739154324 stripped
 Transform:

@@ -7,6 +7,16 @@ public class CameraFacingObject : MonoBehaviour
 
     private Camera mainCamera;
 
+    private void OnEnable()
+    {
+        CameraTagger.OnMainCameraChanged += ReleaseCameraReference;
+    }
+
+    private void OnDisable()
+    {
+        CameraTagger.OnMainCameraChanged -= ReleaseCameraReference;
+    }
+
     private void Update()
     {
         if (!mainCamera) mainCamera = Camera.main;
@@ -14,5 +24,10 @@ public class CameraFacingObject : MonoBehaviour
         transform.forward = mainCamera.transform.forward;
 
         if (matchRotation) transform.rotation = mainCamera.transform.rotation;
+    }
+
+    public void ReleaseCameraReference()
+    {
+        mainCamera = null;
     }
 }

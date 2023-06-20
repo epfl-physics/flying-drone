@@ -9,6 +9,7 @@ public class CameraOrbit : MonoBehaviour
     public float maxPolarAngle = 80.0f;
     public float minAzimuthalAngle = -180.0f;
     public float maxAzimuthalAngle = 180.0f;
+    public bool boundAzimuthalAngle = true;
     public bool canOrbit;
 
     private float polarAngle;
@@ -61,7 +62,10 @@ public class CameraOrbit : MonoBehaviour
             azimuthalAngle += Input.GetAxis("Mouse X") * panSpeed;
             polarAngle -= Input.GetAxis("Mouse Y") * panSpeed;
 
-            azimuthalAngle = Mathf.Clamp(azimuthalAngle, minAzimuthalAngle, maxAzimuthalAngle);
+            if (boundAzimuthalAngle)
+            {
+                azimuthalAngle = Mathf.Clamp(azimuthalAngle, minAzimuthalAngle, maxAzimuthalAngle);
+            }
             polarAngle = Mathf.Clamp(polarAngle, minPolarAngle, maxPolarAngle);
 
             Quaternion rotation = Quaternion.Euler(polarAngle, azimuthalAngle, 0);

@@ -1122,6 +1122,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7752261488963537805, guid: 98e002be1f884481783bcd0677148757, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: TheoryForSylvain
+      objectReference: {fileID: 0}
     - target: {fileID: 7752261488963537807, guid: 98e002be1f884481783bcd0677148757, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

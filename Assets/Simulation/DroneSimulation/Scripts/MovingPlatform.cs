@@ -12,6 +12,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Transform surface;
     [SerializeField] private Transform piston;
     [SerializeField] private Transform basisTriad;
+    [SerializeField] private Vector3 basisOffset;
     [SerializeField] private Transform e3;
     [SerializeField] private Transform originLabel;
     [SerializeField] private Vector3 originLabelOffset;
@@ -216,7 +217,7 @@ public class MovingPlatform : MonoBehaviour
         // Set the surface at the input position
         if (surface) surface.localPosition = position;
 
-        if (basisTriad) basisTriad.localPosition = position;
+        if (basisTriad) basisTriad.localPosition = position + basisOffset;
 
         if (e3) e3.localPosition = position;
 
