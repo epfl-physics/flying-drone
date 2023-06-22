@@ -10,7 +10,8 @@ public class CameraOrbit : MonoBehaviour
     public float minAzimuthalAngle = -180.0f;
     public float maxAzimuthalAngle = 180.0f;
     public bool boundAzimuthalAngle = true;
-    public bool canOrbit;
+    public bool canOrbit = true;
+    public bool onlyPolar = false;
 
     private float polarAngle;
     private float azimuthalAngle;
