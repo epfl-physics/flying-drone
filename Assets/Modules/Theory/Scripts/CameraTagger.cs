@@ -7,6 +7,11 @@ public class CameraTagger : MonoBehaviour
     public void SetCameraAsMain(bool isMain)
     {
         gameObject.tag = isMain ? "MainCamera" : "Untagged";
-        OnMainCameraChanged?.Invoke();
+
+        if (isMain)
+        {
+            // Debug.Log("CameraTagger > " + transform.name + " is main");
+            OnMainCameraChanged?.Invoke();
+        }
     }
 }

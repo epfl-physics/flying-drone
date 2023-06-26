@@ -42,8 +42,18 @@ public class DroneSimulationState : ScriptableObject
     [HideInInspector] public bool rotationIsConstant = false;
     [HideInInspector] public bool rotationIsVariable = false;
 
+    // Camera
+    public bool frameIsInertial = true;
+    public Vector3 cameraPosition;
+    public Quaternion cameraRotation;
+
     public void RedrawVectors()
     {
         OnRedrawVectors?.Invoke();
+    }
+
+    public void SetFrame(bool isInertial)
+    {
+        frameIsInertial = isInertial;
     }
 }
