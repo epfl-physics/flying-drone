@@ -11,11 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Modules/Introduction/Introduction.unity
     guid: dd35653107bdf4f6faecff0a7dba489a
-  - enabled: 0
-    path: Assets/Modules/Theory/Theory.unity
-    guid: 40052359f4c554f27ae1f3d7dcc89c24
   - enabled: 1
-    path: Assets/Modules/Theory/TheoryForSylvain.unity
+    path: Assets/Modules/Theory/Theory.unity
     guid: 84788a4b1800b42d8abd909c0adc23aa
   - enabled: 1
     path: Assets/Modules/Activities/Activities.unity
