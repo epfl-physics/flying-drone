@@ -542,7 +542,7 @@ PrefabInstance:
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1412152125}
+      objectReference: {fileID: 1162085374}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -1573,7 +1573,7 @@ PrefabInstance:
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1412152125}
+      objectReference: {fileID: 1162085374}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -3728,13 +3728,13 @@ MonoBehaviour:
   simulation: {fileID: 1746708803}
   droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 3
+  droneVerticalPeriod: 4
   droneCircularMotionType: 1
   platform: {fileID: 1339683232}
   platformIsVisible: 1
   platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 3
-  platformRotationFrequency: 0.15
+  platformVerticalPeriod: 4
+  platformRotationFrequency: 0.1
   platformTranslationType: 2
   platformRotationType: 1
   tree: {fileID: 264136912}
@@ -4755,13 +4755,13 @@ MonoBehaviour:
   simulation: {fileID: 1746708803}
   droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 3
+  droneVerticalPeriod: 4
   droneCircularMotionType: 1
   platform: {fileID: 1339683232}
   platformIsVisible: 1
   platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 3
-  platformRotationFrequency: 0.15
+  platformVerticalPeriod: 4
+  platformRotationFrequency: 0.1
   platformTranslationType: 2
   platformRotationType: 0
   tree: {fileID: 264136912}
@@ -5104,13 +5104,13 @@ MonoBehaviour:
   simulation: {fileID: 1746708803}
   droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 3
+  droneVerticalPeriod: 4
   droneCircularMotionType: 1
   platform: {fileID: 1339683232}
   platformIsVisible: 0
   platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 3
-  platformRotationFrequency: 0.15
+  platformVerticalPeriod: 4
+  platformRotationFrequency: 0.1
   platformTranslationType: 2
   platformRotationType: 0
   tree: {fileID: 264136912}
@@ -5125,6 +5125,27 @@ MonoBehaviour:
   - {fileID: 388824853}
   - {fileID: 384427018}
   checkboxesOn: []
+--- !u!1 &1162085370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7822572095893866077, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+  m_PrefabInstance: {fileID: 1955569956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1162085374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162085370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca9468d9290c4e2c8bef9ad8fea1c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 1a12bdc1098004bb1b088828b1393c27, type: 2}
+  - {fileID: 2100000, guid: 438f1f0833bfd4ac288f18f62ddb7e69, type: 2}
+  currentIndex: 0
 --- !u!1 &1246572563
 GameObject:
   m_ObjectHideFlags: 0
@@ -5941,17 +5962,6 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &1412152125 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5266993565368964367, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
-  m_PrefabInstance: {fileID: 1955569956}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca9468d9290c4e2c8bef9ad8fea1c39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1471792193 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2711849974202272965, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
@@ -6973,13 +6983,13 @@ MonoBehaviour:
   simulation: {fileID: 1746708803}
   droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 3
+  droneVerticalPeriod: 4
   droneCircularMotionType: 1
   platform: {fileID: 1339683232}
   platformIsVisible: 1
   platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 3
-  platformRotationFrequency: 0.15
+  platformVerticalPeriod: 4
+  platformRotationFrequency: 0.1
   platformTranslationType: 2
   platformRotationType: 1
   tree: {fileID: 264136912}
@@ -7481,6 +7491,7 @@ MonoBehaviour:
   simState: {fileID: 11400000, guid: 751fa249bec9c4cfaad0cb130e4c60fc, type: 2}
   hideVectorsOnStart: 0
   y3: {fileID: 0}
+  pistonMaterial: {fileID: 0}
   omega: {fileID: 0}
   omegaLabel: {fileID: 0}
   showRotation: 0
@@ -7839,12 +7850,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: droneData.restPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.verticalMotionType
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.horizontalMotionType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: platformData.translationPeriod
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770147, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_RootOrder
@@ -7922,10 +7941,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3725808540982895712, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3980812933976324417, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.9945219
@@ -7998,6 +8013,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.87058824
       objectReference: {fileID: 0}
+    - target: {fileID: 4650584201227190953, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4705556817788437443, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -8069,6 +8088,26 @@ PrefabInstance:
     - target: {fileID: 5223067746865103915, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: color.r
       value: 0.5568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304198133640145629, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.87942237
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304198133640145629, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.45779833
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304198133640145629, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.1157782
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304198133640145629, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.060270313
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304198133640145629, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 5395448305060840466, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8855,7 +8894,7 @@ PrefabInstance:
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1412152125}
+      objectReference: {fileID: 1162085374}
     - target: {fileID: 7858766765902229637, guid: 94387e08b8a6345d9bf783ff05763d79, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -9389,13 +9428,13 @@ MonoBehaviour:
   simulation: {fileID: 1746708803}
   droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 3
+  droneVerticalPeriod: 4
   droneCircularMotionType: 1
   platform: {fileID: 1339683232}
   platformIsVisible: 0
   platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 3
-  platformRotationFrequency: 0.15
+  platformVerticalPeriod: 4
+  platformRotationFrequency: 0.1
   platformTranslationType: 2
   platformRotationType: 0
   tree: {fileID: 264136912}
