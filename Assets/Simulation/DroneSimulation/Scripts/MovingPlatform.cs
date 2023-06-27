@@ -12,6 +12,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Transform surface;
     [SerializeField] private Transform piston;
     [SerializeField] private Transform basisTriad;
+    [SerializeField] private Vector3 basisOffset;
     [SerializeField] private Transform e3;
     [SerializeField] private Transform originLabel;
     [SerializeField] private Vector3 originLabelOffset;
@@ -216,7 +217,7 @@ public class MovingPlatform : MonoBehaviour
         // Set the surface at the input position
         if (surface) surface.localPosition = position;
 
-        if (basisTriad) basisTriad.localPosition = position;
+        if (basisTriad) basisTriad.localPosition = position + basisOffset;
 
         if (e3) e3.localPosition = position;
 
@@ -256,7 +257,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (surface)
         {
-            surface.GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", value);
+            surface.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", value);
         }
     }
 
@@ -265,7 +266,7 @@ public class MovingPlatform : MonoBehaviour
         if (surface)
         {
             float alpha = isTransparent ? 0.05f : 1;
-            surface.GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", alpha);
+            surface.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", alpha);
         }
     }
 
