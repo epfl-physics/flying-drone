@@ -8,6 +8,9 @@ public class VectorManager : MonoBehaviour
     [Header("Basis Vectors")]
     public Vector y3;
 
+    [Header("Platform Piston")]
+    public MaterialSelector pistonMaterial;
+
     [Header("Rotation")]
     public Vector omega;
     public GameObject omegaLabel;
@@ -105,6 +108,15 @@ public class VectorManager : MonoBehaviour
             }
 
             y3.gameObject.SetActive(showY3);
+        }
+
+        if (pistonMaterial)
+        {
+            pistonMaterial.SetMaterial(0);
+            if (!simState.translationIsZero && (showVelocities || showAccelerations))
+            {
+                pistonMaterial.SetMaterial(1);
+            }
         }
 
         // Positions

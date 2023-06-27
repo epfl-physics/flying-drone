@@ -257,7 +257,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (surface)
         {
-            surface.GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", value);
+            surface.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", value);
         }
     }
 
@@ -266,7 +266,7 @@ public class MovingPlatform : MonoBehaviour
         if (surface)
         {
             float alpha = isTransparent ? 0.05f : 1;
-            surface.GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", alpha);
+            surface.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", alpha);
         }
     }
 

@@ -11,7 +11,12 @@ public class CameraTagger : MonoBehaviour
         if (isMain)
         {
             // Debug.Log("CameraTagger > " + transform.name + " is main");
+            gameObject.SetActive(true);
             OnMainCameraChanged?.Invoke();
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 }

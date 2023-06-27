@@ -17,6 +17,7 @@ public class DroneSimulation : Simulation
 
     [Header("Projected Point")]
     public Transform droneProjection;
+    public Vector3 droneProjectionOffset;
 
     private void Awake()
     {
@@ -193,6 +194,7 @@ public class DroneSimulation : Simulation
         {
             Vector3 position = drone.transform.localPosition;
             position.y = platform.GetSurfacePosition().y;
+            position += droneProjectionOffset;
             droneProjection.localPosition = position;
         }
     }
