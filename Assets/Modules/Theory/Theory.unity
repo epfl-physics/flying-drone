@@ -18848,7 +18848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1964088338}
-  panSpeed: 5
+  panSpeed: 1
   minPolarAngle: 0
   maxPolarAngle: 89.9
   minAzimuthalAngle: -130
@@ -32551,7 +32551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1380013391}
-  panSpeed: 5
+  panSpeed: 1
   minPolarAngle: 0
   maxPolarAngle: 89.9
   minAzimuthalAngle: -180

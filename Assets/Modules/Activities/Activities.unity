@@ -651,6 +651,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4265403495773799367}
     m_Modifications:
+    - target: {fileID: 6630728238506993888, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
+      propertyPath: m_text
+      value: Identify the kinematic quantity shown in the simulation.
+      objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textEN
       value: Test your understanding of fictitious forces by determining their orientations
@@ -666,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: Texte...
+      value: "Identifiez la quantit\xE9 cin\xE9matique montr\xE9e dans la simulation."
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657200, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_Pivot.x
@@ -758,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657201, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657213, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
