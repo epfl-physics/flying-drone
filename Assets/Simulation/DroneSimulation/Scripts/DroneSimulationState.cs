@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Drone Simulation State", menuName = "Drone Simulation State", order = 56)]
+[CreateAssetMenu(fileName = "New Drone Simulation State", menuName = "Drone Simulation/Drone Simulation State", order = 0)]
 public class DroneSimulationState : ScriptableObject
 {
     public float droneTime;

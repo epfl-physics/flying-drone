@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class VerifyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public class Activity1ArrowButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField, Range(0, 1)] private float alphaHover = 0.8f;
@@ -51,19 +51,24 @@ public class VerifyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        Debug.Log(transform.name + " OnPointerUp()");
         if (isVisible && isHovering)
         {
             canvasGroup.alpha = alphaHover;
-            Debug.Log("Triggering UnityEvent");
+            OnClick?.Invoke();
         }
     }
 
     public void SetVisibility(bool isVisible)
     {
+        Debug.Log(transform.name + " SetVisibility()");
         if (!canvasGroup) return;
 
         canvasGroup.alpha = isVisible ? 1 : 0;
         canvasGroup.interactable = isVisible;
+        canvasGroup.blocksRaycasts = isVisible;
+
+        if (!isVisible) isHovering = false;
 
         if (TryGetComponent(out CursorHoverUI cursor))
         {
@@ -80,6 +85,7 @@ public class VerifyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void HandleEndCameraOrbit()
     {
+        Debug.Log(transform.name + " HandleEndCameraOrbit()");
         cameraIsOrbiting = false;
         if (isHovering) canvasGroup.alpha = alphaHover;
     }
