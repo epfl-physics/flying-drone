@@ -16,7 +16,7 @@ MonoBehaviour:
     position: {x: 4, y: 0, z: 0}
     restHeight: 1.5
     translationAmplitude: 1
-    translationPeriod: 4
+    translationPeriod: 4.5
     rotationFrequency: 0
     translationType: 1
     rotationType: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
     origin: {x: 4, y: 0, z: 0}
     restPosition: {x: 0, y: 4, z: 0}
     verticalAmplitude: 1
-    verticalPeriod: 4
+    verticalPeriod: 4.5
     verticalMotionType: 0
     circularRadius: 0
     circularFrequency: 0

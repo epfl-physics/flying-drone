@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Activity1Controller : MonoBehaviour
 {
     [SerializeField] private DroneSimulation sim;
     [SerializeField] private OptionSet options;
+    [SerializeField] private MultilingualDropdown difficultyDropdown;
+    [SerializeField] private Toggle treeFrameToggle;
 
     [Range(0, 2)] public int difficulty;
     private List<int> answerIndex;
@@ -12,8 +15,8 @@ public class Activity1Controller : MonoBehaviour
 
     [Header("Cameras")]
     [SerializeField] private Transform absoluteCamera;
-    [SerializeField] private Transform relativeCamera;
-    [SerializeField] private bool autoFrame;
+    // [SerializeField] private Transform relativeCamera;
+    // [SerializeField] private bool autoFrame;
 
     [Header("Scenarios")]
     [SerializeField] private ActivityScenario[] beginnerScenarios;
@@ -25,10 +28,11 @@ public class Activity1Controller : MonoBehaviour
 
     private void Start()
     {
-        LoadRandomQuestion(difficulty);
+        if (difficultyDropdown) difficulty = difficultyDropdown.startIndex;
+        LoadRandomQuestion();
     }
 
-    public void LoadRandomQuestion(int difficulty)
+    public void LoadRandomQuestion()
     {
         // Choose a scenario randomly with the given difficulty level
         ActivityScenario[] scenarios;
@@ -40,9 +44,13 @@ public class Activity1Controller : MonoBehaviour
         {
             scenarios = intermediateScenarios;
         }
-        else
+        else if (difficulty == 2)
         {
             scenarios = advancedScenarios;
+        }
+        else
+        {
+            scenarios = new ActivityScenario[0];
         }
 
         int activityIndex = Random.Range(0, scenarios.Length);
@@ -80,11 +88,11 @@ public class Activity1Controller : MonoBehaviour
         sim.ApplyDroneData(true, true);
 
         // Deal with camera frame
-        if (autoFrame)
-        {
-            SetCameraAsMain(absoluteCamera, scenario.frameIsInertial);
-            SetCameraAsMain(relativeCamera, !scenario.frameIsInertial);
-        }
+        // if (autoFrame)
+        // {
+        //     SetCameraAsMain(absoluteCamera, scenario.frameIsInertial);
+        //     SetCameraAsMain(relativeCamera, !scenario.frameIsInertial);
+        // }
 
         OnLoadScenario?.Invoke((int)scenario.answers[0]);
     }
@@ -121,11 +129,32 @@ public class Activity1Controller : MonoBehaviour
 
     public void ResetCamera()
     {
-        SetCameraAsMain(absoluteCamera, true);
-        SetCameraAsMain(relativeCamera, false);
-        if (absoluteCamera.TryGetComponent(out CameraController cameraController))
+        // SetCameraAsMain(absoluteCamera, true);
+        // SetCameraAsMain(relativeCamera, false);
+        // if (absoluteCamera)
+        // {
+        //     if (absoluteCamera.TryGetComponent(out CameraController cameraController))
+        //     {
+        //         cameraController.SetCameraImmediately();
+        //     }
+        // }
+
+        if (treeFrameToggle) treeFrameToggle.isOn = true;
+
+        // Reset absolute camera to original position and rotation
+        if (absoluteCamera)
         {
-            cameraController.SetCameraImmediately();
+            if (absoluteCamera.TryGetComponent(out CameraController cameraController))
+            {
+                cameraController.SetCameraImmediately();
+            }
         }
+    }
+
+    public void SetDifficulty(int index)
+    {
+        difficulty = Mathf.Clamp(index, 0, 2);
+        LoadRandomQuestion();
+        ResetCamera();
     }
 }

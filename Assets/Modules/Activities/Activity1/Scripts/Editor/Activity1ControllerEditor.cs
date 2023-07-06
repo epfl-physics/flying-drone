@@ -19,7 +19,7 @@ public class Activity1ControllerEditor : Editor
 
         if (GUILayout.Button("Load Random Question"))
         {
-            controller.LoadRandomQuestion(controller.difficulty);
+            controller.LoadRandomQuestion();
         }
     }
 }

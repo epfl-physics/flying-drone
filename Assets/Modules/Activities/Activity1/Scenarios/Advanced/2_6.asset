@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a8f017aa569c4a14a7f4d5358a732ba, type: 3}
-  m_Name: 1_3_pos
+  m_Name: 2_6
   m_EditorClassIdentifier: 
   platformData:
     position: {x: 4, y: 0, z: 0}
@@ -18,16 +18,16 @@ MonoBehaviour:
     translationAmplitude: 1
     translationPeriod: 4.5
     rotationFrequency: 0.111
-    translationType: 1
-    rotationType: 1
+    translationType: 2
+    rotationType: 2
   droneData:
     origin: {x: 4, y: 0, z: 0}
     restPosition: {x: 0, y: 4, z: 0}
     verticalAmplitude: 1
     verticalPeriod: 4.5
-    verticalMotionType: 1
+    verticalMotionType: 2
     circularRadius: 1.25
-    circularFrequency: 0.111
-    circularMotionType: 1
+    circularFrequency: -0.111
+    circularMotionType: 2
   frameIsInertial: 1
   answers: 00000000
