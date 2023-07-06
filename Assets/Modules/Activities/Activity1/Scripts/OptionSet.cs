@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OptionSet : MonoBehaviour
@@ -79,7 +80,7 @@ public class OptionSet : MonoBehaviour
         SetFeedbackTextVisibility(textCorrect, true);
     }
 
-    public void SelectionIsIncorrect(int trueIndex)
+    public void SelectionIsIncorrect(List<int> trueIndex)
     {
         SetFeedbackTextVisibility(textIncorrect, true);
     }

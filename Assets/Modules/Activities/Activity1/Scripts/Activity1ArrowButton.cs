@@ -51,7 +51,6 @@ public class Activity1ArrowButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log(transform.name + " OnPointerUp()");
         if (isVisible && isHovering)
         {
             canvasGroup.alpha = alphaHover;
@@ -61,7 +60,6 @@ public class Activity1ArrowButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void SetVisibility(bool isVisible)
     {
-        Debug.Log(transform.name + " SetVisibility()");
         if (!canvasGroup) return;
 
         canvasGroup.alpha = isVisible ? 1 : 0;
@@ -85,7 +83,6 @@ public class Activity1ArrowButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void HandleEndCameraOrbit()
     {
-        Debug.Log(transform.name + " HandleEndCameraOrbit()");
         cameraIsOrbiting = false;
         if (isHovering) canvasGroup.alpha = alphaHover;
     }
