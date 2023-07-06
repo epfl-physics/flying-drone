@@ -58,11 +58,11 @@ public class Activity1ArrowButton : MonoBehaviour, IPointerEnterHandler, IPointe
         }
     }
 
-    public void SetVisibility(bool isVisible)
+    public void SetVisibility(bool isVisible, float invisibleAlpha = 0)
     {
         if (!canvasGroup) return;
 
-        canvasGroup.alpha = isVisible ? 1 : 0;
+        canvasGroup.alpha = isVisible ? 1 : invisibleAlpha;
         canvasGroup.interactable = isVisible;
         canvasGroup.blocksRaycasts = isVisible;
 

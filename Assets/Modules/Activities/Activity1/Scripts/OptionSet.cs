@@ -24,7 +24,7 @@ public class OptionSet : MonoBehaviour
 
     private void Start()
     {
-        SetButtonVisibility(verifyButton, false);
+        SetButtonVisibility(verifyButton, false, 0.2f);
         SetButtonVisibility(continueButton, false);
         SetFeedbackTextVisibility(textCorrect, false);
         SetFeedbackTextVisibility(textIncorrect, false);
@@ -46,7 +46,7 @@ public class OptionSet : MonoBehaviour
             }
         }
 
-        SetButtonVisibility(verifyButton, selectedIndex > -1);
+        SetButtonVisibility(verifyButton, selectedIndex > -1, 0.2f);
         SetFeedbackTextVisibility(textIncorrect, false);
     }
 
@@ -74,7 +74,7 @@ public class OptionSet : MonoBehaviour
             options[i].Deactivate(selectedIndex == i ? 1 : 0.5f);
         }
 
-        SetButtonVisibility(verifyButton, false);
+        SetButtonVisibility(verifyButton, false, 0.2f);
         SetButtonVisibility(continueButton, true);
 
         SetFeedbackTextVisibility(textCorrect, true);
@@ -85,9 +85,9 @@ public class OptionSet : MonoBehaviour
         SetFeedbackTextVisibility(textIncorrect, true);
     }
 
-    private void SetButtonVisibility(Activity1ArrowButton button, bool isVisible)
+    private void SetButtonVisibility(Activity1ArrowButton button, bool isVisible, float invisibleAlpha = 0)
     {
-        if (button) button.SetVisibility(isVisible);
+        if (button) button.SetVisibility(isVisible, invisibleAlpha);
     }
 
     private void SetFeedbackTextVisibility(GameObject text, bool isVisible)
