@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8f017aa569c4a14a7f4d5358a732ba, type: 3}
+  m_Name: 1_0_neg
+  m_EditorClassIdentifier: 
+  platformData:
+    position: {x: 4, y: 0, z: 0}
+    restHeight: 1.5
+    translationAmplitude: 1
+    translationPeriod: 4
+    rotationFrequency: -0.12
+    translationType: 1
+    rotationType: 1
+  droneData:
+    origin: {x: 4, y: 0, z: 0}
+    restPosition: {x: 0, y: 4, z: 0}
+    verticalAmplitude: 1
+    verticalPeriod: 4
+    verticalMotionType: 0
+    circularRadius: 1.25
+    circularFrequency: 0
+    circularMotionType: 1
+  frameIsInertial: 1
+  answers: 01000000
