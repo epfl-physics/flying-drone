@@ -11,7 +11,7 @@ public class Activity1ArrowButton : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] private UnityEvent OnClick;
 
     private bool cameraIsOrbiting;
-    private bool isVisible;
+    private bool isVisible = true;
     private bool isHovering;
 
     private void OnEnable()
@@ -64,7 +64,7 @@ public class Activity1ArrowButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
         canvasGroup.alpha = isVisible ? 1 : invisibleAlpha;
         canvasGroup.interactable = isVisible;
-        canvasGroup.blocksRaycasts = isVisible;
+        // canvasGroup.blocksRaycasts = isVisible;
 
         if (!isVisible) isHovering = false;
 

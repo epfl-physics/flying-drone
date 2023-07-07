@@ -18,6 +18,9 @@ public class Activity1Controller : MonoBehaviour
     // [SerializeField] private Transform relativeCamera;
     // [SerializeField] private bool autoFrame;
 
+    [Header("UI")]
+    [SerializeField] private WinBanner winBanner;
+
     [Header("Scenarios")]
     [SerializeField] private ActivityScenario[] beginnerScenarios;
     [SerializeField] private ActivityScenario[] intermediateScenarios;
@@ -30,6 +33,8 @@ public class Activity1Controller : MonoBehaviour
     {
         if (difficultyDropdown) difficulty = difficultyDropdown.startIndex;
         LoadRandomQuestion();
+
+        if (winBanner) winBanner.Hide();
     }
 
     public void LoadRandomQuestion()
@@ -74,6 +79,8 @@ public class Activity1Controller : MonoBehaviour
         {
             answerIndex.Add((int)answer);
         }
+
+        if (winBanner) winBanner.Hide();
     }
 
     private void LoadScenario(ActivityScenario scenario)
@@ -107,6 +114,8 @@ public class Activity1Controller : MonoBehaviour
             // Debug.Log("Correct ! The answer is " + answerIndex);
             options.SelectionIsCorrect();
             OnAnswerIsCorrect?.Invoke(selectedIndex);
+
+            if (winBanner) winBanner.Reveal(selectedIndex, answerIndex);
         }
         else
         {
@@ -115,29 +124,22 @@ public class Activity1Controller : MonoBehaviour
         }
     }
 
-    private void SetCameraAsMain(Transform camera, bool isMain)
-    {
-        if (camera)
-        {
-            camera.gameObject.SetActive(isMain);
-            if (camera.TryGetComponent(out CameraTagger tagger))
-            {
-                tagger.SetCameraAsMain(isMain);
-            }
-        }
-    }
+    // private void SetCameraAsMain(Transform camera, bool isMain)
+    // {
+    //     if (camera)
+    //     {
+    //         camera.gameObject.SetActive(isMain);
+    //         if (camera.TryGetComponent(out CameraTagger tagger))
+    //         {
+    //             tagger.SetCameraAsMain(isMain);
+    //         }
+    //     }
+    // }
 
     public void ResetCamera()
     {
         // SetCameraAsMain(absoluteCamera, true);
         // SetCameraAsMain(relativeCamera, false);
-        // if (absoluteCamera)
-        // {
-        //     if (absoluteCamera.TryGetComponent(out CameraController cameraController))
-        //     {
-        //         cameraController.SetCameraImmediately();
-        //     }
-        // }
 
         if (treeFrameToggle) treeFrameToggle.isOn = true;
 

@@ -5,8 +5,6 @@ public class OptionSet : MonoBehaviour
 {
     [SerializeField] private OptionButton[] options;
     [SerializeField] private Activity1ArrowButton verifyButton;
-    [SerializeField] private Activity1ArrowButton continueButton;
-    [SerializeField] private GameObject textCorrect;
     [SerializeField] private GameObject textIncorrect;
 
     private int selectedIndex = -1;
@@ -25,8 +23,6 @@ public class OptionSet : MonoBehaviour
     private void Start()
     {
         SetButtonVisibility(verifyButton, false, 0.2f);
-        SetButtonVisibility(continueButton, false);
-        SetFeedbackTextVisibility(textCorrect, false);
         SetFeedbackTextVisibility(textIncorrect, false);
     }
 
@@ -62,8 +58,6 @@ public class OptionSet : MonoBehaviour
             option.SetToOff();
         }
 
-        SetButtonVisibility(continueButton, false);
-        SetFeedbackTextVisibility(textCorrect, false);
         SetFeedbackTextVisibility(textIncorrect, false);
     }
 
@@ -75,9 +69,6 @@ public class OptionSet : MonoBehaviour
         }
 
         SetButtonVisibility(verifyButton, false, 0.2f);
-        SetButtonVisibility(continueButton, true);
-
-        SetFeedbackTextVisibility(textCorrect, true);
     }
 
     public void SelectionIsIncorrect(List<int> trueIndex)
