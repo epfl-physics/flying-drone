@@ -653,7 +653,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6630728238506993888, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_text
-      value: Identify the kinematic quantity shown in the simulation.
+      value: Practice identifying vectors in the velocity transformation equation
+        for relative motion.
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textEN
@@ -666,11 +667,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textData.Array.data[0].text
-      value: Identify the kinematic quantity shown in the simulation.
+      value: Practice identifying vectors in the velocity transformation equation
+        for relative motion.
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: "Identifiez la quantit\xE9 cin\xE9matique montr\xE9e dans la simulation."
+      value: Texte...
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657200, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_Pivot.x

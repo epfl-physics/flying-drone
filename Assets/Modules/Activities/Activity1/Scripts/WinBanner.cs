@@ -7,6 +7,7 @@ public class WinBanner : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image stroke;
+    [SerializeField] private Image background;
     [SerializeField] private TextMeshProUGUI textCorrect;
     [SerializeField] private GameObject textAlt;
     [SerializeField] private Image imageAlt;
@@ -22,6 +23,7 @@ public class WinBanner : MonoBehaviour
         }
 
         SetStrokeColor(Color.white);
+        SetBackgroundColor(Color.white);
         SetTextCorrectColor(Color.black);
 
         if (textAlt) textAlt.SetActive(true);
@@ -30,6 +32,7 @@ public class WinBanner : MonoBehaviour
     public void Reveal(int selectedIndex, List<int> answers)
     {
         SetStrokeColor(selectedIndex);
+        SetBackgroundColor(selectedIndex);
         SetTextCorrectColor(selectedIndex);
 
         if (answers.Count > 1)
@@ -62,6 +65,21 @@ public class WinBanner : MonoBehaviour
         if (!stroke || !colors) return;
 
         stroke.color = colors.GetColorFromIndex(index);
+    }
+
+    private void SetBackgroundColor(Color color)
+    {
+        if (background) background.color = color;
+    }
+
+    private void SetBackgroundColor(int index)
+    {
+        if (!background || !colors) return;
+
+        // Color color = colors.GetColorFromIndex(index);
+        Color color = Color.white;
+        color.a = 0.9f;
+        background.color = color;
     }
 
     private void SetTextCorrectColor(Color color)

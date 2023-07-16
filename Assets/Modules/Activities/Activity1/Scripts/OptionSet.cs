@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class OptionSet : MonoBehaviour
 {
-    [SerializeField] private OptionButton[] options;
-    [SerializeField] private Activity1ArrowButton verifyButton;
+    [SerializeField] private OptionButton2[] options;
+    [SerializeField] private ActivityVerifyButton verifyButton;
     [SerializeField] private GameObject textIncorrect;
 
     private int selectedIndex = -1;
@@ -12,21 +12,22 @@ public class OptionSet : MonoBehaviour
 
     private void OnEnable()
     {
-        OptionButton.OnSelect += HandleOptionSelected;
+        OptionButton2.OnSelect += HandleOptionSelected;
     }
 
     private void OnDisable()
     {
-        OptionButton.OnSelect -= HandleOptionSelected;
+        OptionButton2.OnSelect -= HandleOptionSelected;
     }
 
     private void Start()
     {
-        SetButtonVisibility(verifyButton, false, 0.2f);
+        if (verifyButton) verifyButton.Disable();
+        // SetButtonVisibility(verifyButton, false, 0.2f);
         SetFeedbackTextVisibility(textIncorrect, false);
     }
 
-    public void HandleOptionSelected(OptionButton option)
+    public void HandleOptionSelected(OptionButton2 option)
     {
         selectedIndex = -1;
 
@@ -42,7 +43,19 @@ public class OptionSet : MonoBehaviour
             }
         }
 
-        SetButtonVisibility(verifyButton, selectedIndex > -1, 0.2f);
+        if (verifyButton)
+        {
+            if (selectedIndex > -1)
+            {
+                verifyButton.Enable();
+            }
+            else
+            {
+                verifyButton.Disable();
+            }
+        }
+
+        // SetButtonVisibility(verifyButton, selectedIndex > -1, 0.2f);
         SetFeedbackTextVisibility(textIncorrect, false);
     }
 
@@ -52,7 +65,7 @@ public class OptionSet : MonoBehaviour
 
         selectedIndex = -1;
 
-        foreach (OptionButton option in options)
+        foreach (OptionButton2 option in options)
         {
             option.Activate();
             option.SetToOff();
@@ -68,7 +81,8 @@ public class OptionSet : MonoBehaviour
             options[i].Deactivate(selectedIndex == i ? 1 : 0.5f);
         }
 
-        SetButtonVisibility(verifyButton, false, 0.2f);
+        // SetButtonVisibility(verifyButton, false, 0.2f);
+        if (verifyButton) verifyButton.Disable();
     }
 
     public void SelectionIsIncorrect(List<int> trueIndex)
@@ -76,10 +90,10 @@ public class OptionSet : MonoBehaviour
         SetFeedbackTextVisibility(textIncorrect, true);
     }
 
-    private void SetButtonVisibility(Activity1ArrowButton button, bool isVisible, float invisibleAlpha = 0)
-    {
-        if (button) button.SetVisibility(isVisible, invisibleAlpha);
-    }
+    // private void SetButtonVisibility(Activity1ArrowButton button, bool isVisible, float invisibleAlpha = 0)
+    // {
+    //     if (button) button.SetVisibility(isVisible, invisibleAlpha);
+    // }
 
     private void SetFeedbackTextVisibility(GameObject text, bool isVisible)
     {
