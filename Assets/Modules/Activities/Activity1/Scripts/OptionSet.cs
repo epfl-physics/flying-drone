@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class OptionSet : MonoBehaviour
 {
-    [SerializeField] private OptionButton2[] options;
+    [SerializeField] private OptionButton[] options;
     [SerializeField] private ActivityVerifyButton verifyButton;
     [SerializeField] private CanvasGroup textIncorrect;
 
@@ -12,12 +12,12 @@ public class OptionSet : MonoBehaviour
 
     private void OnEnable()
     {
-        OptionButton2.OnSelect += HandleOptionSelected;
+        OptionButton.OnSelect += HandleOptionSelected;
     }
 
     private void OnDisable()
     {
-        OptionButton2.OnSelect -= HandleOptionSelected;
+        OptionButton.OnSelect -= HandleOptionSelected;
     }
 
     private void Start()
@@ -27,7 +27,7 @@ public class OptionSet : MonoBehaviour
         SetFeedbackTextVisibility(textIncorrect, false);
     }
 
-    public void HandleOptionSelected(OptionButton2 option)
+    public void HandleOptionSelected(OptionButton option)
     {
         selectedIndex = -1;
 
@@ -65,7 +65,7 @@ public class OptionSet : MonoBehaviour
 
         selectedIndex = -1;
 
-        foreach (OptionButton2 option in options)
+        foreach (OptionButton option in options)
         {
             option.Activate();
             option.SetToOff();

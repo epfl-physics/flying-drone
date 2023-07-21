@@ -5,9 +5,6 @@ public class ActivitiesVectors : MonoBehaviour
     [SerializeField] private VelocityVector velocityVector;
     [SerializeField] private DroneSimulationState simState;
 
-    // private delegate Vector3 GetVelocityComponents();
-    // private GetVelocityComponents getVelocityComponents;
-
     private void OnEnable()
     {
         DroneSimulationState.OnRedrawVectors += HandleRedrawVectors;
@@ -18,32 +15,6 @@ public class ActivitiesVectors : MonoBehaviour
         DroneSimulationState.OnRedrawVectors -= HandleRedrawVectors;
     }
 
-    // private void Start()
-    // {
-    //     ResetColor();
-    // }
-
-    // public void HandleLoadScenario(int answerIndex)
-    // {
-    //     switch (answerIndex)
-    //     {
-    //         case 0:
-    //             getVelocityComponents = GetAbsoluteComponents;
-    //             break;
-    //         case 1:
-    //             getVelocityComponents = GetPlatformComponents;
-    //             break;
-    //         case 2:
-    //             getVelocityComponents = GetRelativeComponents;
-    //             break;
-    //         case 3:
-    //             getVelocityComponents = GetTangentialComponents;
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-
     public void HandleRedrawVectors()
     {
         if (!velocityVector || !simState) return;
@@ -52,20 +23,6 @@ public class ActivitiesVectors : MonoBehaviour
         velocityVector.components = GetAbsoluteComponents();
         velocityVector.Redraw();
     }
-
-    // public void SetVectorColor(Color color)
-    // {
-    //     if (velocityVector)
-    //     {
-    //         velocityVector.color = color;
-    //         velocityVector.SetColor();
-    //     }
-    // }
-
-    // public void ResetColor()
-    // {
-    //     SetVectorColor(Color.black);
-    // }
 
     private Vector3 GetAbsoluteComponents()
     {

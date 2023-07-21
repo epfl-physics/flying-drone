@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class OptionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image background;
-    [SerializeField, Range(0, 1)] private float selectedAlpha = 0.8f;
+    [SerializeField] private Image latex;
+    [SerializeField] private Color color = Color.black;
 
     private bool _isOn;
     public bool IsOn => _isOn;
@@ -15,10 +16,21 @@ public class OptionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public static event System.Action<OptionButton> OnSelect;
 
+    private void Awake()
+    {
+        if (TryGetComponent(out Toggle toggle))
+        {
+            _isOn = toggle.isOn;
+        }
+
+        SetSelected(IsOn);
+    }
+
     public void OnClick(bool isOn)
     {
         _isOn = isOn;
-        SetBackgroundAlpha(isOn);
+        // SetBackgroundAlpha(isOn);
+        SetSelected(isOn);
         OnSelect?.Invoke(this);
 
         if (isHovering)
@@ -40,14 +52,22 @@ public class OptionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         isHovering = false;
     }
 
-    public void SetBackgroundAlpha(bool isOn)
+    public void SetSelected(bool isSelected)
     {
-        if (!background) return;
+        // Debug.Log("Selected ? " + isSelected);
 
-        Color color = background.color;
-        color.a = isOn ? selectedAlpha : 1f;
-        background.color = color;
+        if (background) background.color = isSelected ? color : Color.white;
+        if (latex) latex.color = isSelected ? Color.white : color;
     }
+
+    // public void SetBackgroundAlpha(bool isOn)
+    // {
+    //     if (!background) return;
+
+    //     Color color = background.color;
+    //     color.a = isOn ? selectedAlpha : 1f;
+    //     background.color = color;
+    // }
 
     public void SetToOff()
     {
