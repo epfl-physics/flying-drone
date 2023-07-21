@@ -15,8 +15,6 @@ public class Activity1Controller : MonoBehaviour
 
     [Header("Cameras")]
     [SerializeField] private Transform absoluteCamera;
-    // [SerializeField] private Transform relativeCamera;
-    // [SerializeField] private bool autoFrame;
 
     [Header("UI")]
     [SerializeField] private WinBanner winBanner;
@@ -32,7 +30,44 @@ public class Activity1Controller : MonoBehaviour
     private void Start()
     {
         if (difficultyDropdown) difficulty = difficultyDropdown.startIndex;
-        LoadRandomQuestion();
+        // LoadRandomQuestion();
+        LoadFirstQuestion();
+    }
+
+    private void LoadFirstQuestion()
+    {
+        // Load the first scenario of the given difficulty level
+        ActivityScenario[] scenarios;
+        if (difficulty == 0)
+        {
+            scenarios = beginnerScenarios;
+        }
+        else if (difficulty == 1)
+        {
+            scenarios = intermediateScenarios;
+        }
+        else if (difficulty == 2)
+        {
+            scenarios = advancedScenarios;
+        }
+        else
+        {
+            scenarios = new ActivityScenario[0];
+        }
+
+        int activityIndex = 0;
+        if (scenarios.Length > 1) previousActivityIndex = activityIndex;
+
+        // Assign the scenario parameters to the simulation
+        ActivityScenario scenario = scenarios[activityIndex];
+        LoadScenario(scenario);
+
+        // Store the correct answer(s)
+        answerIndex = new List<int>();
+        foreach (ActivityScenario.VelocityTerm answer in scenario.answers)
+        {
+            answerIndex.Add((int)answer);
+        }
 
         if (winBanner) winBanner.Hide();
     }
@@ -94,13 +129,6 @@ public class Activity1Controller : MonoBehaviour
         sim.droneData = scenario.droneData;
         sim.ApplyDroneData(true, true);
 
-        // Deal with camera frame
-        // if (autoFrame)
-        // {
-        //     SetCameraAsMain(absoluteCamera, scenario.frameIsInertial);
-        //     SetCameraAsMain(relativeCamera, !scenario.frameIsInertial);
-        // }
-
         OnLoadScenario?.Invoke((int)scenario.answers[0]);
     }
 
@@ -124,23 +152,8 @@ public class Activity1Controller : MonoBehaviour
         }
     }
 
-    // private void SetCameraAsMain(Transform camera, bool isMain)
-    // {
-    //     if (camera)
-    //     {
-    //         camera.gameObject.SetActive(isMain);
-    //         if (camera.TryGetComponent(out CameraTagger tagger))
-    //         {
-    //             tagger.SetCameraAsMain(isMain);
-    //         }
-    //     }
-    // }
-
     public void ResetCamera()
     {
-        // SetCameraAsMain(absoluteCamera, true);
-        // SetCameraAsMain(relativeCamera, false);
-
         if (treeFrameToggle) treeFrameToggle.isOn = true;
 
         // Reset absolute camera to original position and rotation

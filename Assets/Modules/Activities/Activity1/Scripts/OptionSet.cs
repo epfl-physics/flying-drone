@@ -5,7 +5,7 @@ public class OptionSet : MonoBehaviour
 {
     [SerializeField] private OptionButton2[] options;
     [SerializeField] private ActivityVerifyButton verifyButton;
-    [SerializeField] private GameObject textIncorrect;
+    [SerializeField] private CanvasGroup textIncorrect;
 
     private int selectedIndex = -1;
     public int SelectedIndex => selectedIndex;
@@ -95,8 +95,8 @@ public class OptionSet : MonoBehaviour
     //     if (button) button.SetVisibility(isVisible, invisibleAlpha);
     // }
 
-    private void SetFeedbackTextVisibility(GameObject text, bool isVisible)
+    private void SetFeedbackTextVisibility(CanvasGroup feedback, bool isVisible)
     {
-        if (text) text.SetActive(isVisible);
+        if (feedback) feedback.alpha = isVisible ? 1 : 0;
     }
 }

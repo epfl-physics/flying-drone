@@ -672,7 +672,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: Texte...
+      value: "S'entra\xEEner \xE0 identifier les vecteurs dans l'\xE9quation de transformation
+        de la vitesse pour un mouvement relatif."
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657200, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_Pivot.x
