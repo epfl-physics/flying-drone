@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Drone Simulation State", menuName = "Drone Simulation State", order = 56)]
+[CreateAssetMenu(fileName = "New Drone Simulation State", menuName = "Drone Simulation/Drone Simulation State", order = 0)]
 public class DroneSimulationState : ScriptableObject
 {
     public float droneTime;
@@ -42,7 +42,7 @@ public class DroneSimulationState : ScriptableObject
     [HideInInspector] public bool rotationIsConstant = false;
     [HideInInspector] public bool rotationIsVariable = false;
 
-    // Camera
+    [Header("Camera")]
     public bool frameIsInertial = true;
     public Vector3 cameraPosition;
     public Quaternion cameraRotation;

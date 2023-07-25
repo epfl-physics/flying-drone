@@ -24,6 +24,9 @@ public class CameraOrbit : MonoBehaviour
     private float currentDistance;
     private bool isDragging;
 
+    public static event System.Action OnStartOrbit;
+    public static event System.Action OnEndOrbit;
+
     private void OnEnable()
     {
         CameraTagger.OnMainCameraChanged += HandleMainCameraChanged;
@@ -44,7 +47,7 @@ public class CameraOrbit : MonoBehaviour
         }
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         // Debug.Log("CameraOrbit > initializing " + transform.name);
 
@@ -84,6 +87,7 @@ public class CameraOrbit : MonoBehaviour
         {
             isDragging = true;
             Cursor.visible = false;
+            OnStartOrbit?.Invoke();
         }
 
         if (isDragging)
@@ -113,6 +117,7 @@ public class CameraOrbit : MonoBehaviour
         {
             isDragging = false;
             Cursor.visible = true;
+            OnEndOrbit?.Invoke();
         }
     }
 
