@@ -47,7 +47,7 @@ public class CameraOrbit : MonoBehaviour
         }
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         // Debug.Log("CameraOrbit > initializing " + transform.name);
 

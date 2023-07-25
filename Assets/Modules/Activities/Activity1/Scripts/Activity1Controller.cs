@@ -163,6 +163,11 @@ public class Activity1Controller : MonoBehaviour
             {
                 cameraController.SetCameraImmediately();
             }
+
+            if (absoluteCamera.TryGetComponent(out CameraOrbit cameraOrbit))
+            {
+                cameraOrbit.Initialize();
+            }
         }
     }
 
