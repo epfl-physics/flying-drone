@@ -5384,10 +5384,10 @@ MonoBehaviour:
   tmp: {fileID: 352085612}
   textData:
   - language: 0
-    text: Speed
+    text: Translation
     visibleUI: {fileID: 0}
   - language: 1
-    text: Vitesse
+    text: Translation
     visibleUI: {fileID: 0}
 --- !u!114 &352085612
 MonoBehaviour:
@@ -5409,7 +5409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Vitesse
+  m_text: Translation
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0a43fe65966e4830b14e32656a09a81, type: 2}
   m_sharedMaterial: {fileID: 2994796600930771256, guid: b0a43fe65966e4830b14e32656a09a81, type: 2}
@@ -8605,7 +8605,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 8, y: 0}
-  m_SizeDelta: {x: 896, y: 176}
+  m_SizeDelta: {x: 960, y: 192}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &526607936
 MonoBehaviour:
@@ -8627,7 +8627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a3d64fd32d7e145ada1c92e6d773dea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 349fb1c7b4a234505a9e30696e87d031, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -10763,7 +10763,7 @@ MonoBehaviour:
     text: Mouse over a term in the equation for more details.
     visibleUI: {fileID: 0}
   - language: 1
-    text: "Passez la souris sur un terme de l'\xE9quation pour obtenir plus de d\xE9tails."
+    text: "Passez le curseur sur un terme de l'\xE9quation pour obtenir plus d'informations."
     visibleUI: {fileID: 0}
 --- !u!114 &641100304
 MonoBehaviour:
@@ -10785,7 +10785,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Passez la souris sur un terme de l'\xE9quation pour obtenir plus de d\xE9tails."
+  m_text: "Passez le curseur sur un terme de l'\xE9quation pour obtenir plus d'informations."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
   m_sharedMaterial: {fileID: 4303336837466598660, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
@@ -11635,7 +11635,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 8, y: 0}
-  m_SizeDelta: {x: 944, y: 176}
+  m_SizeDelta: {x: 992, y: 176}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &655357361
 MonoBehaviour:
@@ -11657,7 +11657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0b64ed3a613734d25b30be0a46f998d2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e3144f3b7cb44d86a837ab1c67364fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -16166,7 +16166,7 @@ MonoBehaviour:
     text: Mouse over a term in the equation for more details.
     visibleUI: {fileID: 0}
   - language: 1
-    text: "Passez la souris sur un terme de l'\xE9quation pour obtenir plus de d\xE9tails."
+    text: "Passez le curseur sur un terme de l'\xE9quation pour obtenir plus d'informations."
     visibleUI: {fileID: 0}
 --- !u!114 &940208631
 MonoBehaviour:
@@ -17492,7 +17492,7 @@ MonoBehaviour:
   dropdown: {fileID: 1003685698}
   textItems:
   - textEN: Zero
-    textFR: "Z\xE9ro"
+    textFR: Nulle
   - textEN: Constant
     textFR: Constante
   - textEN: Variable
@@ -22985,10 +22985,11 @@ MonoBehaviour:
   tmp: {fileID: 1472103168}
   textData:
   - language: 0
-    text: ': non-inertial <b>platform</b> frame with coordinate system '
+    text: ': accelerated <b>platform</b> frame with coordinate system '
     visibleUI: {fileID: 0}
   - language: 1
-    text: ": r\xE9f\xE9rentiel non-inertiel de la <b>plateforme</b> avec le rep\xE8re"
+    text: ": r\xE9f\xE9rentiel acc\xE9l\xE9r\xE9 de la <b>plateforme</b> muni du
+      rep\xE8re"
     visibleUI: {fileID: 0}
 --- !u!114 &1472103168
 MonoBehaviour:
@@ -23010,7 +23011,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ": r\xE9f\xE9rentiel non-inertiel de la <b>plateforme</b> avec le rep\xE8re"
+  m_text: ': accelerated <b>platform</b> frame with coordinate system '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
   m_sharedMaterial: {fileID: 4303336837466598660, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
@@ -23871,7 +23872,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 30}
+  m_SizeDelta: {x: 105, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1497220179
 MonoBehaviour:
@@ -23891,7 +23892,7 @@ MonoBehaviour:
     text: Controls
     visibleUI: {fileID: 0}
   - language: 1
-    text: "Contr\xF4les\n"
+    text: Commandes
     visibleUI: {fileID: 0}
 --- !u!114 &1497220180
 MonoBehaviour:
@@ -23913,7 +23914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Contr\xF4les\n"
+  m_text: Commandes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0de5a858dbd984e63aa82481dd8d6074, type: 2}
   m_sharedMaterial: {fileID: -5584794868368336635, guid: 0de5a858dbd984e63aa82481dd8d6074, type: 2}
@@ -24642,7 +24643,7 @@ MonoBehaviour:
   dropdown: {fileID: 1549200973}
   textItems:
   - textEN: Zero
-    textFR: "Z\xE9ro"
+    textFR: Nulle
   - textEN: Constant
     textFR: Constante
   - textEN: Variable
@@ -25735,7 +25736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8838591167912391666, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: Hors l'axe
+      value: Hors axe
       objectReference: {fileID: 0}
     - target: {fileID: 8838591167912391667, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: m_text
@@ -26111,7 +26112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8838591168953407441, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: Sur l'axe
+      value: Sur axe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
@@ -29156,7 +29157,7 @@ MonoBehaviour:
     text: ': inertial <b>tree</b> frame with coordinate system '
     visibleUI: {fileID: 0}
   - language: 1
-    text: ": r\xE9f\xE9rentiel inertiel de l'<b>arbre</b> avec le rep\xE8re"
+    text: ": r\xE9f\xE9rentiel d'inertie de l'<b>arbre</b> muni du rep\xE8re"
     visibleUI: {fileID: 0}
 --- !u!114 &1749859404
 MonoBehaviour:
@@ -29178,7 +29179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ': inertial <b>tree</b> frame with coordinate system '
+  m_text: ": r\xE9f\xE9rentiel d'inertie de l'<b>arbre</b> muni du rep\xE8re"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
   m_sharedMaterial: {fileID: 4303336837466598660, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
