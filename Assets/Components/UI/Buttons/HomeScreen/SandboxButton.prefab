@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4259289883307363697, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: m_text
-      value: free play
+      value: exploration
       objectReference: {fileID: 0}
     - target: {fileID: 4924513296629304193, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: m_RootOrder
@@ -57,11 +57,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8311875937064516696, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: textData.Array.data[0].text
-      value: free play
+      value: exploration
       objectReference: {fileID: 0}
     - target: {fileID: 8311875937064516696, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: jeu libre
+      value: exploration
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9bb16b0e5fa046ba965ea35a381eae4, type: 3}
