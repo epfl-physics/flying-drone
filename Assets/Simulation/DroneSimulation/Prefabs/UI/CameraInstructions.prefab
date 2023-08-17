@@ -204,7 +204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag the mouse to change the perspective
+  m_text: Faites glisser le curseur pour changer de perspective
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7bea0ee510519418e83160323e771f52, type: 2}
   m_sharedMaterial: {fileID: -4219023752200370933, guid: 7bea0ee510519418e83160323e771f52, type: 2}
@@ -291,5 +291,5 @@ MonoBehaviour:
     text: Drag the mouse to change the perspective
     visibleUI: {fileID: 0}
   - language: 1
-    text: Faites glisser la souris pour changer de perspective
+    text: Faites glisser le curseur pour changer de perspective
     visibleUI: {fileID: 0}

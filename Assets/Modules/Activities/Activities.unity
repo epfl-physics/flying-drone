@@ -657,8 +657,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6630728238506993888, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_text
-      value: Practice identifying vectors in the velocity transformation equation
-        for relative motion.
+      value: Practice identifying the different types of velocity vectors under specific
+        conditions of relative motion.
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textEN
@@ -671,13 +671,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textData.Array.data[0].text
-      value: Practice identifying vectors in the velocity transformation equation
-        for relative motion.
+      value: Practice identifying the different types of velocity vectors under specific
+        conditions of relative motion.
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: "S'entra\xEEner \xE0 identifier les vecteurs dans l'\xE9quation de transformation
-        de la vitesse pour un mouvement relatif."
+      value: "S'entra\xEEner \xE0 identifier les diff\xE9rents types de vecteurs
+        vitesse de mouvements relatifs sp\xE9cifiques."
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657200, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_Pivot.x

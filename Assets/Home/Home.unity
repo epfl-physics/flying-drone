@@ -374,15 +374,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4704704178282869280, guid: 59fa57a953dcf46f48cb7e03cbd6df0b, type: 3}
       propertyPath: textData.Array.data[0].text
-      value: Flying Drone
+      value: Drone Kinematics
       objectReference: {fileID: 0}
     - target: {fileID: 4704704178282869280, guid: 59fa57a953dcf46f48cb7e03cbd6df0b, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: Drone Volant
+      value: "Cin\xE9matique de drone"
       objectReference: {fileID: 0}
     - target: {fileID: 6294686233944835007, guid: 59fa57a953dcf46f48cb7e03cbd6df0b, type: 3}
       propertyPath: m_text
-      value: Flying Drone
+      value: Drone Kinematics
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59fa57a953dcf46f48cb7e03cbd6df0b, type: 3}
