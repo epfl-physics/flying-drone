@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VectorManager : MonoBehaviour
+public class SandboxVectorManager : MonoBehaviour
 {
     public DroneSimulationState simState;
     public bool hideVectorsOnStart;
@@ -14,7 +14,8 @@ public class VectorManager : MonoBehaviour
     [Header("Rotation")]
     public Vector omega;
     public GameObject omegaLabel;
-    public bool showRotation;
+    public float omegaScaleFactor = 1;
+    // public bool showRotation;
 
     [Header("Position")]
     public Vector dronePositionAbsolute;
@@ -86,7 +87,7 @@ public class VectorManager : MonoBehaviour
         // Rotation
         // Vector3 omegaPosition = origin + rPlatform;
         Vector3 omegaPosition = origin + 6.5f * Vector3.right + 1.5f * Vector3.up;
-        RedrawVector(omega, omegaPosition, simState.omega, showRotation);
+        RedrawVector(omega, omegaPosition, omegaScaleFactor * simState.omega, true);
         if (omegaLabel) omegaLabel.SetActive(simState.omega.y != 0);
 
         if (y3)
@@ -125,12 +126,13 @@ public class VectorManager : MonoBehaviour
         // Velocities
         RedrawVector(droneVelocityAbsolute, origin + rAbsolute, vAbsolute, showVelocities);
         RedrawVector(platformVelocity, origin + rPlatform, vPlatform, showVelocities);
-        RedrawVector(droneVelocityRelative, origin + rAbsolute, vRelative, showVelocities);
+        Vector3 vRelativeOffset = vRelative.normalized == vAbsolute.normalized ? 0.2f * Vector3.down : Vector3.zero;
+        RedrawVector(droneVelocityRelative, origin + rAbsolute + vRelativeOffset, vRelative, showVelocities);
         bool showPlatformV2 = showVelocities && (vAbsolute != vPlatform);
         RedrawVector(platformVelocityAdditive, origin + rAbsolute, vPlatform, showPlatformV2);
         // bool showTangentialV = showVelocities && (vAbsolute != vTangential);
-        Vector3 tangentialVOffset = vAbsolute == vTangential ? 0.2f * Vector3.down : Vector3.zero;
-        RedrawVector(tangentialVelocity, origin + rAbsolute + tangentialVOffset, vTangential, showVelocities);
+        Vector3 vTangentialOffset = vTangential.normalized == vAbsolute.normalized ? 0.2f * Vector3.down : Vector3.zero;
+        RedrawVector(tangentialVelocity, origin + rAbsolute + vTangentialOffset, vTangential, showVelocities);
 
         // Accelerations
         RedrawVector(droneAccelerationAbsolute, origin + rAbsolute, aAbsolute, showAccelerations);
@@ -165,25 +167,21 @@ public class VectorManager : MonoBehaviour
                 showPositions = true;
                 showVelocities = false;
                 showAccelerations = false;
-                showRotation = true;
                 break;
             case 2:
                 showPositions = false;
                 showVelocities = true;
                 showAccelerations = false;
-                showRotation = true;
                 break;
             case 3:
                 showPositions = false;
                 showVelocities = false;
                 showAccelerations = true;
-                showRotation = true;
                 break;
             default:
                 showPositions = false;
                 showVelocities = false;
                 showAccelerations = false;
-                showRotation = false;
                 break;
         }
 

@@ -44,6 +44,8 @@ public class DroneSimulation : Simulation
 
     private void Update()
     {
+        if (IsPaused) return;
+
         Vector3 platformSurfacePosition = Vector3.zero;
 
         // Determine whether the platform needs to update
@@ -197,5 +199,11 @@ public class DroneSimulation : Simulation
             position += droneProjectionOffset;
             droneProjection.localPosition = position;
         }
+    }
+
+    public void UnlinkSinusoidalRotationFromTranslation()
+    {
+        if (platform) platform.tieRotationToTranslation = false;
+        if (drone) drone.tieRotationToTranslation = false;
     }
 }

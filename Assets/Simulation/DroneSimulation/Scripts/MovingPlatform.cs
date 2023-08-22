@@ -20,6 +20,7 @@ public class MovingPlatform : MonoBehaviour
     // public Vector3 Omega => 2 * Mathf.PI * rotationFrequency * Vector3.up;
     public Vector3 Omega => ComputeOmega();
     public Vector3 OmegaDot => ComputeOmegaDot();
+    [HideInInspector] public bool tieRotationToTranslation = true;
 
     private float time = 0;
     public float Time { get { return time; } set { time = value; } }
@@ -49,7 +50,11 @@ public class MovingPlatform : MonoBehaviour
     public void TakeAStep(float deltaTime)
     {
         time += deltaTime;
-        if (time >= 2 * data.translationPeriod) time = 0;
+        // Reset the clock after one vertical period
+        if (data.rotationType != RotationType.Sinusoidal)
+        {
+            if (time >= 2 * data.translationPeriod) time = 0;
+        }
 
         // Compute the platform's position
         Vector3 position = data.restHeight * Vector3.up;
@@ -156,6 +161,7 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 ComputeOmega()
     {
+        // Default to zero for RotationType.None
         float frequency = 0;
 
         if (data.rotationType == RotationType.Constant)
@@ -164,9 +170,15 @@ public class MovingPlatform : MonoBehaviour
         }
         else if (data.rotationType == RotationType.Sinusoidal)
         {
-            // Positive for one vertical period, negative for the next, and repeat
-            float angularSpeed = 0.5f * (2 * Mathf.PI / data.translationPeriod);
-            // frequency = 0.5f * data.rotationFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.translationPeriod));
+            // Let it take 2 seconds to go from max to min rotation rate
+            float angularSpeed = 0.5f * Mathf.PI;
+
+            if (tieRotationToTranslation)
+            {
+                // Positive for one vertical period, negative for the next, and repeat
+                angularSpeed = 0.5f * (2 * Mathf.PI / data.translationPeriod);
+            }
+
             frequency = data.rotationFrequency * Mathf.Sin(angularSpeed * time);
         }
 
@@ -179,11 +191,14 @@ public class MovingPlatform : MonoBehaviour
 
         if (data.rotationType == RotationType.Sinusoidal)
         {
-            // float factor = 2 * Mathf.PI * data.rotationFrequency / data.translationPeriod;
-            // frequencyDot = 0.5f * factor * Mathf.Sin(2 * Mathf.PI * time / data.translationPeriod);
-            float angularSpeed = 0.5f * (2 * Mathf.PI / data.translationPeriod);
-            frequencyDot = angularSpeed * data.rotationFrequency * Mathf.Cos(angularSpeed * time);
+            float angularSpeed = 0.5f * Mathf.PI;
 
+            if (tieRotationToTranslation)
+            {
+                angularSpeed = 0.5f * (2 * Mathf.PI / data.translationPeriod);
+            }
+
+            frequencyDot = angularSpeed * data.rotationFrequency * Mathf.Cos(angularSpeed * time);
         }
 
         return 2 * Mathf.PI * frequencyDot * Vector3.up;

@@ -18,6 +18,8 @@ public class Drone : MonoBehaviour
     // Orbital angle
     private float angle = 0;
 
+    [HideInInspector] public bool tieRotationToTranslation = true;
+
     private void Awake()
     {
         ComputeHeightBounds();
@@ -31,7 +33,11 @@ public class Drone : MonoBehaviour
     public void TakeAStep(float deltaTime)
     {
         time += deltaTime;
-        if (time >= 2 * data.verticalPeriod) time = 0;
+        // Reset the clock after one vertical period
+        if (data.circularMotionType != CircularMotionType.Sinusoidal)
+        {
+            if (time >= 2 * data.verticalPeriod) time = 0;
+        }
 
         // Compute the drone's local position
         Vector3 position = data.restPosition;
@@ -176,9 +182,15 @@ public class Drone : MonoBehaviour
 
         if (data.circularMotionType == CircularMotionType.Sinusoidal)
         {
-            // Positive for one vertical period, negative for the next, and repeat
-            float angularSpeed = 0.5f * (2 * Mathf.PI / data.verticalPeriod);
-            // frequency = 0.5f * data.circularFrequency * (1 - Mathf.Cos(2 * Mathf.PI * time / data.verticalPeriod));
+            // Let it take 2 seconds to go from max to min rotation rate
+            float angularSpeed = 0.5f * Mathf.PI;
+
+            if (tieRotationToTranslation)
+            {
+                // Positive for one vertical period, negative for the next, and repeat
+                angularSpeed = 0.5f * (2 * Mathf.PI / data.verticalPeriod);
+            }
+
             frequency = data.circularFrequency * Mathf.Sin(angularSpeed * time);
         }
 
@@ -191,9 +203,13 @@ public class Drone : MonoBehaviour
 
         if (data.circularMotionType == CircularMotionType.Sinusoidal)
         {
-            // float factor = 2 * Mathf.PI * data.circularFrequency / data.verticalPeriod;
-            // frequencyDot = 0.5f * factor * Mathf.Sin(2 * Mathf.PI * time / data.verticalPeriod);
-            float angularSpeed = 0.5f * (2 * Mathf.PI / data.verticalPeriod);
+            float angularSpeed = 0.5f * Mathf.PI;
+
+            if (tieRotationToTranslation)
+            {
+                angularSpeed = 0.5f * (2 * Mathf.PI / data.verticalPeriod);
+            }
+
             frequencyDot = angularSpeed * data.circularFrequency * Mathf.Cos(angularSpeed * time);
         }
 
