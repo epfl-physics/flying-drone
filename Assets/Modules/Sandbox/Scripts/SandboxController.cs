@@ -322,6 +322,8 @@ public class SandboxController : MonoBehaviour
             sim.platformData.translationType = MovingPlatform.TranslationType.Sinusoidal;
         }
 
+        Debug.Log("Translation is constant ? " + translationIsConstant);
+
         // Platform rotation frequency is Hz, while angular frequency here is rad / s.
         sim.platformData.rotationFrequency = platformAngularFrequency / (2 * Mathf.PI);
         if (platformAngularFrequency == 0)
