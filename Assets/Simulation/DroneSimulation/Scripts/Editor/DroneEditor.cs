@@ -18,7 +18,6 @@ public class DroneEditor : Editor
         if (GUI.changed)
         {
             drone.ReturnToRestPosition();
-            drone.ComputeHeightBounds();
         }
     }
 }

@@ -4,26 +4,19 @@ public class Drone : MonoBehaviour
 {
     public bool autoUpdate;
 
-    public enum VerticalMotionType { None, Linear, Sinusoidal }
-    public enum CircularMotionType { None, Constant, Sinusoidal }
+    public enum VerticalMotionType { Linear, Sinusoidal }
+    public enum CircularMotionType { Constant, Sinusoidal }
     public DroneData data;
 
-    private float time = 0;
-    public float Time { get { return time; } set { time = value; } }
+    public float Omega => ComputeOmega();
+    public float OmegaDot => ComputeOmegaDot();
 
-    // Vertical displacement
-    private float minHeight;
-    private float maxHeight;
+    [Header("Running clocks")]
+    public float verticalTime = 0;
+    public float circularTime = 0;
 
     // Orbital angle
-    private float angle = 0;
-
-    [HideInInspector] public bool tieRotationToTranslation = true;
-
-    private void Awake()
-    {
-        ComputeHeightBounds();
-    }
+    [HideInInspector] public float angle = 0;
 
     private void Update()
     {
@@ -32,25 +25,30 @@ public class Drone : MonoBehaviour
 
     public void TakeAStep(float deltaTime)
     {
-        time += deltaTime;
-        // Reset the clock after one vertical period
-        if (data.circularMotionType != CircularMotionType.Sinusoidal)
-        {
-            if (time >= 2 * data.verticalPeriod) time = 0;
-        }
-
-        // Compute the drone's local position
+        // Get the drone's rest position
         Vector3 position = data.restPosition;
 
-        if (data.verticalMotionType != VerticalMotionType.None)
+        // Compute the drone's current vertical position
+        if (data.verticalFrequency > 0)
         {
-            position.y = ComputeHeight(time);
+            verticalTime += deltaTime;
+
+            // Reset the translation clock after a vertical period
+            if (verticalTime > data.VerticalPeriod) verticalTime = 0;
+
+            position.y += ComputeHeightOffset();
         }
 
-        float omega = ComputeOmega(time);
-        angle += omega * deltaTime;
+        // Compute the drone's current position in the horizontal plane
+        angle += Omega * deltaTime;
+        angle = angle % (2 * Mathf.PI);
         position.x = data.circularRadius * Mathf.Cos(angle);
         position.z = data.circularRadius * Mathf.Sin(angle);
+
+        if (data.circularMotionType == CircularMotionType.Sinusoidal)
+        {
+            circularTime += deltaTime;
+        }
 
         // Set the drone's position relative to the specified origin
         position += data.origin;
@@ -59,158 +57,133 @@ public class Drone : MonoBehaviour
         transform.localPosition = position;
     }
 
-    private float ComputeHeight(float time)
+    private float ComputeHeightOffset()
     {
-        float height = 0;
-        float t = time / data.verticalPeriod;
-        if (time >= data.verticalPeriod) t -= 1;
+        float heightOffset;
+        float quarterPeriod = 0.25f * data.VerticalPeriod;
+        float time = verticalTime;
 
-        if (t < 0.5f)
+        switch (data.verticalMotionType)
         {
-            if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
-            {
-                t = 0.25f * (1 - Mathf.Cos(2 * Mathf.PI * t));
-            }
-            height = Mathf.Lerp(minHeight, maxHeight, 2 * t);
-        }
-        else
-        {
-            t = t - 0.5f;
-            if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
-            {
-                t = 0.25f * (1 - Mathf.Cos(2 * Mathf.PI * t));
-            }
-            height = Mathf.Lerp(maxHeight, minHeight, 2 * t);
+            case VerticalMotionType.Linear:
+                // Sawtooth function
+                float slope = data.verticalAmplitude / quarterPeriod;
+                if (time < quarterPeriod)
+                {
+                    heightOffset = slope * time;
+                }
+                else if (time < 3 * quarterPeriod)
+                {
+                    heightOffset = 2 * data.verticalAmplitude - slope * time;
+                }
+                else
+                {
+                    heightOffset = slope * (time - data.VerticalPeriod);
+                }
+                break;
+            case VerticalMotionType.Sinusoidal:
+                // Sinusoidal function
+                float omega = 2 * Mathf.PI * data.verticalFrequency;
+                heightOffset = data.verticalAmplitude * Mathf.Sin(omega * time);
+                break;
+            default:
+                heightOffset = 0;
+                break;
         }
 
-        return height;
-    }
-
-    public void ComputeHeightBounds()
-    {
-        minHeight = data.restPosition.y - data.verticalAmplitude;
-        maxHeight = data.restPosition.y + data.verticalAmplitude;
+        return heightOffset;
     }
 
     public void SetRestHeight(float value)
     {
         data.restPosition.y = value;
-        ComputeHeightBounds();
-    }
-
-    public void SetVerticalAmplitude(float value)
-    {
-        data.verticalAmplitude = value;
-        ComputeHeightBounds();
     }
 
     public void ReturnToRestPosition()
     {
-        // Debug.Log("ReturnToRestPosition");
         transform.localPosition = data.origin + data.restPosition;
     }
 
     public Vector3 GetVelocity()
     {
-        Vector3 velocity = Vector3.zero;
+        Vector3 v = Vector3.zero;
+        float quarterPeriod = 0.25f * data.VerticalPeriod;
+        float time = verticalTime;
 
-        float t = time / data.verticalPeriod;
-        if (time >= data.verticalPeriod) t -= 1;
-
-        if (data.verticalMotionType == VerticalMotionType.Linear)
+        switch (data.verticalMotionType)
         {
-            if (t < 0.5f)
-            {
-                velocity.y = 4 * data.verticalAmplitude / data.verticalPeriod;
-            }
-            else
-            {
-                velocity.y = -4 * data.verticalAmplitude / data.verticalPeriod;
-            }
-        }
-        else if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
-        {
-            if (t < 0.5f)
-            {
-                velocity.y = 2 * data.verticalAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * t) / data.verticalPeriod;
-            }
-            else
-            {
-                velocity.y = -2 * data.verticalAmplitude * Mathf.PI * Mathf.Sin(2 * Mathf.PI * (t - 0.5f)) / data.verticalPeriod;
-            }
+            case VerticalMotionType.Linear:
+                // Sawtooth function
+                float slope = data.verticalAmplitude / quarterPeriod;
+                if (time < quarterPeriod || time >= 3 * quarterPeriod)
+                {
+                    v.y = slope;
+                }
+                else
+                {
+                    v.y = -slope;
+                }
+                break;
+            case VerticalMotionType.Sinusoidal:
+                // Sinusoidal function
+                float omega = 2 * Mathf.PI * data.verticalFrequency;
+                v.y = data.verticalAmplitude * omega * Mathf.Cos(omega * time);
+                break;
+            default:
+                break;
         }
 
-        float omega = ComputeOmega(time);
         float r = data.circularRadius;
-        velocity.x = -omega * r * Mathf.Sin(angle);
-        velocity.z = omega * r * Mathf.Cos(angle);
+        v.x = -Omega * r * Mathf.Sin(angle);
+        v.z = Omega * r * Mathf.Cos(angle);
 
-        return velocity;
+        return v;
     }
 
     public Vector3 GetAcceleration()
     {
-        Vector3 acceleration = Vector3.zero;
-
-        float t = time / data.verticalPeriod;
-        if (time >= data.verticalPeriod) t -= 1;
+        Vector3 a = Vector3.zero;
+        float quarterPeriod = 0.25f * data.VerticalPeriod;
+        float time = verticalTime;
 
         if (data.verticalMotionType == VerticalMotionType.Sinusoidal)
         {
-            if (t < 0.5f)
-            {
-                acceleration.y = 4 * data.verticalAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * t) / data.verticalPeriod / data.verticalPeriod;
-            }
-            else
-            {
-                acceleration.y = -4 * data.verticalAmplitude * Mathf.PI * Mathf.PI * Mathf.Cos(2 * Mathf.PI * (t - 0.5f)) / data.verticalPeriod / data.verticalPeriod;
-            }
+            float omega = 2 * Mathf.PI * data.verticalFrequency;
+            a.y = -data.verticalAmplitude * omega * omega * Mathf.Sin(omega * time);
         }
 
-        float omega = ComputeOmega(time);
-        float omegaDot = ComputeOmegaDot(time);
         float r = data.circularRadius;
-        acceleration.x = -r * (omega * omega * Mathf.Cos(angle) + omegaDot * Mathf.Sin(angle));
-        acceleration.z = -r * (omega * omega * Mathf.Sin(angle) - omegaDot * Mathf.Cos(angle));
+        a.x = -r * (Omega * Omega * Mathf.Cos(angle) + OmegaDot * Mathf.Sin(angle));
+        a.z = -r * (Omega * Omega * Mathf.Sin(angle) - OmegaDot * Mathf.Cos(angle));
 
-        return acceleration;
+        return a;
     }
 
-    private float ComputeOmega(float time)
+    private float ComputeOmega()
     {
-        float frequency = data.circularFrequency;
+        float frequency = 0;
 
-        if (data.circularMotionType == CircularMotionType.Sinusoidal)
+        if (data.circularMotionType == CircularMotionType.Constant)
         {
-            // Let it take 2 seconds to go from max to min rotation rate
-            float angularSpeed = 0.5f * Mathf.PI;
-
-            if (tieRotationToTranslation)
-            {
-                // Positive for one vertical period, negative for the next, and repeat
-                angularSpeed = 0.5f * (2 * Mathf.PI / data.verticalPeriod);
-            }
-
-            frequency = data.circularFrequency * Mathf.Sin(angularSpeed * time);
+            frequency = data.circularFrequency;
+        }
+        else if (data.circularMotionType == CircularMotionType.Sinusoidal)
+        {
+            float angularSpeed = 2 * Mathf.PI * data.circularFrequencyVariable;
+            frequency = data.circularFrequency * Mathf.Cos(angularSpeed * circularTime);
         }
 
         return 2 * Mathf.PI * frequency;
     }
 
-    private float ComputeOmegaDot(float time)
+    private float ComputeOmegaDot()
     {
         float frequencyDot = 0;
 
         if (data.circularMotionType == CircularMotionType.Sinusoidal)
         {
-            float angularSpeed = 0.5f * Mathf.PI;
-
-            if (tieRotationToTranslation)
-            {
-                angularSpeed = 0.5f * (2 * Mathf.PI / data.verticalPeriod);
-            }
-
-            frequencyDot = angularSpeed * data.circularFrequency * Mathf.Cos(angularSpeed * time);
+            float angularSpeed = 2 * Mathf.PI * data.circularFrequencyVariable;
+            frequencyDot = -angularSpeed * data.circularFrequency * Mathf.Sin(angularSpeed * circularTime);
         }
 
         return 2 * Mathf.PI * frequencyDot;
@@ -220,12 +193,25 @@ public class Drone : MonoBehaviour
 [System.Serializable]
 public class DroneData
 {
-    [Tooltip("Origin")] public Vector3 origin = Vector3.zero;
-    [Tooltip("Relative to origin"), Min(0)] public Vector3 restPosition = 4 * Vector3.up;
-    [Tooltip("Vertical displacement")] public float verticalAmplitude = 1;
-    [Tooltip("Time to execute one full cycle"), Min(0)] public float verticalPeriod = 2;
+    [Tooltip("Position of the drone's origin")]
+    public Vector3 origin = Vector3.zero;
+    [Tooltip("Default position relative to origin"), Min(0)]
+    public Vector3 restPosition = 4 * Vector3.up;
+
+    [Header("Vertical Motion")]
     public Drone.VerticalMotionType verticalMotionType;
-    [Tooltip("Radius of circular displacement")] public float circularRadius = 1;
-    [Tooltip("Rotations per second"), Range(-0.5f, 0.5f)] public float circularFrequency = 0;
+    [Tooltip("Vertical displacement")]
+    public float verticalAmplitude = 1;
+    [Tooltip("Translation cycles per second"), Range(0, 2)]
+    public float verticalFrequency = 0.5f;
+    public float VerticalPeriod => 1f / verticalFrequency;
+
+    [Header("Circular Motion")]
     public Drone.CircularMotionType circularMotionType;
+    [Tooltip("Radius of circular displacement"), Min(0)]
+    public float circularRadius = 1;
+    [Tooltip("Rotations per second"), Range(-0.5f, 0.5f)]
+    public float circularFrequency = 0;
+    [Tooltip("Rotation cycles per second when variable"), Range(0, 2)]
+    public float circularFrequencyVariable = 0.5f;
 }

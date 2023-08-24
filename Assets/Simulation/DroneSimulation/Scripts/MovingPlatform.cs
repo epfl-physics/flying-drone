@@ -20,17 +20,18 @@ public class MovingPlatform : MonoBehaviour
     public Vector3 Omega => ComputeOmega();
     public Vector3 OmegaDot => ComputeOmegaDot();
 
-    [Header("Running clocks")]
-    public float translationTime = 0;
-    public float rotationTime = 0;
-
     public Vector3 Position
     {
         get { return transform.localPosition; }
         set { transform.localPosition = value; }
     }
 
-    [SerializeField] private float angle = 0;
+    [Header("Running clocks")]
+    public float translationTime = 0;
+    public float rotationTime = 0;
+
+    // Rotation angle
+    [HideInInspector] public float angle = 0;
 
     private void Update()
     {
@@ -48,7 +49,7 @@ public class MovingPlatform : MonoBehaviour
             if (translationTime > data.TranslationPeriod) translationTime = 0;
 
             // Get the current vertical position of the surface
-            Vector3 position = ComputeHeight(translationTime) * Vector3.up;
+            Vector3 position = ComputeHeight() * Vector3.up;
 
             // Set the surface at the correct height
             SetSurfacePosition(position);
@@ -69,10 +70,11 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    private float ComputeHeight(float time)
+    private float ComputeHeight()
     {
         float heightOffset;
         float quarterPeriod = 0.25f * data.TranslationPeriod;
+        float time = translationTime;
 
         switch (data.translationType)
         {
@@ -163,7 +165,6 @@ public class MovingPlatform : MonoBehaviour
         }
         else if (data.rotationType == RotationType.Sinusoidal)
         {
-            // Let it take 2 seconds to go from max to min rotation rate
             float angularSpeed = 2 * Mathf.PI * data.rotationFrequencyVariable;
             frequency = data.rotationFrequency * Mathf.Cos(angularSpeed * rotationTime);
         }
@@ -250,7 +251,6 @@ public class MovingPlatform : MonoBehaviour
             surface.GetChild(0).GetComponent<MeshRenderer>().sharedMaterial.SetFloat("_Alpha", alpha);
         }
     }
-
 }
 
 [System.Serializable]
@@ -267,6 +267,7 @@ public class PlatformData
     public float translationAmplitude = 1;
     [Tooltip("Translation cycles per second"), Range(0, 2)]
     public float translationFrequency = 0.5f;
+    public float TranslationPeriod => 1f / translationFrequency;
 
     [Header("Rotation")]
     public MovingPlatform.RotationType rotationType;
@@ -274,6 +275,4 @@ public class PlatformData
     public float rotationFrequency = 0;
     [Tooltip("Rotation cycles per second when variable"), Range(0, 2)]
     public float rotationFrequencyVariable = 0.5f;
-
-    public float TranslationPeriod => 1f / translationFrequency;
 }
