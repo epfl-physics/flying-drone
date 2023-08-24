@@ -21,10 +21,7 @@ public class DroneSimulation : Simulation
 
     private void Awake()
     {
-        if (drone)
-        {
-            drone.autoUpdate = false;
-        }
+        if (drone) drone.autoUpdate = false;
 
         if (platform)
         {
@@ -36,27 +33,30 @@ public class DroneSimulation : Simulation
         ApplyDroneData();
     }
 
-    private void Start()
-    {
-        if (drone) drone.Time = 0;
-        if (platform) platform.Time = 0;
-    }
+    // private void Start()
+    // {
+    //     if (drone) drone.Time = 0;
+    //     if (platform) platform.Time = 0;
+    // }
 
     private void Update()
     {
         if (IsPaused) return;
 
-        Vector3 platformSurfacePosition = Vector3.zero;
+        // Vector3 platformSurfacePosition = Vector3.zero;
 
         // Determine whether the platform needs to update
-        bool platformIsMoving = false;
-        platformIsMoving |= platformData.translationType != MovingPlatform.TranslationType.None;
-        platformIsMoving |= platformData.rotationType != MovingPlatform.RotationType.None;
+        // bool platformIsMoving = false;
+        // platformIsMoving |= platformData.translationType != MovingPlatform.TranslationType.None;
+        // platformIsMoving |= platformData.rotationType != MovingPlatform.RotationType.None;
 
-        if (platform && platformIsMoving)
+        if (platform) // && platformIsMoving)
         {
             platform.TakeAStep(Time.deltaTime);
-            platformSurfacePosition = platform.GetSurfacePosition();
+            // platformSurfacePosition = platform.GetSurfacePosition();
+
+            // platformTranslationTime = platform.translationTime;
+            // platformRotationTime = platform.rotationTime;
         }
 
         // Determine whether the drone needs to update
@@ -79,15 +79,18 @@ public class DroneSimulation : Simulation
         {
             platform.Position = platformData.position;
             platform.SetRestHeight(platformData.restHeight);
-            platform.SetAmplitude(platformData.translationAmplitude);
-            platform.data.translationPeriod = platformData.translationPeriod;
+            // platform.SetAmplitude(platformData.translationAmplitude);
+            platform.data.translationAmplitude = platformData.translationAmplitude;
+            // platform.data.translationPeriod = platformData.translationPeriod;
+            platform.data.translationFrequency = platformData.translationFrequency;
             platform.data.rotationFrequency = platformData.rotationFrequency;
+            platform.data.rotationFrequencyVariable = platformData.rotationFrequencyVariable;
             platform.data.translationType = platformData.translationType;
             platform.data.rotationType = platformData.rotationType;
 
             if (drone && synchronizeWithDrone)
             {
-                platform.Time = drone.Time;
+                platform.translationTime = drone.Time;
             }
         }
     }
@@ -113,7 +116,7 @@ public class DroneSimulation : Simulation
 
         if (platform && synchronizeWithPlatform)
         {
-            drone.Time = platform.Time;
+            drone.Time = platform.translationTime;
         }
     }
 
@@ -123,7 +126,7 @@ public class DroneSimulation : Simulation
 
         // Running clocks for drone and platform motions
         simState.droneTime = drone.Time;
-        simState.platformTime = platform.Time;
+        simState.platformTime = platform.translationTime;
 
         // Drone absolute quantities
         Vector3 rAbsolute = drone.transform.localPosition;
@@ -201,9 +204,9 @@ public class DroneSimulation : Simulation
         }
     }
 
-    public void UnlinkSinusoidalRotationFromTranslation()
-    {
-        if (platform) platform.tieRotationToTranslation = false;
-        if (drone) drone.tieRotationToTranslation = false;
-    }
+    // public void MatchVariableRotationFrequencyToTranslation()
+    // {
+    //     if (platform) platform.matchRotationToTranslationFrequency = false;
+    //     if (drone) drone.tieRotationToTranslation = false;
+    // }
 }

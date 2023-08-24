@@ -10,8 +10,10 @@ public class DroneSlideController : Slides.SimulationSlideController
     public Drone.CircularMotionType droneCircularMotionType;
     public GameObject platform;
     public bool platformIsVisible;
-    public float platformVerticalAmplitude = 0.5f;
-    public float platformVerticalPeriod = 3f;
+    // public float platformVerticalAmplitude = 0.5f;
+    // public float platformVerticalPeriod = 3f;
+    public float platformTranslationAmplitude = 0.5f;
+    public float platformTranslationFrequency = 0.3f;
     public float platformRotationFrequency = 0f;
     public MovingPlatform.TranslationType platformTranslationType;
     public MovingPlatform.RotationType platformRotationType;
@@ -36,8 +38,10 @@ public class DroneSlideController : Slides.SimulationSlideController
     {
         DroneSimulation sim = (DroneSimulation)simulation;
 
-        sim.platformData.translationAmplitude = platformVerticalAmplitude;
-        sim.platformData.translationPeriod = platformVerticalPeriod;
+        // sim.platformData.translationAmplitude = platformVerticalAmplitude;
+        // sim.platformData.translationFrequency = platformVerticalPeriod;
+        sim.platformData.translationAmplitude = platformTranslationAmplitude;
+        sim.platformData.translationFrequency = platformTranslationFrequency;
         sim.platformData.translationType = platformTranslationType;
         sim.platformData.rotationFrequency = platformRotationFrequency;
         sim.platformData.rotationType = platformRotationType;
