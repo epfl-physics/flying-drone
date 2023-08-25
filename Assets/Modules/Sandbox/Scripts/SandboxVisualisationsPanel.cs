@@ -1,26 +1,22 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
-public class SandboxControlPanel : MonoBehaviour
+public class SandboxVisualisationsPanel : MonoBehaviour
 {
     private RectTransform rectTransform;
 
-    [SerializeField] private float xHidden = -200;
-    [SerializeField] private float xShowing = -40;
+    [SerializeField] private float yHidden = -100;
+    [SerializeField] private float yShowing = -20;
     [SerializeField] private bool startHidden = false;
-    [SerializeField] private CanvasGroup hiddenTitle;
-    [SerializeField] private Image icon;
-    [SerializeField] private CanvasGroup coverPanel;
     [SerializeField] private CanvasGroup fadePanel;
 
-    private float yPosition;
+    private float xPosition;
 
     protected void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        yPosition = rectTransform.anchoredPosition.y;
+        xPosition = rectTransform.anchoredPosition.x;
     }
 
     private void Start()
@@ -51,24 +47,17 @@ public class SandboxControlPanel : MonoBehaviour
     {
         StopAllCoroutines();
 
-        // Vector2 targetPosition = new Vector2(xPosition, -rectTransform.rect.height);
-        Vector2 targetPosition = new Vector2(xHidden, yPosition);
+        Vector2 targetPosition = new Vector2(xPosition, yHidden);
         StartCoroutine(LerpPosition(rectTransform, targetPosition, lerpTime, 2));
-        if (hiddenTitle) StartCoroutine(LerpCanvasGroupAlpha(hiddenTitle, 1, 0.8f * lerpTime));
-        if (icon) StartCoroutine(LerpIconAlpha(1, lerpTime));
-        if (coverPanel) StartCoroutine(LerpCanvasGroupAlpha(coverPanel, 1, 0.8f * lerpTime));
-        if (fadePanel) StartCoroutine(LerpCanvasGroupAlpha(fadePanel, 0, 0.8f * lerpTime));
+        if (fadePanel) StartCoroutine(LerpFadePanelAlpha(fadePanel, 0, 0.8f * lerpTime));
     }
 
     public void Show(float lerpTime)
     {
         StopAllCoroutines();
-        Vector2 targetPosition = new Vector2(xShowing, yPosition);
+        Vector2 targetPosition = new Vector2(xPosition, yShowing);
         StartCoroutine(LerpPosition(rectTransform, targetPosition, lerpTime, 2));
-        if (hiddenTitle) StartCoroutine(LerpCanvasGroupAlpha(hiddenTitle, 0, 0.6f * lerpTime));
-        if (icon) StartCoroutine(LerpIconAlpha(0, 0.6f * lerpTime));
-        if (coverPanel) StartCoroutine(LerpCanvasGroupAlpha(coverPanel, 0, 0.6f * lerpTime));
-        if (fadePanel) StartCoroutine(LerpCanvasGroupAlpha(fadePanel, 1, 0.6f * lerpTime));
+        if (fadePanel) StartCoroutine(LerpFadePanelAlpha(fadePanel, 1, 0.6f * lerpTime));
     }
 
     private IEnumerator LerpPosition(RectTransform rectTransform,
@@ -95,26 +84,7 @@ public class SandboxControlPanel : MonoBehaviour
         return 1 - Mathf.Pow(1 - t, a);
     }
 
-    private IEnumerator LerpIconAlpha(float targetAlpha, float lerpTime, float easeFactor = 0)
-    {
-        Color startColor = icon.color;
-        Color targetColor = startColor;
-        targetColor.a = targetAlpha;
-
-        float time = 0;
-        while (time < lerpTime)
-        {
-            time += Time.unscaledDeltaTime;
-            // float t = time / lerpTime;
-            float t = EaseOut(time / lerpTime, 1 + easeFactor);
-            icon.color = Color.Lerp(startColor, targetColor, t);
-            yield return null;
-        }
-
-        icon.color = targetColor;
-    }
-
-    private IEnumerator LerpCanvasGroupAlpha(CanvasGroup cg, float targetAlpha, float lerpTime, float easeFactor = 0)
+    private IEnumerator LerpFadePanelAlpha(CanvasGroup cg, float targetAlpha, float lerpTime, float easeFactor = 0)
     {
         float startAlpha = cg.alpha;
         cg.blocksRaycasts = targetAlpha == 1;

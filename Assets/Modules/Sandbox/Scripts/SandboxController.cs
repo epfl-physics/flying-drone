@@ -365,4 +365,13 @@ public class SandboxController : MonoBehaviour
 
         // OnChangeSimulationParameters?.Invoke();
     }
+
+    public void TogglePointMass(bool showPointMass)
+    {
+        if (sim)
+        {
+            sim.drone.gameObject.SetActive(!showPointMass);
+            sim.pointMass.gameObject.SetActive(showPointMass);
+        }
+    }
 }
