@@ -746,7 +746,7 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     restHeight: 1
     translationAmplitude: 1
-    translationPeriod: 2
+    translationFrequency: 0.5
     rotationFrequency: 0
     translationType: 0
     rotationType: 0
@@ -757,6 +757,10 @@ MonoBehaviour:
   e3: {fileID: 5002669458873323699}
   originLabel: {fileID: 4419426288328285942}
   originLabelOffset: {x: -0.5, y: 0.3, z: 0}
+  matchRotationToTranslationFrequency: 0
+  translationTime: 0
+  rotationTime: 0
+  angle: 0
 --- !u!1 &8579746345619621488
 GameObject:
   m_ObjectHideFlags: 0

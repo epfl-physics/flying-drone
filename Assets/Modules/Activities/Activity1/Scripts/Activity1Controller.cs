@@ -124,10 +124,11 @@ public class Activity1Controller : MonoBehaviour
 
         // First deal with the platform
         sim.platformData = scenario.platformData;
-        sim.ApplyPlatformData(false);
+        sim.ApplyPlatformData();
 
         sim.droneData = scenario.droneData;
-        sim.ApplyDroneData(true, true);
+        sim.SynchronizeDroneClocksWithPlatform();
+        sim.ApplyDroneData();
 
         OnLoadScenario?.Invoke((int)scenario.answers[0]);
     }

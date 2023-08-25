@@ -3,8 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Drone Simulation State", menuName = "Drone Simulation/Drone Simulation State", order = 0)]
 public class DroneSimulationState : ScriptableObject
 {
-    public float droneTime;
-    public float platformTime;
+    [Header("Drone")]
+    public float droneVerticalTime;
+    public float droneCircularTime;
+    public float droneAngle;
+
+    [Header("Platform")]
+    public float platformTranslationTime;
+    public float platformRotationTime;
+    public float platformAngle;
 
     [Header("Rotation")]
     public Vector3 omega;

@@ -21,107 +21,71 @@ public class DroneSimulation : Simulation
 
     private void Awake()
     {
-        if (drone)
-        {
-            drone.autoUpdate = false;
-        }
-
-        if (platform)
-        {
-            platform.autoUpdate = false;
-            platform.Position = platformData.position;
-        }
+        if (platform) platform.autoUpdate = false;
+        if (drone) drone.autoUpdate = false;
 
         ApplyPlatformData();
         ApplyDroneData();
     }
 
-    private void Start()
-    {
-        if (drone) drone.Time = 0;
-        if (platform) platform.Time = 0;
-    }
-
     private void Update()
     {
-        Vector3 platformSurfacePosition = Vector3.zero;
+        if (IsPaused) return;
 
-        // Determine whether the platform needs to update
-        bool platformIsMoving = false;
-        platformIsMoving |= platformData.translationType != MovingPlatform.TranslationType.None;
-        platformIsMoving |= platformData.rotationType != MovingPlatform.RotationType.None;
+        if (platform) platform.TakeAStep(Time.deltaTime);
+        if (drone) drone.TakeAStep(Time.deltaTime);
 
-        if (platform && platformIsMoving)
-        {
-            platform.TakeAStep(Time.deltaTime);
-            platformSurfacePosition = platform.GetSurfacePosition();
-        }
-
-        // Determine whether the drone needs to update
-        bool droneIsMoving = droneData.verticalMotionType != Drone.VerticalMotionType.None;
-        droneIsMoving |= droneData.circularMotionType != Drone.CircularMotionType.None;
-        if (drone && droneIsMoving)
-        {
-            drone.TakeAStep(Time.deltaTime);
-            SynchronizePointMass();
-        }
-
+        SynchronizePointMass();
         SynchronizeDroneProjection();
-
         UpdateSimState();
     }
 
-    public void ApplyPlatformData(bool synchronizeWithDrone = false)
+    public void ApplyPlatformData()
     {
         if (platform)
         {
             platform.Position = platformData.position;
             platform.SetRestHeight(platformData.restHeight);
-            platform.SetAmplitude(platformData.translationAmplitude);
-            platform.data.translationPeriod = platformData.translationPeriod;
-            platform.data.rotationFrequency = platformData.rotationFrequency;
             platform.data.translationType = platformData.translationType;
+            platform.data.translationAmplitude = platformData.translationAmplitude;
+            platform.data.translationFrequency = platformData.translationFrequency;
             platform.data.rotationType = platformData.rotationType;
-
-            if (drone && synchronizeWithDrone)
-            {
-                platform.Time = drone.Time;
-            }
+            platform.data.rotationFrequency = platformData.rotationFrequency;
+            platform.data.rotationFrequencyVariable = platformData.rotationFrequencyVariable;
         }
     }
 
-    public void ApplyDroneData(bool synchronizeWithPlatform = false, bool returnToRestPosition = true)
+    public void ApplyDroneData()
     {
         if (drone)
         {
             drone.data.origin = droneData.origin;
             drone.data.restPosition = droneData.restPosition;
             drone.SetRestHeight(droneData.restPosition.y);
-            drone.SetVerticalAmplitude(droneData.verticalAmplitude);
-            drone.data.verticalPeriod = droneData.verticalPeriod;
             drone.data.verticalMotionType = droneData.verticalMotionType;
+            drone.data.verticalAmplitude = droneData.verticalAmplitude;
+            drone.data.verticalFrequency = droneData.verticalFrequency;
+            drone.data.circularMotionType = droneData.circularMotionType;
             drone.data.circularRadius = droneData.circularRadius;
             drone.data.circularFrequency = droneData.circularFrequency;
-            drone.data.circularMotionType = droneData.circularMotionType;
-            if (returnToRestPosition) drone.ReturnToRestPosition();
+            drone.data.circularFrequencyVariable = droneData.circularFrequencyVariable;
         }
 
         SynchronizePointMass();
         SynchronizeDroneProjection();
-
-        if (platform && synchronizeWithPlatform)
-        {
-            drone.Time = platform.Time;
-        }
     }
 
     public void UpdateSimState()
     {
         if (!simState) return;
 
-        // Running clocks for drone and platform motions
-        simState.droneTime = drone.Time;
-        simState.platformTime = platform.Time;
+        // Running clocks and current angles of platform and drone
+        simState.platformTranslationTime = platform.translationTime;
+        simState.platformRotationTime = platform.rotationTime;
+        simState.platformAngle = platform.angle;
+        simState.droneVerticalTime = drone.verticalTime;
+        simState.droneCircularTime = drone.circularTime;
+        simState.droneAngle = drone.angle;
 
         // Drone absolute quantities
         Vector3 rAbsolute = drone.transform.localPosition;
@@ -169,16 +133,6 @@ public class DroneSimulation : Simulation
         simState.RedrawVectors();
     }
 
-    // public void SetDroneAtRestPosition()
-    // {
-    //     if (drone)
-    //     {
-    //         drone.ReturnToRestPosition();
-    //         SynchronizePointMass();
-    //         SynchronizeDroneProjection();
-    //     }
-    // }
-
     private void SynchronizePointMass()
     {
         // Place the point mass at the drone position
@@ -196,6 +150,20 @@ public class DroneSimulation : Simulation
             position.y = platform.GetSurfacePosition().y;
             position += droneProjectionOffset;
             droneProjection.localPosition = position;
+        }
+    }
+
+    public void SynchronizePlatformRotationClock()
+    {
+        if (platform) platform.rotationTime = platform.translationTime;
+    }
+
+    public void SynchronizeDroneClocksWithPlatform()
+    {
+        if (drone && platform)
+        {
+            drone.verticalTime = platform.translationTime;
+            drone.circularTime = platform.rotationTime;
         }
     }
 }

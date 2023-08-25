@@ -15,19 +15,21 @@ MonoBehaviour:
   platformData:
     position: {x: 4, y: 0, z: 0}
     restHeight: 1.5
+    translationType: 1
     translationAmplitude: 1
-    translationPeriod: 4.5
-    rotationFrequency: 0.111
-    translationType: 2
-    rotationType: 2
+    translationFrequency: 0.15
+    rotationType: 1
+    rotationFrequency: 0.15
+    rotationFrequencyVariable: 0.15
   droneData:
     origin: {x: 4, y: 0, z: 0}
     restPosition: {x: 0, y: 4, z: 0}
+    verticalMotionType: 1
     verticalAmplitude: 1
-    verticalPeriod: 4.5
-    verticalMotionType: 0
+    verticalFrequency: 0
+    circularMotionType: 1
     circularRadius: 1.25
     circularFrequency: 0
-    circularMotionType: 1
+    circularFrequencyVariable: 0
   frameIsInertial: 1
   answers: 03000000

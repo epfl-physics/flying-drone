@@ -33,8 +33,6 @@ public class VectorManager : MonoBehaviour
     public Vector platformVelocityAdditive;
     public Vector tangentialVelocity;
     public bool showVelocities;
-    public enum VelocityAdditionOrder { First, Second }
-    public VelocityAdditionOrder velocityAdditionOrder = default;
 
     [Header("Acceleration")]
     public Vector droneAccelerationAbsolute;
