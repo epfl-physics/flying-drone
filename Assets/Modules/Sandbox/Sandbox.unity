@@ -11837,6 +11837,7 @@ GameObject:
   - component: {fileID: 1071083211}
   - component: {fileID: 1071083212}
   - component: {fileID: 1071083213}
+  - component: {fileID: 1071083214}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11986,6 +11987,18 @@ MonoBehaviour:
   maxAzimuthalAngle: 180
   clampAzimuthalAngle: 0
   canOrbit: 1
+--- !u!114 &1071083214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071083207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7e8b7940abe402290fde98f31c1981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1078534249
 GameObject:
   m_ObjectHideFlags: 0
@@ -32734,7 +32747,7 @@ PrefabInstance:
     - target: {fileID: 8838591168304344290, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4393337935116234915}
     - target: {fileID: 8838591168304344290, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -32897,7 +32910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8838591168771992338, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8838591168771992338, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -32922,7 +32935,7 @@ PrefabInstance:
     - target: {fileID: 8838591168771992338, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: 19502d2411aeb4ebeb5b416e2dc75901, type: 2}
+      objectReference: {fileID: 1071083214}
     - target: {fileID: 8838591168771992338, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -32953,7 +32966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8838591168771992338, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetFrame
+      value: SetCameraAsMain
       objectReference: {fileID: 0}
     - target: {fileID: 8838591168771992338, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
@@ -32969,7 +32982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8838591168771992338, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: DroneSimulationState, Assembly-CSharp
+      value: CameraTagger, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8838591168771992338, guid: 17173eeceb31b4113bd1e452162b4e0f, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
@@ -43784,21 +43797,23 @@ MonoBehaviour:
   platformData:
     position: {x: 4, y: 0, z: 0}
     restHeight: 1.5
-    translationAmplitude: 1
-    translationPeriod: 3
-    rotationFrequency: 0
     translationType: 0
+    translationAmplitude: 1
+    translationFrequency: 0.5
     rotationType: 0
+    rotationFrequency: 0
+    rotationFrequencyVariable: 0.5
   drone: {fileID: 1802410385}
   droneData:
     origin: {x: 4, y: 0, z: 0}
     restPosition: {x: 0, y: 4, z: 0}
-    verticalAmplitude: 0.5
-    verticalPeriod: 2
     verticalMotionType: 0
+    verticalAmplitude: 0.5
+    verticalFrequency: 0.5
+    circularMotionType: 0
     circularRadius: 1.2
     circularFrequency: 0
-    circularMotionType: 0
+    circularFrequencyVariable: 0.5
   pointMass: {fileID: 1973564330}
   droneProjection: {fileID: 112229507252859136}
   droneProjectionOffset: {x: 0, y: 0.06, z: 0}
@@ -45001,7 +45016,7 @@ TrailRenderer:
   m_Time: 3
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.05
+    widthMultiplier: 0.02
     widthCurve:
       serializedVersion: 2
       m_Curve:

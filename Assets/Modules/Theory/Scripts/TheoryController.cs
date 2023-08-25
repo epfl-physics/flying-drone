@@ -171,7 +171,6 @@ public class TheoryController : MonoBehaviour
         {
             rotationIsConstant = true;
             SetPlatformRotationToggleInteractivity(true);
-
         }
         else if (typeIndex == 2)
         {
