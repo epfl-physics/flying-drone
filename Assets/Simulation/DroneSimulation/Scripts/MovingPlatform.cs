@@ -33,6 +33,12 @@ public class MovingPlatform : MonoBehaviour
     // Rotation angle
     [HideInInspector] public float angle = 0;
 
+    // For the Introduction
+    private void OnDisable()
+    {
+        SetSurfaceAlpha(1);
+    }
+
     private void Update()
     {
         if (autoUpdate) TakeAStep(UnityEngine.Time.deltaTime);

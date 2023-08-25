@@ -4,14 +4,12 @@ using UnityEngine.UI;
 public class DroneSlideController : Slides.SimulationSlideController
 {
     [Header("Simulation")]
-    public float droneCircularFrequency = 0;
     public float droneVerticalAmplitude = 0.5f;
-    public float droneVerticalPeriod = 3f;
+    public float droneVerticalFrequency = 0.3f;
+    public float droneCircularFrequency = 0;
     public Drone.CircularMotionType droneCircularMotionType;
     public GameObject platform;
     public bool platformIsVisible;
-    // public float platformVerticalAmplitude = 0.5f;
-    // public float platformVerticalPeriod = 3f;
     public float platformTranslationAmplitude = 0.5f;
     public float platformTranslationFrequency = 0.3f;
     public float platformRotationFrequency = 0f;
@@ -38,8 +36,6 @@ public class DroneSlideController : Slides.SimulationSlideController
     {
         DroneSimulation sim = (DroneSimulation)simulation;
 
-        // sim.platformData.translationAmplitude = platformVerticalAmplitude;
-        // sim.platformData.translationFrequency = platformVerticalPeriod;
         sim.platformData.translationAmplitude = platformTranslationAmplitude;
         sim.platformData.translationFrequency = platformTranslationFrequency;
         sim.platformData.translationType = platformTranslationType;
@@ -49,9 +45,9 @@ public class DroneSlideController : Slides.SimulationSlideController
 
         sim.droneData.circularFrequency = droneCircularFrequency;
         sim.droneData.verticalAmplitude = droneVerticalAmplitude;
-        sim.droneData.verticalPeriod = droneVerticalPeriod;
+        sim.droneData.verticalFrequency = droneVerticalFrequency;
         sim.droneData.circularMotionType = droneCircularMotionType;
-        sim.ApplyDroneData(false, false);
+        sim.ApplyDroneData();
 
         // Object visibility
         if (platform) platform.SetActive(platformIsVisible);
