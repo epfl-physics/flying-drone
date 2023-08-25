@@ -3228,17 +3228,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulation: {fileID: 1746708803}
-  droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 4
-  droneCircularMotionType: 1
+  droneVerticalFrequency: 0.3
+  droneCircularFrequency: 0.15
+  droneCircularMotionType: 0
   platform: {fileID: 1339683232}
   platformIsVisible: 1
-  platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 4
+  platformTranslationAmplitude: 0.5
+  platformTranslationFrequency: 0.3
   platformRotationFrequency: 0.1
-  platformTranslationType: 2
-  platformRotationType: 1
+  platformTranslationType: 1
+  platformRotationType: 0
   tree: {fileID: 264136912}
   treeIsVisible: 1
   ground: {fileID: 1955569958}
@@ -3909,16 +3909,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulation: {fileID: 1746708803}
-  droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 4
-  droneCircularMotionType: 1
+  droneVerticalFrequency: 0.3
+  droneCircularFrequency: 0.15
+  droneCircularMotionType: 0
   platform: {fileID: 1339683232}
   platformIsVisible: 1
-  platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 4
-  platformRotationFrequency: 0.1
-  platformTranslationType: 2
+  platformTranslationAmplitude: 0.5
+  platformTranslationFrequency: 0.3
+  platformRotationFrequency: 0
+  platformTranslationType: 1
   platformRotationType: 0
   tree: {fileID: 264136912}
   treeIsVisible: 1
@@ -4258,16 +4258,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulation: {fileID: 1746708803}
-  droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 4
-  droneCircularMotionType: 1
+  droneVerticalFrequency: 0.3
+  droneCircularFrequency: 0.15
+  droneCircularMotionType: 0
   platform: {fileID: 1339683232}
   platformIsVisible: 0
-  platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 4
+  platformTranslationAmplitude: 0.5
+  platformTranslationFrequency: 0.3
   platformRotationFrequency: 0.1
-  platformTranslationType: 2
+  platformTranslationType: 1
   platformRotationType: 0
   tree: {fileID: 264136912}
   treeIsVisible: 1
@@ -6733,17 +6733,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulation: {fileID: 1746708803}
-  droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 4
-  droneCircularMotionType: 1
+  droneVerticalFrequency: 0.3
+  droneCircularFrequency: 0.15
+  droneCircularMotionType: 0
   platform: {fileID: 1339683232}
   platformIsVisible: 1
-  platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 4
+  platformTranslationAmplitude: 0.5
+  platformTranslationFrequency: 0.3
   platformRotationFrequency: 0.1
-  platformTranslationType: 2
-  platformRotationType: 1
+  platformTranslationType: 1
+  platformRotationType: 0
   tree: {fileID: 264136912}
   treeIsVisible: 1
   ground: {fileID: 1955569958}
@@ -7545,7 +7545,6 @@ MonoBehaviour:
   platformVelocityAdditive: {fileID: 0}
   tangentialVelocity: {fileID: 0}
   showVelocities: 0
-  velocityAdditionOrder: 0
   droneAccelerationAbsolute: {fileID: 0}
   droneAccelerationRelative: {fileID: 0}
   platformAcceleration: {fileID: 0}
@@ -7883,6 +7882,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: droneData.circularRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.restPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7892,7 +7895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.verticalMotionType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.horizontalMotionType
@@ -9022,16 +9025,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulation: {fileID: 1746708803}
-  droneCircularFrequency: 0.15
   droneVerticalAmplitude: 0.5
-  droneVerticalPeriod: 4
-  droneCircularMotionType: 1
+  droneVerticalFrequency: 0.3
+  droneCircularFrequency: 0.15
+  droneCircularMotionType: 0
   platform: {fileID: 1339683232}
   platformIsVisible: 0
-  platformVerticalAmplitude: 0.5
-  platformVerticalPeriod: 4
+  platformTranslationAmplitude: 0.5
+  platformTranslationFrequency: 0.3
   platformRotationFrequency: 0.1
-  platformTranslationType: 2
+  platformTranslationType: 1
   platformRotationType: 0
   tree: {fileID: 264136912}
   treeIsVisible: 0

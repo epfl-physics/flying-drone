@@ -40,7 +40,7 @@ public class DroneSimulation : Simulation
         UpdateSimState();
     }
 
-    public void ApplyPlatformData(bool synchronizeWithDrone = false)
+    public void ApplyPlatformData()
     {
         if (platform)
         {
@@ -52,39 +52,27 @@ public class DroneSimulation : Simulation
             platform.data.rotationType = platformData.rotationType;
             platform.data.rotationFrequency = platformData.rotationFrequency;
             platform.data.rotationFrequencyVariable = platformData.rotationFrequencyVariable;
-
-            if (drone && synchronizeWithDrone)
-            {
-                platform.translationTime = drone.verticalTime;
-            }
         }
     }
 
-    public void ApplyDroneData(bool synchronizeWithPlatform = false, bool returnToRestPosition = true)
+    public void ApplyDroneData()
     {
         if (drone)
         {
             drone.data.origin = droneData.origin;
             drone.data.restPosition = droneData.restPosition;
             drone.SetRestHeight(droneData.restPosition.y);
-            // drone.SetVerticalAmplitude(droneData.verticalAmplitude);
-            drone.data.verticalAmplitude = droneData.verticalAmplitude;
-            // drone.data.verticalPeriod = droneData.verticalPeriod;
-            drone.data.verticalFrequency = droneData.verticalFrequency;
             drone.data.verticalMotionType = droneData.verticalMotionType;
+            drone.data.verticalAmplitude = droneData.verticalAmplitude;
+            drone.data.verticalFrequency = droneData.verticalFrequency;
+            drone.data.circularMotionType = droneData.circularMotionType;
             drone.data.circularRadius = droneData.circularRadius;
             drone.data.circularFrequency = droneData.circularFrequency;
-            drone.data.circularMotionType = droneData.circularMotionType;
-            if (returnToRestPosition) drone.ReturnToRestPosition();
+            drone.data.circularFrequencyVariable = droneData.circularFrequencyVariable;
         }
 
         SynchronizePointMass();
         SynchronizeDroneProjection();
-
-        if (platform && synchronizeWithPlatform)
-        {
-            drone.verticalTime = platform.translationTime;
-        }
     }
 
     public void UpdateSimState()
@@ -162,6 +150,20 @@ public class DroneSimulation : Simulation
             position.y = platform.GetSurfacePosition().y;
             position += droneProjectionOffset;
             droneProjection.localPosition = position;
+        }
+    }
+
+    public void SynchronizePlatformRotationClock()
+    {
+        if (platform) platform.rotationTime = platform.translationTime;
+    }
+
+    public void SynchronizeDroneClocksWithPlatform()
+    {
+        if (drone && platform)
+        {
+            drone.verticalTime = platform.translationTime;
+            drone.circularTime = platform.rotationTime;
         }
     }
 }

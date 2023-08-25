@@ -6,16 +6,20 @@ public class TheoryController : MonoBehaviour
 {
     public DroneSimulation sim;
     public DroneSimulationState simState;
+
+    [Header("Parameters")]
     public float droneAxisOffset = 1;
+    public float translationAmplitude = 0.7f;
+    public float translationFrequency = 0.25f;
+    public float rotationFrequency = 0.1f;
+    public float rotationFrequencyVariable = 0.25f;
+
     private bool droneIsOnAxis = true;
     private bool droneIsAtRestInR = true;
     private bool droneIsAtRestInRPrime = false;
-    private float defaultTranslationAmplitude = 0.7f;
-    private float defaultTranslationPeriod = 4f;
     private bool translationIsZero = false;
     private bool translationIsConstant = false;
     private bool translationIsVariable = true;
-    private float defaultRotationRate = 0.1f;
     private float rotationDirection = 1f;
     private bool rotationIsZero = true;
     private bool rotationIsConstant = false;
@@ -33,16 +37,16 @@ public class TheoryController : MonoBehaviour
     [Header("Trails")]
     public TrailRenderer droneTrail;
     public TrailRenderer pointMassTrail;
+    private bool needToClearDroneTrail;
+    private bool needToClearPointMassTrail;
 
     public static event System.Action OnChangeSimulationParameters;
 
-    public void Start()
+    private void Start()
     {
-        // int translationTypeIndex = GetToggleGroupActiveIndex(platformTranslationTG);
         int translationTypeIndex = GetDropdownActiveIndex(platformTranslationDropdown);
         SetPlatformTranslationType(translationTypeIndex, false);
 
-        // int rotationTypeIndex = GetToggleGroupActiveIndex(platformRotationTG);
         int rotationTypeIndex = GetDropdownActiveIndex(platformRotationDropdown);
         SetPlatformRotationType(rotationTypeIndex, false);
 
@@ -56,6 +60,23 @@ public class TheoryController : MonoBehaviour
         SetDroneMotionType(droneMotionIndex, false);
 
         SetSimulationData();
+    }
+
+    private void LateUpdate()
+    {
+        // Clear trails late to avoid visual discontinuities
+
+        if (needToClearDroneTrail)
+        {
+            if (droneTrail) droneTrail.Clear();
+            needToClearDroneTrail = false;
+        }
+
+        if (needToClearPointMassTrail)
+        {
+            if (pointMassTrail) pointMassTrail.Clear();
+            needToClearPointMassTrail = false;
+        }
     }
 
     private int GetToggleGroupActiveIndex(ToggleGroup toggleGroup)
@@ -156,6 +177,8 @@ public class TheoryController : MonoBehaviour
         {
             rotationIsVariable = true;
             SetPlatformRotationToggleInteractivity(false);
+            sim.SynchronizePlatformRotationClock();
+            sim.SynchronizeDroneClocksWithPlatform();
         }
 
         if (setSimData) SetSimulationData();
@@ -184,9 +207,10 @@ public class TheoryController : MonoBehaviour
         else if (motionIndex == 1)
         {
             droneIsAtRestInRPrime = true;
+            sim.SynchronizeDroneClocksWithPlatform();
         }
 
-        if (setSimData) SetSimulationData();
+        if (setSimData) SetSimulationData(true);
     }
 
     public void OnPlatformTranslationOptionChanged(int value)
@@ -230,11 +254,14 @@ public class TheoryController : MonoBehaviour
         // Debug.Log("TheoryController > SetSimulationData");
 
         // First deal with the platform
-        sim.platformData.translationAmplitude = defaultTranslationAmplitude;
-        sim.platformData.translationPeriod = defaultTranslationPeriod;
+        sim.platformData.translationAmplitude = translationAmplitude;
+        sim.platformData.translationFrequency = translationFrequency;
+        sim.platformData.rotationFrequency = rotationDirection * rotationFrequency;
+        sim.platformData.rotationFrequencyVariable = rotationFrequencyVariable;
+
         if (translationIsZero)
         {
-            sim.platformData.translationType = MovingPlatform.TranslationType.None;
+            sim.platformData.translationFrequency = 0;
         }
         else if (translationIsConstant)
         {
@@ -245,10 +272,9 @@ public class TheoryController : MonoBehaviour
             sim.platformData.translationType = MovingPlatform.TranslationType.Sinusoidal;
         }
 
-        sim.platformData.rotationFrequency = rotationDirection * defaultRotationRate;
         if (rotationIsZero)
         {
-            sim.platformData.rotationType = MovingPlatform.RotationType.None;
+            sim.platformData.rotationFrequency = 0;
         }
         else if (rotationIsConstant)
         {
@@ -259,94 +285,51 @@ public class TheoryController : MonoBehaviour
             sim.platformData.rotationType = MovingPlatform.RotationType.Sinusoidal;
         }
 
-        sim.ApplyPlatformData(false);
+        sim.ApplyPlatformData();
 
+        // Next the drone
         sim.droneData.origin = 4 * Vector3.right;
-        sim.droneData.verticalPeriod = sim.platformData.translationPeriod;
+        sim.droneData.restPosition = 4 * Vector3.up;
+        sim.droneData.verticalFrequency = sim.platformData.translationFrequency;
         sim.droneData.verticalAmplitude = sim.platformData.translationAmplitude;
         sim.droneData.circularFrequency = sim.platformData.rotationFrequency;
+        sim.droneData.circularFrequencyVariable = sim.platformData.rotationFrequencyVariable;
+        sim.droneData.circularRadius = droneIsOnAxis ? 0 : droneAxisOffset;
         if (droneIsAtRestInR)
         {
-            sim.droneData.circularRadius = 0;
-            sim.droneData.verticalMotionType = Drone.VerticalMotionType.None;
-            sim.droneData.circularMotionType = Drone.CircularMotionType.None;
-            if (droneIsOnAxis)
-            {
-                sim.droneData.restPosition = 4 * Vector3.up;
-            }
-            else
-            {
-                sim.droneData.restPosition = 4 * Vector3.up + droneAxisOffset * Vector3.right;
-            }
+            sim.droneData.verticalFrequency = 0;
+            sim.droneData.circularFrequency = 0;
         }
         else if (droneIsAtRestInRPrime)
         {
-            if (sim.platformData.translationType == MovingPlatform.TranslationType.None)
+            if (translationIsZero)
             {
-                sim.droneData.verticalMotionType = Drone.VerticalMotionType.None;
+                sim.droneData.verticalFrequency = 0;
             }
-            else if (sim.platformData.translationType == MovingPlatform.TranslationType.Linear)
+            else if (translationIsConstant)
             {
                 sim.droneData.verticalMotionType = Drone.VerticalMotionType.Linear;
             }
-            else if (sim.platformData.translationType == MovingPlatform.TranslationType.Sinusoidal)
+            else if (translationIsVariable)
             {
                 sim.droneData.verticalMotionType = Drone.VerticalMotionType.Sinusoidal;
             }
 
-            if (droneIsOnAxis)
+            if (rotationIsZero)
             {
-                sim.droneData.restPosition = 4 * Vector3.up;
-                sim.droneData.circularRadius = 0;
                 sim.droneData.circularFrequency = 0;
-                sim.droneData.circularMotionType = Drone.CircularMotionType.None;
             }
-            else
+            else if (rotationIsConstant)
             {
-                if (rotationIsZero)
-                {
-                    sim.droneData.restPosition = 4 * Vector3.up + droneAxisOffset * Vector3.right;
-                    sim.droneData.circularRadius = droneAxisOffset;
-                    sim.droneData.circularFrequency = 0;
-                    sim.droneData.circularMotionType = Drone.CircularMotionType.None;
-                }
-                else if (rotationIsConstant)
-                {
-                    sim.droneData.restPosition = 4 * Vector3.up;
-                    sim.droneData.circularRadius = droneAxisOffset;
-                    sim.droneData.circularFrequency = sim.platformData.rotationFrequency;
-                    sim.droneData.circularMotionType = Drone.CircularMotionType.Constant;
-                }
-                else if (rotationIsVariable)
-                {
-                    sim.droneData.restPosition = 4 * Vector3.up;
-                    sim.droneData.circularRadius = droneAxisOffset;
-                    sim.droneData.circularFrequency = sim.platformData.rotationFrequency;
-                    sim.droneData.circularMotionType = Drone.CircularMotionType.Sinusoidal;
-                }
-            }
-        }
-        else
-        {
-            // Not at rest in R or R' !!
-            if (droneIsOnAxis)
-            {
-                sim.droneData.restPosition = 4 * Vector3.up;
-                sim.droneData.circularRadius = 0;
                 sim.droneData.circularMotionType = Drone.CircularMotionType.Constant;
-                sim.droneData.verticalMotionType = Drone.VerticalMotionType.Linear;
             }
-            else
+            else if (rotationIsVariable)
             {
-                sim.droneData.restPosition = 4 * Vector3.up;
-                sim.droneData.circularRadius = droneAxisOffset;
-                sim.droneData.circularFrequency = -sim.platformData.rotationFrequency;
-                sim.droneData.circularMotionType = Drone.CircularMotionType.Constant;
-                sim.droneData.verticalMotionType = Drone.VerticalMotionType.None;
+                sim.droneData.circularMotionType = Drone.CircularMotionType.Sinusoidal;
             }
         }
 
-        sim.ApplyDroneData(true, true);
+        sim.ApplyDroneData();
 
         // Assign hidden variables
         if (simState)
@@ -364,8 +347,8 @@ public class TheoryController : MonoBehaviour
 
         if (clearTrail)
         {
-            if (droneTrail) droneTrail.Clear();
-            if (pointMassTrail) pointMassTrail.Clear();
+            needToClearDroneTrail = true;
+            needToClearPointMassTrail = true;
         }
 
         OnChangeSimulationParameters?.Invoke();
