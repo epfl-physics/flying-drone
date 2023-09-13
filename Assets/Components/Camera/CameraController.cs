@@ -17,21 +17,9 @@ public class CameraController : MonoBehaviour
     public Vector3 targetRotation;
     public float moveTime = 1;
 
-    [Header("Zoom")]
-    public bool canZoom = false;
-    public float minZoom = 1f;
-    public float maxZoom = 10f;
-    public float zoomSpeed = 1f;
-    public Transform zoomTarget;
-    private float initialDistance;
-
     [Header("Background Color")]
     public Color targetColor = Color.white;
     public float colorTransitionTime = 1;
-
-    // [Header("Orbit Options")]
-    // public bool canPanX;
-    // public bool canPanY;
 
     // The actual camera object to move
     [HideInInspector] public Transform cameraTransform;
@@ -46,12 +34,10 @@ public class CameraController : MonoBehaviour
         // Check if this object is the camera
         if (TryGetComponent(out camera))
         {
-            // Debug.Log(transform.name + " IS a camera");
             componentIsCamera = true;
         }
         else
         {
-            // Debug.Log(transform.name + " IS NOT a camera");
             camera = Camera.main;
             componentIsCamera = false;
         }
@@ -82,26 +68,6 @@ public class CameraController : MonoBehaviour
             StartCoroutine(MoveTo(targetPosition, targetRotation, moveTime));
             StartCoroutine(ChangeBackgroundColor(targetColor, colorTransitionTime));
         }
-
-        if (zoomTarget)
-        {
-            initialDistance = Vector3.Distance(cameraTransform.position, zoomTarget.position);
-        }
-    }
-
-    private void LateUpdate()
-    {
-        if (!zoomTarget || !canZoom) return;
-
-        // Get the input from the mouse wheel
-        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-
-        // Calculate the new distance between camera and target
-        float newDistance = Mathf.Clamp(initialDistance - zoomInput * zoomSpeed, minZoom, maxZoom);
-
-        // Calculate the new camera position
-        Vector3 direction = (cameraTransform.position - zoomTarget.position).normalized;
-        cameraTransform.position = zoomTarget.position + direction * newDistance;
     }
 
     private void UpdateCameraState()
