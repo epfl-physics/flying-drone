@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 689a5e1041b17464d931e180cfca883e, type: 3}
-  m_Name: VelocityColors
+  m_Name: AccelerationVectors
   m_EditorClassIdentifier: 
   defaultColor: {r: 0, g: 0, b: 0, a: 1}
   colors:
@@ -20,5 +20,9 @@ MonoBehaviour:
     color: {r: 0.5137255, g: 0.88235295, b: 0.70980394, a: 1}
   - name: relative
     color: {r: 1, g: 0.7490196, b: 0.39607844, a: 1}
-  - name: tangential
+  - name: centripetal
+    color: {r: 0.28627452, g: 0.78431374, b: 0.8352941, a: 1}
+  - name: coriolis
     color: {r: 1, g: 0.5568628, b: 0.41568628, a: 1}
+  - name: euler
+    color: {r: 0.6745098, g: 0.6745098, b: 0.6745098, a: 1}

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class ActivitiesVectors : MonoBehaviour
 {
-    [SerializeField] private VelocityVector velocityVector;
+    [SerializeField] private ActivityCustomVector velocityVector;
     [SerializeField] private DroneSimulationState simState;
+    [SerializeField] private float scaleFactor = 1;
 
     private void OnEnable()
     {
@@ -20,7 +21,7 @@ public class ActivitiesVectors : MonoBehaviour
         if (!velocityVector || !simState) return;
 
         velocityVector.transform.position = simState.origin + simState.dronePositionAbsolute;
-        velocityVector.components = GetAbsoluteComponents();
+        velocityVector.components = scaleFactor * GetAbsoluteComponents();
         velocityVector.Redraw();
     }
 

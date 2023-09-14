@@ -18539,7 +18539,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -18565,11 +18565,6 @@ MonoBehaviour:
   targetPosition: {x: 2, y: 4.8, z: -16}
   targetRotation: {x: 9, y: 0, z: 0}
   moveTime: 1.5
-  canZoom: 0
-  minZoom: 1
-  maxZoom: 10
-  zoomSpeed: 1
-  zoomTarget: {fileID: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
   cameraTransform: {fileID: 1096363629}
@@ -18582,17 +18577,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1096363626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce2c385eed93b43d781d26a29462f9cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c5213aa2e3b14673b98ce302977129b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1964088338}
-  panSpeed: 1
-  minPolarAngle: 0
-  maxPolarAngle: 89.9
-  minAzimuthalAngle: -130
-  maxAzimuthalAngle: 130
-  clampAzimuthalAngle: 0
   canOrbit: 1
+  orbitSpeed: 1
+  minPolarAngle: 0
+  maxPolarAngle: 90
+  minAzimuthalAngle: -180
+  maxAzimuthalAngle: 180
+  clampAzimuthalAngle: 0
+  canZoom: 1
+  minDistance: 1
+  maxDistance: 20
+  zoomSpeed: 1
 --- !u!114 &1096363633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32283,17 +32282,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2033755002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce2c385eed93b43d781d26a29462f9cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c5213aa2e3b14673b98ce302977129b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1380013391}
-  panSpeed: 1
+  canOrbit: 1
+  orbitSpeed: 1
   minPolarAngle: 0
-  maxPolarAngle: 89.9
+  maxPolarAngle: 90
   minAzimuthalAngle: -180
   maxAzimuthalAngle: 180
   clampAzimuthalAngle: 0
-  canOrbit: 1
+  canZoom: 1
+  minDistance: 1
+  maxDistance: 20
+  zoomSpeed: 1
 --- !u!114 &2033755004
 MonoBehaviour:
   m_ObjectHideFlags: 0

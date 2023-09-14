@@ -1799,7 +1799,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3268,11 +3268,6 @@ MonoBehaviour:
   targetPosition: {x: 6, y: 5, z: -10}
   targetRotation: {x: 10, y: -15, z: 0}
   moveTime: 1
-  canZoom: 0
-  minZoom: 1
-  maxZoom: 10
-  zoomSpeed: 1
-  zoomTarget: {fileID: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
   cameraTransform: {fileID: 465849219}
@@ -3949,11 +3944,6 @@ MonoBehaviour:
   targetPosition: {x: 7.5, y: 5.5, z: -10}
   targetRotation: {x: 10, y: -30, z: 0}
   moveTime: 1
-  canZoom: 0
-  minZoom: 1
-  maxZoom: 10
-  zoomSpeed: 1
-  zoomTarget: {fileID: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
   cameraTransform: {fileID: 465849219}
@@ -4213,11 +4203,6 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 5.8, z: -13}
   targetRotation: {x: 9.5, y: 0, z: 0}
   moveTime: 1
-  canZoom: 0
-  minZoom: 1
-  maxZoom: 10
-  zoomSpeed: 1
-  zoomTarget: {fileID: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
   cameraTransform: {fileID: 465849219}
@@ -6772,11 +6757,6 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 7, z: -13}
   targetRotation: {x: 15, y: 0, z: 0}
   moveTime: 1
-  canZoom: 0
-  minZoom: 1
-  maxZoom: 10
-  zoomSpeed: 1
-  zoomTarget: {fileID: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
   cameraTransform: {fileID: 465849219}
@@ -8972,11 +8952,6 @@ MonoBehaviour:
   targetPosition: {x: 2, y: 6.6, z: -8}
   targetRotation: {x: 18, y: 0, z: 0}
   moveTime: 1
-  canZoom: 0
-  minZoom: 1
-  maxZoom: 10
-  zoomSpeed: 1
-  zoomTarget: {fileID: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
   cameraTransform: {fileID: 465849219}

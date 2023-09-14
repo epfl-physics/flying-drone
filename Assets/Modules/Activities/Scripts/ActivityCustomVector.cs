@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VelocityVector : MonoBehaviour
+public class ActivityCustomVector : MonoBehaviour
 {
     public LineRenderer body;
     public ConeMesh head;

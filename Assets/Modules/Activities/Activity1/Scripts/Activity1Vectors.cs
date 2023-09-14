@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Activity1Vectors : MonoBehaviour
 {
-    [SerializeField] private VelocityVector velocityVector;
+    [SerializeField] private ActivityCustomVector velocityVector;
     [SerializeField] private Vector omegaVector;
     [SerializeField] private DroneSimulationState simState;
 

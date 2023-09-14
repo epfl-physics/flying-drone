@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Activity Scenario", menuName = "Drone Simulation/Activity Scenario", order = 1)]
+[CreateAssetMenu(fileName = "New Activity1 Scenario", menuName = "Activities/Activity1 Scenario", order = 1)]
 public class ActivityScenario : ScriptableObject
 {
     public PlatformData platformData;

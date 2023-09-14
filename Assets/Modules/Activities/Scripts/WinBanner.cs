@@ -11,8 +11,8 @@ public class WinBanner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textCorrect;
     [SerializeField] private GameObject textAlt;
     [SerializeField] private Image imageAlt;
-    [SerializeField] private VelocityColors colors;
-    [SerializeField] private Sprite[] velocityTerms;
+    [SerializeField] private VectorColors colors;
+    [SerializeField] private Sprite[] equationTerms;
 
     public void Hide()
     {
@@ -98,9 +98,9 @@ public class WinBanner : MonoBehaviour
     {
         if (!imageAlt) return;
 
-        if (index >= 0 && index < velocityTerms.Length)
+        if (index >= 0 && index < equationTerms.Length)
         {
-            imageAlt.sprite = velocityTerms[index];
+            imageAlt.sprite = equationTerms[index];
             if (colors) imageAlt.color = colors.GetColorFromIndex(index);
             imageAlt.SetNativeSize();
         }

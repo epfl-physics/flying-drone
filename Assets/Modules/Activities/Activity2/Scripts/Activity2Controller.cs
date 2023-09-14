@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Activity1Controller : MonoBehaviour
+public class Activity2Controller : MonoBehaviour
 {
     [SerializeField] private DroneSimulation sim;
     [SerializeField] private OptionSet options;
@@ -44,6 +44,10 @@ public class Activity1Controller : MonoBehaviour
 
     private void LoadFirstQuestion()
     {
+        // Hide feedback UI
+        if (winBanner) winBanner.Hide();
+        if (confetti) confetti.SetActive(false);
+
         // Load the first scenario of the given difficulty level
         ActivityScenario[] scenarios;
         if (difficulty == 0)
@@ -63,6 +67,9 @@ public class Activity1Controller : MonoBehaviour
             scenarios = new ActivityScenario[0];
         }
 
+        // Do not proceed if no scenarios have been added to this difficulty level
+        if (scenarios.Length == 0) return;
+
         int activityIndex = 0;
         if (scenarios.Length > 1) previousActivityIndex = activityIndex;
 
@@ -76,14 +83,14 @@ public class Activity1Controller : MonoBehaviour
         {
             answerIndex.Add((int)answer);
         }
-
-        if (winBanner) winBanner.Hide();
-
-        if (confetti) confetti.SetActive(false);
     }
 
     public void LoadRandomQuestion()
     {
+        // Hide feedback UI
+        if (winBanner) winBanner.Hide();
+        if (confetti) confetti.SetActive(false);
+
         // Choose a scenario randomly with the given difficulty level
         ActivityScenario[] scenarios;
         if (difficulty == 0)
@@ -102,6 +109,9 @@ public class Activity1Controller : MonoBehaviour
         {
             scenarios = new ActivityScenario[0];
         }
+
+        // Do not proceed if no scenarios have been added to this difficulty level
+        if (scenarios.Length == 0) return;
 
         int activityIndex = Random.Range(0, scenarios.Length);
         if (scenarios.Length > 1)
@@ -124,10 +134,6 @@ public class Activity1Controller : MonoBehaviour
         {
             answerIndex.Add((int)answer);
         }
-
-        if (winBanner) winBanner.Hide();
-
-        if (confetti) confetti.SetActive(false);
     }
 
     private void LoadScenario(ActivityScenario scenario)

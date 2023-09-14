@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 5063279846955601815}
   - component: {fileID: 5063279846955601816}
   m_Layer: 0
-  m_Name: Vectors
+  m_Name: ActivityVectors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
