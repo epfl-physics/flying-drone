@@ -12639,13 +12639,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3956505985533522769}
-  panSpeed: 1
+  canOrbit: 1
+  orbitSpeed: 1
   minPolarAngle: 0
   maxPolarAngle: 90
   minAzimuthalAngle: -180
   maxAzimuthalAngle: 180
   clampAzimuthalAngle: 0
-  canOrbit: 1
+  canZoom: 1
+  minDistance: 1
+  maxDistance: 20
+  zoomSpeed: 1
 --- !u!114 &1071083214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47905,13 +47909,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1843705663727916611}
-  panSpeed: 1
+  canOrbit: 1
+  orbitSpeed: 1
   minPolarAngle: 0
   maxPolarAngle: 90
   minAzimuthalAngle: -180
   maxAzimuthalAngle: 180
   clampAzimuthalAngle: 0
-  canOrbit: 1
+  canZoom: 1
+  minDistance: 1
+  maxDistance: 20
+  zoomSpeed: 1
 --- !u!114 &8698263623074694535
 MonoBehaviour:
   m_ObjectHideFlags: 0
