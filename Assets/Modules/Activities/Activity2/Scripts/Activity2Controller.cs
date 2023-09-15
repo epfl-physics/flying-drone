@@ -26,9 +26,9 @@ public class Activity2Controller : MonoBehaviour
     private bool soundIsOn = true;
 
     [Header("Scenarios")]
-    [SerializeField] private ActivityScenario[] beginnerScenarios;
-    [SerializeField] private ActivityScenario[] intermediateScenarios;
-    [SerializeField] private ActivityScenario[] advancedScenarios;
+    [SerializeField] private Activity2Scenario[] beginnerScenarios;
+    [SerializeField] private Activity2Scenario[] intermediateScenarios;
+    [SerializeField] private Activity2Scenario[] advancedScenarios;
 
     public static event System.Action<int> OnLoadScenario;
     public static event System.Action<int> OnAnswerIsCorrect;
@@ -49,7 +49,7 @@ public class Activity2Controller : MonoBehaviour
         if (confetti) confetti.SetActive(false);
 
         // Load the first scenario of the given difficulty level
-        ActivityScenario[] scenarios;
+        Activity2Scenario[] scenarios;
         if (difficulty == 0)
         {
             scenarios = beginnerScenarios;
@@ -64,7 +64,7 @@ public class Activity2Controller : MonoBehaviour
         }
         else
         {
-            scenarios = new ActivityScenario[0];
+            scenarios = new Activity2Scenario[0];
         }
 
         // Do not proceed if no scenarios have been added to this difficulty level
@@ -74,12 +74,12 @@ public class Activity2Controller : MonoBehaviour
         if (scenarios.Length > 1) previousActivityIndex = activityIndex;
 
         // Assign the scenario parameters to the simulation
-        ActivityScenario scenario = scenarios[activityIndex];
+        Activity2Scenario scenario = scenarios[activityIndex];
         LoadScenario(scenario);
 
         // Store the correct answer(s)
         answerIndex = new List<int>();
-        foreach (ActivityScenario.VelocityTerm answer in scenario.answers)
+        foreach (Activity2Scenario.AccelerationTerm answer in scenario.answers)
         {
             answerIndex.Add((int)answer);
         }
@@ -92,7 +92,7 @@ public class Activity2Controller : MonoBehaviour
         if (confetti) confetti.SetActive(false);
 
         // Choose a scenario randomly with the given difficulty level
-        ActivityScenario[] scenarios;
+        Activity2Scenario[] scenarios;
         if (difficulty == 0)
         {
             scenarios = beginnerScenarios;
@@ -107,7 +107,7 @@ public class Activity2Controller : MonoBehaviour
         }
         else
         {
-            scenarios = new ActivityScenario[0];
+            scenarios = new Activity2Scenario[0];
         }
 
         // Do not proceed if no scenarios have been added to this difficulty level
@@ -125,18 +125,18 @@ public class Activity2Controller : MonoBehaviour
         }
 
         // Assign the scenario parameters to the simulation
-        ActivityScenario scenario = scenarios[activityIndex];
+        Activity2Scenario scenario = scenarios[activityIndex];
         LoadScenario(scenario);
 
         // Store the correct answer(s)
         answerIndex = new List<int>();
-        foreach (ActivityScenario.VelocityTerm answer in scenario.answers)
+        foreach (Activity2Scenario.AccelerationTerm answer in scenario.answers)
         {
             answerIndex.Add((int)answer);
         }
     }
 
-    private void LoadScenario(ActivityScenario scenario)
+    private void LoadScenario(Activity2Scenario scenario)
     {
         if (!sim) return;
 

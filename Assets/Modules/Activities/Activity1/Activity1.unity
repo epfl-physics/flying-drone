@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5408308995882811225, guid: e626deed9927342bf96566f53ac721b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5408308995882811226, guid: e626deed9927342bf96566f53ac721b9, type: 3}
       propertyPath: m_Name
       value: SoundToggle
@@ -3201,7 +3205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1346373293687021004, guid: e7f50e550660f4415b4bb48fefe84ab3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 350
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1346373293687021004, guid: e7f50e550660f4415b4bb48fefe84ab3, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3254,6 +3258,18 @@ PrefabInstance:
     - target: {fileID: 1346373293687021004, guid: e7f50e550660f4415b4bb48fefe84ab3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346373293687021005, guid: e7f50e550660f4415b4bb48fefe84ab3, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346373293687021005, guid: e7f50e550660f4415b4bb48fefe84ab3, type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346373293687021006, guid: e7f50e550660f4415b4bb48fefe84ab3, type: 3}
+      propertyPath: m_HorizontalFit
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1346373293817362554, guid: e7f50e550660f4415b4bb48fefe84ab3, type: 3}
       propertyPath: m_AnchorMax.y

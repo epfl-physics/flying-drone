@@ -21,8 +21,8 @@ MonoBehaviour:
   - name: relative
     color: {r: 1, g: 0.7490196, b: 0.39607844, a: 1}
   - name: centripetal
-    color: {r: 0.28627452, g: 0.78431374, b: 0.8352941, a: 1}
-  - name: coriolis
     color: {r: 1, g: 0.5568628, b: 0.41568628, a: 1}
+  - name: coriolis
+    color: {r: 0.28627452, g: 0.78431374, b: 0.8352941, a: 1}
   - name: euler
     color: {r: 0.6745098, g: 0.6745098, b: 0.6745098, a: 1}

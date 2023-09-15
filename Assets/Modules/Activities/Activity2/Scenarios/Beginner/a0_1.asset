@@ -9,27 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8f017aa569c4a14a7f4d5358a732ba, type: 3}
-  m_Name: Beginner_01
+  m_Script: {fileID: 11500000, guid: 9686ee903006c43ac83bf82bc49d6eb6, type: 3}
+  m_Name: a0_1
   m_EditorClassIdentifier: 
   platformData:
-    position: {x: 0, y: 0, z: 0}
-    restHeight: 1
-    translationType: 0
-    translationAmplitude: 1
-    translationFrequency: 0.5
+    position: {x: 4, y: 0, z: 0}
+    restHeight: 1.5
+    translationType: 1
+    translationAmplitude: 0.8
+    translationFrequency: 0.2
     rotationType: 0
     rotationFrequency: 0
-    rotationFrequencyVariable: 0.5
+    rotationFrequencyVariable: 0
   droneData:
-    origin: {x: 0, y: 0, z: 0}
+    origin: {x: 4, y: 0, z: 0}
     restPosition: {x: 0, y: 4, z: 0}
     verticalMotionType: 0
-    verticalAmplitude: 1
-    verticalFrequency: 0.5
+    verticalAmplitude: 0.8
+    verticalFrequency: 0
     circularMotionType: 0
-    circularRadius: 1
+    circularRadius: 0
     circularFrequency: 0
-    circularFrequencyVariable: 0.5
-  frameIsInertial: 1
-  answers: 
+    circularFrequencyVariable: 0
+  answers: 02000000

@@ -32,9 +32,14 @@ public class Activity2Vectors : MonoBehaviour
         Activity2Controller.OnAnswerIsCorrect -= HandleAnswerIsCorrect;
     }
 
+    private void Awake()
+    {
+        // Set to default before Activity2Controller loads the first scenario in Start()
+        getAccelerationComponents = GetDefaultComponents;
+    }
+
     private void Start()
     {
-        getAccelerationComponents = GetDefaultComponents;
         ResetColor();
     }
 

@@ -39,14 +39,27 @@ public class WinBanner : MonoBehaviour
         {
             for (int i = 0; i < answers.Count; i++)
             {
-                if (i != selectedIndex)
+                if (answers[i] != selectedIndex)
                 {
-                    SetAltImage(i);
+                    SetAltImage(answers[i]);
                 }
             }
         }
 
-        if (textAlt) textAlt.SetActive(answers.Count > 1);
+        int padding = 50;
+
+        if (textAlt)
+        {
+            bool showAltText = answers.Count > 1;
+            if (showAltText) padding = 25;
+            textAlt.SetActive(showAltText);
+        }
+
+        if (TryGetComponent(out VerticalLayoutGroup layoutGroup))
+        {
+            layoutGroup.padding.left = padding;
+            layoutGroup.padding.right = padding;
+        }
 
         if (canvasGroup)
         {
