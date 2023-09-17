@@ -176,14 +176,14 @@ MonoBehaviour:
   tmp: {fileID: 25032381}
   textData:
   - language: 0
-    text: In this app we will examine the way that positions, as well as velocities
-      and accelerations, are related between inertial (like the tree) and non-inertial
-      (like the platform) frames of reference.
+    text: In this app, we will examine the way that positions, velocities, and accelerations
+      are related between the inertial reference frame of the tree and the accelerated
+      reference frame of the platform.
     visibleUI: {fileID: 0}
   - language: 1
     text: "Dans cette application, nous examinerons la mani\xE8re dont les positions,
-      ainsi que les vitesses et les acc\xE9l\xE9rations, sont li\xE9es entre les
-      r\xE9f\xE9rentiels inertiels (comme l'arbre) et non inertiels (comme la plateforme)."
+      les vitesses et les acc\xE9l\xE9rations sont li\xE9es entre le r\xE9f\xE9rentiel
+      d'inertie de l'arbre et le r\xE9f\xE9rentiel acc\xE9l\xE9r\xE9 de la plateforme."
     visibleUI: {fileID: 0}
 --- !u!114 &25032381
 MonoBehaviour:
@@ -205,9 +205,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dans cette application, nous examinerons la mani\xE8re dont les positions,
-    ainsi que les vitesses et les acc\xE9l\xE9rations, sont li\xE9es entre les r\xE9f\xE9rentiels
-    inertiels (comme l'arbre) et non inertiels (comme la plateforme)."
+  m_text: In this app, we will examine the way that positions, velocities, and accelerations
+    are related between the inertial reference frame of the tree and the accelerated
+    reference frame of the platform.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
   m_sharedMaterial: {fileID: 4303336837466598660, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
@@ -1769,8 +1769,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465849216}
-  m_LocalRotation: {x: 0.08418598, y: -0.2578342, z: 0.022557566, w: 0.96225023}
-  m_LocalPosition: {x: 7.5, y: 5.5, z: -10}
+  m_LocalRotation: {x: 0.1305262, y: 0, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 7, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2874,13 +2874,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6257136877173775410, guid: ccc12b8ffc56a4453829f75b0e33d480, type: 3}
       propertyPath: textData.Array.data[0].text
-      value: What is special about the motion of the drone from the perspective of
-        the platform in this case?
+      value: What is special about the motion of the drone with respect to the platform
+        in this case?
       objectReference: {fileID: 0}
     - target: {fileID: 6257136877173775410, guid: ccc12b8ffc56a4453829f75b0e33d480, type: 3}
       propertyPath: textData.Array.data[1].text
-      value: Qu'est-ce qui est particulier dans le mouvement du drone du point de
-        vue de la plateforme dans ce cas-ci ?
+      value: "Qu'y a-t-il de particulier dans le mouvement du drone par rapport \xE0
+        la plateforme dans ce cas-ci ?"
       objectReference: {fileID: 0}
     - target: {fileID: 6257136877173775411, guid: ccc12b8ffc56a4453829f75b0e33d480, type: 3}
       propertyPath: m_text
@@ -3279,7 +3279,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871466008}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -5674,12 +5674,12 @@ MonoBehaviour:
   tmp: {fileID: 1572172398}
   textData:
   - language: 0
-    text: But we can just as well choose another reference object, even a moving
-      one, such as this checkered platform.
+    text: Alternatively, we can choose another reference object undergoing rectilinear
+      motion, such as this checkered platform.
     visibleUI: {fileID: 0}
   - language: 1
-    text: "Mais nous pouvons tout aussi bien choisir un autre objet de r\xE9f\xE9rence,
-      m\xEAme en mouvement, tel que cette plateforme \xE0 damier."
+    text: "Alternativement, nous pouvons choisir un autre objet de r\xE9f\xE9rence
+      en mouvement rectiligne, comme cette plateforme en damier."
     visibleUI: {fileID: 0}
 --- !u!114 &1572172398
 MonoBehaviour:
@@ -5701,8 +5701,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: But we can just as well choose another reference object, even a moving
-    one, such as this checkered platform.
+  m_text: Alternatively, we can choose another reference object undergoing rectilinear
+    motion, such as this checkered platform.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
   m_sharedMaterial: {fileID: 4303336837466598660, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
@@ -6969,12 +6969,12 @@ MonoBehaviour:
   tmp: {fileID: 1825610896}
   textData:
   - language: 0
-    text: We can start by deciding to measure such quantities with respect to a fixed
-      physical object, like this tree.
+    text: Let's start by measuring such quantities with respect to a fixed physical
+      reference object, like this tree.
     visibleUI: {fileID: 0}
   - language: 1
-    text: "Nous pouvons commencer par d\xE9cider de mesurer ces grandeurs par rapport
-      \xE0 un objet physique fixe, comme cet arbre."
+    text: "Commen\xE7ons par mesurer ces grandeurs par rapport \xE0 un objet physique
+      fixe de r\xE9f\xE9rence, comme cet arbre."
     visibleUI: {fileID: 0}
 --- !u!114 &1825610896
 MonoBehaviour:
@@ -6996,8 +6996,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nous pouvons commencer par d\xE9cider de mesurer ces grandeurs par rapport
-    \xE0 un objet physique fixe, comme cet arbre."
+  m_text: Let's start by measuring such quantities with respect to a fixed physical
+    reference object, like this tree.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
   m_sharedMaterial: {fileID: 4303336837466598660, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
@@ -8657,12 +8657,12 @@ MonoBehaviour:
   textData:
   - language: 0
     text: An even more interesting case arises if we let the platform rotate as well.
-      Here we've chosen its rotation rate to match that of the drone.
+      Here we've chosen its angular speed to match that of the drone.
     visibleUI: {fileID: 0}
   - language: 1
     text: "Un cas encore plus int\xE9ressant se produit si nous laissons \xE9galement
-      la plateforme tourner. Ici, nous avons choisi que son taux de rotation corresponde
-      \xE0 celui du drone."
+      la plateforme tourner. Ici, nous avons fait co\xEFncider les vitesses angulaires
+      de la plateforme et du drone."
     visibleUI: {fileID: 0}
 --- !u!114 &2019263880
 MonoBehaviour:
@@ -8684,9 +8684,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Un cas encore plus int\xE9ressant se produit si nous laissons \xE9galement
-    la plateforme tourner. Ici, nous avons choisi que son taux de rotation corresponde
-    \xE0 celui du drone."
+  m_text: An even more interesting case arises if we let the platform rotate as well.
+    Here we've chosen its angular speed to match that of the drone.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
   m_sharedMaterial: {fileID: 4303336837466598660, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
@@ -8802,9 +8801,9 @@ MonoBehaviour:
       acceleration.
     visibleUI: {fileID: 0}
   - language: 1
-    text: "Consid\xE9rons un drone qui vole de fa\xE7on autonome \xE0 l'ext\xE9rieur.
-      Nous sommes int\xE9ress\xE9s \xE0 d\xE9crire son mouvement \xE0 travers des
-      grandeurs cin\xE9matiques, \xE0 savoir sa position, sa vitesse et son acc\xE9l\xE9ration."
+    text: "Consid\xE9rons un drone volant de fa\xE7on autonome \xE0 l'ext\xE9rieur.
+      Nous cherchons \xE0 d\xE9crire son mouvement \xE0 l'aide de grandeurs cin\xE9matiques
+      comme la position, la vitesse et l'acc\xE9l\xE9ration."
     visibleUI: {fileID: 0}
 --- !u!114 &1501862273387505208
 MonoBehaviour:
@@ -8826,8 +8825,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Consider a drone hovering autonomously outdoors. We're interested in describing
-    its motion through kinematic quantities, namely its position, velocity, and acceleration.
+  m_text: "Consid\xE9rons un drone volant de fa\xE7on autonome \xE0 l'ext\xE9rieur.
+    Nous cherchons \xE0 d\xE9crire son mouvement \xE0 l'aide de grandeurs cin\xE9matiques
+    comme la position, la vitesse et l'acc\xE9l\xE9ration."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
   m_sharedMaterial: {fileID: 4303336837466598660, guid: ea838625e000443bb85ccb2eff18976f, type: 2}
@@ -8912,7 +8912,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5144281311261889148}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
