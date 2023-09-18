@@ -18419,18 +18419,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1096363626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c5213aa2e3b14673b98ce302977129b, type: 3}
+  m_Script: {fileID: 11500000, guid: ce2c385eed93b43d781d26a29462f9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1964088338}
   canOrbit: 1
   orbitSpeed: 1
   minPolarAngle: 0
-  maxPolarAngle: 90
+  maxPolarAngle: 89.9
   minAzimuthalAngle: -180
   maxAzimuthalAngle: 180
   clampAzimuthalAngle: 0
-  canZoom: 1
+  canZoom: 0
   minDistance: 1
   maxDistance: 20
   zoomSpeed: 1
@@ -31049,6 +31049,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 518946231864279631, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1380013391}
     - target: {fileID: 681658859410430683, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
@@ -32115,30 +32119,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6767289548893762131, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
   m_PrefabInstance: {fileID: 2033755000}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2033755003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033755002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c5213aa2e3b14673b98ce302977129b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1380013391}
-  canOrbit: 1
-  orbitSpeed: 1
-  minPolarAngle: 0
-  maxPolarAngle: 90
-  minAzimuthalAngle: -180
-  maxAzimuthalAngle: 180
-  clampAzimuthalAngle: 0
-  canZoom: 1
-  minDistance: 1
-  maxDistance: 20
-  zoomSpeed: 1
 --- !u!114 &2033755004
 MonoBehaviour:
   m_ObjectHideFlags: 0

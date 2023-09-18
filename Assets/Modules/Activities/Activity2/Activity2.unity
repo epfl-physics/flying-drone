@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 119265481}
   - component: {fileID: 119265484}
   - component: {fileID: 119265485}
-  - component: {fileID: 119265488}
+  - component: {fileID: 119265486}
   - component: {fileID: 119265487}
   m_Layer: 0
   m_Name: Main Camera
@@ -405,7 +405,7 @@ MonoBehaviour:
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
   cameraTransform: {fileID: 119265483}
---- !u!114 &119265487
+--- !u!114 &119265486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,19 +414,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 119265480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af7e8b7940abe402290fde98f31c1981, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &119265488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119265480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640df392c8a66459785be06c3e5e8aee, type: 3}
+  m_Script: {fileID: 11500000, guid: ce2c385eed93b43d781d26a29462f9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 693491102}
@@ -441,6 +429,18 @@ MonoBehaviour:
   minDistance: 1
   maxDistance: 20
   zoomSpeed: 1
+--- !u!114 &119265487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119265480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7e8b7940abe402290fde98f31c1981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &134702554 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4341614226761528004, guid: b498395005027416691d83d5496b9edf, type: 3}
@@ -1596,6 +1596,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 518946231864279631, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1214118917}
     - target: {fileID: 719886042124893642, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -2023,30 +2027,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7e8b7940abe402290fde98f31c1981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &465079267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465079265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640df392c8a66459785be06c3e5e8aee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1214118917}
-  canOrbit: 1
-  orbitSpeed: 1
-  minPolarAngle: 0
-  maxPolarAngle: 89.9
-  minAzimuthalAngle: -180
-  maxAzimuthalAngle: 180
-  clampAzimuthalAngle: 0
-  canZoom: 0
-  minDistance: 1
-  maxDistance: 20
-  zoomSpeed: 1
 --- !u!114 &465079268 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}

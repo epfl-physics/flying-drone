@@ -90,20 +90,6 @@ public class SandboxController : MonoBehaviour
         ApplySimulationData();
     }
 
-    // private void Update()
-    // {
-    //     if (!hasUpdatedFillArea)
-    //     {
-    //         if (platformRotationSlider)
-    //         {
-    //             Debug.Log("Here");
-    //             platformRotationSlider.UpdateValue(platformRotationSlider.value + 0.1f);
-    //         }
-    //         hasUpdatedFillArea = true;
-    //         // platformRotationSlider.onValueChanged();
-    //     }
-    // }
-
     private void LateUpdate()
     {
         // Clear trails late to avoid visual discontinuities
