@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class SandboxController : MonoBehaviour
 {
     public DroneSimulation sim;
-    // public DroneSimulationState simState;
 
     // Drone parameters
     private float droneAxisOffset = 0;
@@ -29,9 +28,10 @@ public class SandboxController : MonoBehaviour
     public ToggleGroup droneMotionTG;
 
     [Header("Sliders")]
-    public Slider axisOffsetSlider;
-    public Slider platformTranslationSlider;
-    public SandboxSlider platformRotationSlider;
+    public CustomSlider axisOffsetSlider;
+    public CustomSlider platformTranslationSlider;
+    public CenteredSlider platformRotationSlider;
+    private bool hasUpdatedFillArea;
 
     [Header("Dropdowns")]
     public TMP_Dropdown platformTranslationDropdown;
@@ -90,6 +90,20 @@ public class SandboxController : MonoBehaviour
         ApplySimulationData();
     }
 
+    // private void Update()
+    // {
+    //     if (!hasUpdatedFillArea)
+    //     {
+    //         if (platformRotationSlider)
+    //         {
+    //             Debug.Log("Here");
+    //             platformRotationSlider.UpdateValue(platformRotationSlider.value + 0.1f);
+    //         }
+    //         hasUpdatedFillArea = true;
+    //         // platformRotationSlider.onValueChanged();
+    //     }
+    // }
+
     private void LateUpdate()
     {
         // Clear trails late to avoid visual discontinuities
@@ -135,19 +149,16 @@ public class SandboxController : MonoBehaviour
         translationIsConstant = false;
         translationIsVariable = false;
 
-        if (translationSpeed != 0)
+        switch (typeIndex)
         {
-            switch (typeIndex)
-            {
-                case 0:
-                    translationIsConstant = true;
-                    break;
-                case 1:
-                    translationIsVariable = true;
-                    break;
-                default:
-                    break;
-            }
+            case 0:
+                translationIsConstant = true;
+                break;
+            case 1:
+                translationIsVariable = true;
+                break;
+            default:
+                break;
         }
 
         if (applySimData) ApplySimulationData(true);
@@ -161,21 +172,16 @@ public class SandboxController : MonoBehaviour
         rotationIsConstant = false;
         rotationIsVariable = false;
 
-        if (angularFrequency != 0)
+        switch (typeIndex)
         {
-            switch (typeIndex)
-            {
-                case 0:
-                    rotationIsConstant = true;
-                    break;
-                case 1:
-                    rotationIsVariable = true;
-                    // sim.SynchronizePlatformRotationClock();
-                    // sim.SynchronizeDroneClocksWithPlatform();
-                    break;
-                default:
-                    break;
-            }
+            case 0:
+                rotationIsConstant = true;
+                break;
+            case 1:
+                rotationIsVariable = true;
+                break;
+            default:
+                break;
         }
 
         if (setSimData) ApplySimulationData(true);
