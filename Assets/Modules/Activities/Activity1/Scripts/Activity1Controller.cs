@@ -19,6 +19,12 @@ public class Activity1Controller : MonoBehaviour
     [Header("UI")]
     [SerializeField] private WinBanner winBanner;
 
+    [Header("Feedback")]
+    [SerializeField] private SoundEffect successBell;
+    [SerializeField] private GameObject confetti;
+    private AudioSource audioSource;
+    private bool soundIsOn = true;
+
     [Header("Scenarios")]
     [SerializeField] private ActivityScenario[] beginnerScenarios;
     [SerializeField] private ActivityScenario[] intermediateScenarios;
@@ -32,6 +38,8 @@ public class Activity1Controller : MonoBehaviour
         if (difficultyDropdown) difficulty = difficultyDropdown.startIndex;
         // LoadRandomQuestion();
         LoadFirstQuestion();
+
+        TryGetComponent(out audioSource);
     }
 
     private void LoadFirstQuestion()
@@ -70,6 +78,8 @@ public class Activity1Controller : MonoBehaviour
         }
 
         if (winBanner) winBanner.Hide();
+
+        if (confetti) confetti.SetActive(false);
     }
 
     public void LoadRandomQuestion()
@@ -116,6 +126,8 @@ public class Activity1Controller : MonoBehaviour
         }
 
         if (winBanner) winBanner.Hide();
+
+        if (confetti) confetti.SetActive(false);
     }
 
     private void LoadScenario(ActivityScenario scenario)
@@ -145,6 +157,10 @@ public class Activity1Controller : MonoBehaviour
             OnAnswerIsCorrect?.Invoke(selectedIndex);
 
             if (winBanner) winBanner.Reveal(selectedIndex, answerIndex);
+
+            if (confetti) confetti.SetActive(true);
+
+            if (audioSource && successBell && soundIsOn) successBell.Play(audioSource);
         }
         else
         {
@@ -177,5 +193,10 @@ public class Activity1Controller : MonoBehaviour
         difficulty = Mathf.Clamp(index, 0, 2);
         LoadRandomQuestion();
         ResetCamera();
+    }
+
+    public void ToggleSound(bool isOn)
+    {
+        soundIsOn = isOn;
     }
 }

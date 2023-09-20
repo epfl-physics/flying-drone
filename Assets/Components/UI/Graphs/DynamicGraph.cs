@@ -124,7 +124,8 @@ public class DynamicGraph : MonoBehaviour
         if (lines == null) return;
         if (lineIndex < 0 || lineIndex >= lines.Count) return;
 
-        lines[lineIndex].gameObject.SetActive(visible);
+        // lines[lineIndex].gameObject.SetActive(visible);
+        lines[lineIndex].GetComponent<CanvasGroup>().alpha = visible ? 1 : 0;
     }
 
     private Vector2 UVToCoordinatePosition(Vector2 uv)

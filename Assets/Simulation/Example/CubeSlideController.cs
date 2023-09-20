@@ -24,7 +24,6 @@ public class CubeSlideController : Slides.SimulationSlideController
 
     public override void InitializeSlide()
     {
-        Debug.Log(transform.name + " InitializeSlide");
         sim.isRotating = cubeIsRotating;
 
         if (pauseWhileCameraMoves) sim.Pause();

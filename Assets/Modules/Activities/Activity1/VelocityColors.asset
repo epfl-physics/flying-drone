@@ -9,11 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a0f098092946444599373dca626a46d, type: 3}
+  m_Script: {fileID: 11500000, guid: 689a5e1041b17464d931e180cfca883e, type: 3}
   m_Name: VelocityColors
   m_EditorClassIdentifier: 
-  unknown: {r: 0, g: 0, b: 0, a: 1}
-  absolute: {r: 0.35686275, g: 0.67058825, b: 0.94509804, a: 1}
-  platform: {r: 0.5137255, g: 0.88235295, b: 0.70980394, a: 1}
-  relative: {r: 1, g: 0.7490196, b: 0.39607844, a: 1}
-  tangential: {r: 1, g: 0.5568628, b: 0.41568628, a: 1}
+  defaultColor: {r: 0, g: 0, b: 0, a: 1}
+  colors:
+  - name: absolute
+    color: {r: 0.35686275, g: 0.67058825, b: 0.94509804, a: 1}
+  - name: platform
+    color: {r: 0.5137255, g: 0.88235295, b: 0.70980394, a: 1}
+  - name: relative
+    color: {r: 1, g: 0.7490196, b: 0.39607844, a: 1}
+  - name: tangential
+    color: {r: 1, g: 0.5568628, b: 0.41568628, a: 1}

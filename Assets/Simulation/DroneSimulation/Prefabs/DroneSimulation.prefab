@@ -779,6 +779,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799bfb499a3c64c13919cd0ed32b47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6767289548893762131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1597442860794538761, guid: e26ce4297d27540c2bde5714d20a5cfd, type: 3}
+  m_PrefabInstance: {fileID: 5458780751982156122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &518946231864279631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6767289548893762131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2c385eed93b43d781d26a29462f9cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  canOrbit: 1
+  orbitSpeed: 1
+  minPolarAngle: 0
+  maxPolarAngle: 89.9
+  minAzimuthalAngle: -180
+  maxAzimuthalAngle: 180
+  clampAzimuthalAngle: 0
+  canZoom: 0
+  minDistance: 1
+  maxDistance: 20
+  zoomSpeed: 1
 --- !u!1001 &5721149269631274126
 PrefabInstance:
   m_ObjectHideFlags: 0

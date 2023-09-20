@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 174792231296877006}
   - component: {fileID: 174792231296877001}
-  - component: {fileID: 174792231296877000}
   - component: {fileID: 174792231296877007}
   - component: {fileID: 174792231296877002}
+  - component: {fileID: 2404429055210292986}
   m_Layer: 5
   m_Name: LinePlot
   m_TagString: Untagged
@@ -60,29 +60,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &174792231296877000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174792231296877005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!114 &174792231296877007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,4 +93,18 @@ MonoBehaviour:
   lineSegmentPrefab: {fileID: 4064381209439042420, guid: ff1947afff3d8421f9de2bace19cdd4e, type: 3}
   color: {r: 0, g: 0, b: 0, a: 1}
   lineWidth: 1
+  showMarkers: 1
   markerSize: 0.5
+  points: []
+--- !u!225 &2404429055210292986
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174792231296877005}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

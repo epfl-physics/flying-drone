@@ -192,6 +192,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4265403495773799367}
     m_Modifications:
+    - target: {fileID: 6630728238506993888, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
+      propertyPath: m_text
+      value: Practice identifying the different types of acceleration vectors under
+        specific conditions of relative motion.
+      objectReference: {fileID: 0}
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textEN
       value: Coming soon.
@@ -199,6 +204,16 @@ PrefabInstance:
     - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: textFR
       value: "\xC0 venir."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
+      propertyPath: textData.Array.data[0].text
+      value: Practice identifying the different types of acceleration vectors under
+        specific conditions of relative motion.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630728238506993889, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
+      propertyPath: textData.Array.data[1].text
+      value: "S'entra\xEEner \xE0 identifier les diff\xE9rents types de vecteurs
+        acc\xE9l\xE9ration de mouvements relatifs sp\xE9cifiques."
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657200, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_Pivot.x
@@ -210,7 +225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657200, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657200, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_AnchorMax.x
@@ -290,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657201, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6630728238529657213, guid: 9ee20eafb5f094ea6b6424bb51947619, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -551,7 +566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1610463190247839496, guid: 930c101ab32c94575bce33c435193995, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1610463190247839496, guid: 930c101ab32c94575bce33c435193995, type: 3}
       propertyPath: m_AnchorMax.x
@@ -906,7 +921,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 30
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -931,14 +946,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916412901}
-  m_LocalRotation: {x: 0.10452846, y: 0, z: 0, w: 0.9945219}
-  m_LocalPosition: {x: 2, y: 5, z: -4}
+  m_LocalRotation: {x: 0.13917312, y: 0, z: 0, w: 0.9902681}
+  m_LocalPosition: {x: 2, y: 5.1, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 54180010}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 12, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.03, y: 0, z: 0}
 --- !u!114 &1916412905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,14 +1000,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraState: {fileID: 11400000, guid: 39f4c0426ca434011b7b724859aeb057, type: 2}
-  targetPosition: {x: 2, y: 5, z: -4}
-  targetRotation: {x: 12, y: 0, z: 0}
-  moveTime: 1.5
-  canZoom: 0
-  minZoom: 1
-  maxZoom: 10
-  zoomSpeed: 1
-  zoomTarget: {fileID: 0}
+  targetPosition: {x: 2, y: 5.1, z: -4}
+  targetRotation: {x: 16, y: 0, z: 0}
+  moveTime: 1
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorTransitionTime: 1
   cameraTransform: {fileID: 1916412904}
@@ -1037,7 +1047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.circularRadius
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.verticalPeriod
@@ -1049,7 +1059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.verticalAmplitude
-      value: 0.2
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3067780818712770146, guid: e2c277f794e94468681547d288a4cb3b, type: 3}
       propertyPath: droneData.verticalFrequency
@@ -1174,15 +1184,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 874340420835300643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0d80f422196450fb1a6c6f1dca777b, type: 3}
+  m_Script: {fileID: 11500000, guid: ca3401956e54241f798f0eb0aef7eb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 3141480431301101137}
   head: {fileID: 4494077293595804643}
   defaultMaterial: {fileID: 2100000, guid: eb530278d6e614093963bd2574c7a45a, type: 2}
-  components: {x: 0, y: 1, z: 0}
+  components: {x: 0, y: 0, z: 0}
   color: {r: 0, g: 0, b: 0, a: 1}
-  lineWidth: 0.05
+  lineWidth: 0.04
   sortOrder: 0
 --- !u!1 &874340420835300643
 GameObject:
@@ -1461,8 +1471,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 723623425}
-  - {fileID: 1381935235}
   - {fileID: 262351843}
+  - {fileID: 1381935235}
   - {fileID: 1113852817}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1629,6 +1639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityVector: {fileID: 874340420835300642}
   simState: {fileID: 11400000, guid: 99f6d4affe62d4014b8996cb7b331a89, type: 2}
+  scaleFactor: 1.5
 --- !u!1 &7872207580176638088
 GameObject:
   m_ObjectHideFlags: 0
