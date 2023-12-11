@@ -84,7 +84,7 @@ public class CameraController : MonoBehaviour
 
         while (time < moveTime)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             float t = time / moveTime;
             t = t * t * (3f - 2f * t);
             cameraTransform.position = Vector3.Slerp(startPosition, targetPosition, t);
@@ -108,7 +108,7 @@ public class CameraController : MonoBehaviour
 
         while (time < transitionTime)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             camera.backgroundColor = Color.Lerp(startColor, targetColor, time / transitionTime);
             yield return null;
         }

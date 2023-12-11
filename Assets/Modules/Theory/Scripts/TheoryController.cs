@@ -25,6 +25,9 @@ public class TheoryController : MonoBehaviour
     private bool rotationIsConstant = false;
     private bool rotationIsVariable = false;
 
+    [Header("Time")]
+    public float slowMotionTimeScale = 0.25f;
+
     [Header("Toggle Groups")]
     public ToggleGroup dronePositionTG;
     public ToggleGroup droneMotionTG;
@@ -41,6 +44,11 @@ public class TheoryController : MonoBehaviour
     private bool needToClearPointMassTrail;
 
     public static event System.Action OnChangeSimulationParameters;
+
+    private void OnDisable()
+    {
+        SetTimeScale(false);
+    }
 
     private void Start()
     {
@@ -351,5 +359,10 @@ public class TheoryController : MonoBehaviour
         }
 
         OnChangeSimulationParameters?.Invoke();
+    }
+
+    public void SetTimeScale(bool isSlowMotion)
+    {
+        Time.timeScale = isSlowMotion ? slowMotionTimeScale : 1f;
     }
 }
