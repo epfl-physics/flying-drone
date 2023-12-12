@@ -3,18 +3,33 @@ using UnityEngine;
 public class TheoryTab4 : MonoBehaviour
 {
     [Header("Tab Labels")]
-    [SerializeField] private GameObject accelerationsLabel;
-    [SerializeField] private GameObject forcessLabel;
+    [SerializeField] private CanvasGroup accelerationsLabel;
+    [SerializeField] private CanvasGroup forcessLabel;
 
     [Header("Panels")]
     [SerializeField] private CanvasGroup accelerationsPanel;
     [SerializeField] private CanvasGroup forcesPanel;
 
+    public void Start()
+    {
+        SetReferenceFrame(true);
+    }
+
     public void SetReferenceFrame(bool frameIsTree)
     {
         // Update tab text
-        if (accelerationsLabel) accelerationsLabel.SetActive(frameIsTree);
-        if (forcessLabel) forcessLabel.SetActive(!frameIsTree);
+        if (accelerationsLabel)
+        {
+            accelerationsLabel.alpha = frameIsTree ? 1 : 0;
+            accelerationsLabel.interactable = frameIsTree;
+            accelerationsLabel.blocksRaycasts = frameIsTree;
+        }
+        if (forcessLabel)
+        {
+            forcessLabel.alpha = frameIsTree ? 0 : 1;
+            forcessLabel.interactable = !frameIsTree;
+            forcessLabel.blocksRaycasts = !frameIsTree;
+        }
 
         // Update visible equations
         if (accelerationsPanel)

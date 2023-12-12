@@ -16,7 +16,13 @@ public class TheoryEquationTerm : MonoBehaviour
         PlatformAcceleration,
         CentrifugalAcceleration,
         CoriolisAcceleration,
-        EulerAcceleration
+        EulerAcceleration,
+        ExternalForce,
+        PlatformForce,
+        CentrifugalForce,
+        CoriolisForce,
+        EulerForce,
+        TotalRelativeForce
     }
     public EquationTerm term;
     public GameObject[] displayWhenZero;
@@ -152,6 +158,73 @@ public class TheoryEquationTerm : MonoBehaviour
                 else if (simState.rotationIsZero || simState.rotationIsConstant)
                 {
                     isZero = true;
+                }
+                break;
+            case EquationTerm.ExternalForce:
+                if (simState.droneIsAtRestInR)
+                {
+                    isZero = true;
+                }
+                else if (simState.droneIsAtRestInRPrime)
+                {
+                    if (simState.droneIsOnAxis)
+                    {
+                        isZero = !simState.translationIsVariable;
+                    }
+                    else
+                    {
+                        isZero = !simState.translationIsVariable && simState.rotationIsZero;
+                    }
+                }
+                break;
+            case EquationTerm.PlatformForce:
+                isZero = !simState.translationIsVariable;
+                break;
+            case EquationTerm.CentrifugalForce:
+                if (simState.droneIsOnAxis)
+                {
+                    isZero = true;
+                }
+                else if (simState.rotationIsZero)
+                {
+                    isZero = true;
+                }
+                break;
+            case EquationTerm.CoriolisForce:
+                if (simState.droneIsOnAxis)
+                {
+                    isZero = true;
+                }
+                else if (simState.rotationIsZero || simState.droneIsAtRestInRPrime)
+                {
+                    isZero = true;
+                }
+                break;
+            case EquationTerm.EulerForce:
+                if (simState.droneIsOnAxis)
+                {
+                    isZero = true;
+                }
+                else if (simState.rotationIsZero || simState.rotationIsConstant)
+                {
+                    isZero = true;
+                }
+                break;
+            case EquationTerm.TotalRelativeForce:
+                if (simState.droneIsAtRestInRPrime)
+                {
+                    isZero = true;
+                }
+                else if (simState.droneIsAtRestInR)
+                {
+                    if (simState.droneIsOnAxis)
+                    {
+                        isZero = !simState.translationIsVariable;
+                    }
+                    else
+                    {
+                        isZero = !simState.translationIsVariable && simState.rotationIsZero;
+                    }
                 }
                 break;
             default:
