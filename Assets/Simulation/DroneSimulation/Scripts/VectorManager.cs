@@ -142,7 +142,7 @@ public class VectorManager : MonoBehaviour
         // bool showCentripetalA = showAccelerations && (aAbsolute != aCentripetal);
         Vector3 centripetalOffset = aRelative == aCentripetal || aAbsolute == aCentripetal ? 0.2f * Vector3.down : Vector3.zero;
         RedrawVector(centripetalAcceleration, origin + rAbsolute + centripetalOffset, aCentripetal, showAccelerations);
-        Vector3 coriolisOffset = simState.platformTranslationTime != 0 && (aRelative.normalized == aCoriolis.normalized) ? 0.2f * Vector3.down : Vector3.zero;
+        Vector3 coriolisOffset = simState.platformAcceleration.y == 0 && (aRelative.normalized == aCoriolis.normalized) ? 0.2f * Vector3.down : Vector3.zero;
         RedrawVector(coriolisAcceleration, origin + rAbsolute + coriolisOffset, aCoriolis, showAccelerations);
         RedrawVector(eulerAcceleration, origin + rAbsolute, aEuler, showAccelerations);
     }

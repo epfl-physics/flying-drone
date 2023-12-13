@@ -10,11 +10,6 @@ public class TheoryTab4 : MonoBehaviour
     [SerializeField] private CanvasGroup accelerationsPanel;
     [SerializeField] private CanvasGroup forcesPanel;
 
-    public void Start()
-    {
-        SetReferenceFrame(true);
-    }
-
     public void SetReferenceFrame(bool frameIsTree)
     {
         // Update tab text

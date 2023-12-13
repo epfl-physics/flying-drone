@@ -37,6 +37,9 @@ public class SandboxController : MonoBehaviour
     public TMP_Dropdown platformTranslationDropdown;
     public TMP_Dropdown platformRotationDropdown;
 
+    [Header("Time")]
+    public float slowMotionTimeScale = 0.25f;
+
     [Header("Trails")]
     public TrailRenderer droneTrail;
     public TrailRenderer pointMassTrail;
@@ -55,6 +58,8 @@ public class SandboxController : MonoBehaviour
     {
         SandboxSlider.OnMouseDown -= HandleSliderMouseDown;
         SandboxSlider.OnMouseUp -= HandleSliderMouseUp;
+
+        SetTimeScale(false);
     }
 
     private void HandleSliderMouseDown()
@@ -365,5 +370,10 @@ public class SandboxController : MonoBehaviour
             sim.drone.gameObject.SetActive(!showPointMass);
             sim.pointMass.gameObject.SetActive(showPointMass);
         }
+    }
+
+    public void SetTimeScale(bool isSlowMotion)
+    {
+        Time.timeScale = isSlowMotion ? slowMotionTimeScale : 1f;
     }
 }

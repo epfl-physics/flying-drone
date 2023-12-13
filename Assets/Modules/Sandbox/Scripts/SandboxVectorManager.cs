@@ -76,13 +76,14 @@ public class SandboxVectorManager : MonoBehaviour
         Vector3 vPlatform = simState.platformVelocity;
         Vector3 vTangential = simState.tangentialVelocity;
 
-        // Accelerations
+        // Accelerations / forces
+        float sign = simState.frameIsInertial ? 1 : -1;
         Vector3 aAbsolute = simState.droneAccelerationAbsolute;
         Vector3 aRelative = simState.droneAccelerationRelative;
-        Vector3 aPlatform = simState.platformAcceleration;
-        Vector3 aCentripetal = simState.centripetalAcceleration;
-        Vector3 aCoriolis = simState.coriolisAcceleration;
-        Vector3 aEuler = simState.eulerAcceleration;
+        Vector3 aPlatform = sign * simState.platformAcceleration;
+        Vector3 aCentripetal = sign * simState.centripetalAcceleration;
+        Vector3 aCoriolis = sign * simState.coriolisAcceleration;
+        Vector3 aEuler = sign * simState.eulerAcceleration;
 
         // Rotation
         // Vector3 omegaPosition = origin + rPlatform;
@@ -121,7 +122,7 @@ public class SandboxVectorManager : MonoBehaviour
         // Positions
         RedrawVector(dronePositionAbsolute, origin, rAbsolute, showPositions && showDronePositionAbsolute);
         RedrawVector(dronePositionRelative, origin + rPlatform, rRelative, showPositions && showDronePositionRelative);
-        RedrawVector(this.platformPosition, origin, rPlatform, showPositions && showPlatformPosition);
+        RedrawVector(platformPosition, origin, rPlatform, showPositions && showPlatformPosition);
 
         // Velocities
         RedrawVector(droneVelocityAbsolute, origin + rAbsolute, vAbsolute, showVelocities);
@@ -143,7 +144,8 @@ public class SandboxVectorManager : MonoBehaviour
         // bool showCentripetalA = showAccelerations && (aAbsolute != aCentripetal);
         Vector3 centripetalOffset = aRelative == aCentripetal || aAbsolute == aCentripetal ? 0.2f * Vector3.down : Vector3.zero;
         RedrawVector(centripetalAcceleration, origin + rAbsolute + centripetalOffset, aCentripetal, showAccelerations);
-        RedrawVector(coriolisAcceleration, origin + rAbsolute, aCoriolis, showAccelerations);
+        Vector3 coriolisOffset = simState.platformAcceleration.y == 0 && (aRelative.normalized == aCoriolis.normalized) ? 0.2f * Vector3.down : Vector3.zero;
+        RedrawVector(coriolisAcceleration, origin + rAbsolute + coriolisOffset, aCoriolis, showAccelerations);
         RedrawVector(eulerAcceleration, origin + rAbsolute, aEuler, showAccelerations);
     }
 
