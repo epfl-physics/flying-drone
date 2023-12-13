@@ -8,6 +8,8 @@ public class MultilingualDropdown : MonoBehaviour
     public List<DropdownTextItem> textItems;
     public int startIndex = 0;
 
+    private Language currentLanguage = default;
+
     public void Awake()
     {
         if (!dropdown) return;
@@ -64,6 +66,13 @@ public class MultilingualDropdown : MonoBehaviour
                 dropdown.captionText.text = option.text;
             }
         }
+
+        currentLanguage = language;
+    }
+
+    public void Apply()
+    {
+        HandleLanguageChange(currentLanguage);
     }
 }
 
