@@ -4143,10 +4143,10 @@ MonoBehaviour:
   tmp: {fileID: 236569692}
   textData:
   - language: 0
-    text: Fictitious Forces
+    text: Inertial Forces
     visibleUI: {fileID: 0}
   - language: 1
-    text: Forces d'Inertie
+    text: Forces d'inertie
     visibleUI: {fileID: 0}
 --- !u!114 &236569692
 MonoBehaviour:
@@ -4168,7 +4168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fictitious Forces
+  m_text: Inertial Forces
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0de5a858dbd984e63aa82481dd8d6074, type: 2}
   m_sharedMaterial: {fileID: -5584794868368336635, guid: 0de5a858dbd984e63aa82481dd8d6074, type: 2}

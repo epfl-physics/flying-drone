@@ -17,8 +17,8 @@ public class SandboxVectorsDropdown : MonoBehaviour
         DropdownTextItem item = dropdown.textItems[3];
 
         // Set its text values
-        item.textEN = frameIsAbsolute ? "Accelerations" : "Fictitious Forces";
-        item.textFR = frameIsAbsolute ? "Accélérations" : "Forces d'Inertie";
+        item.textEN = frameIsAbsolute ? "Accelerations" : "Inertial Forces";
+        item.textFR = frameIsAbsolute ? "Accélérations" : "Forces d'inertie";
 
         dropdown.Apply();
 
